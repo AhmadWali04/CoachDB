@@ -129,3 +129,33 @@ Tests are colocated to avoid overlapping Track A's test files. Include
 They cover query isolation for both teams, foreign-result defense, verification
 and time cutoffs, unavailable indexes/services, cursor errors and deadlines,
 cancellation, validation, bounded results, attribution, and index filter coverage.
+
+## Provision the private experience index
+
+Codex owns this follow-up on `b/experience-index`; Claude's secondary frontend
+panels remain on their separate branch. Track A must choose the experience
+embedding model and its dimensions before provisioning the shared index. Do not
+reuse the style-profile dimensions unless the experience writer uses that model.
+
+Preview without a connection or credentials (8 is only an example):
+
+```sh
+backend/.venv/bin/python scripts/provision_experience_index.py --dimensions 8
+```
+
+Once Track A confirms the dimensions, add `--apply`. The command reads
+`MONGODB_URI` and `MONGODB_DATABASE` from the environment or `backend/.env`.
+It creates the empty `coach_experiences` collection when absent, then creates
+`coach_experiences_vector` with namespace/model/verified/time filters. It does
+not read or insert experiences and does not grant access or change users.
+
+Provisioning is idempotent: matching indexes are reused, incompatible definitions
+are rejected without rebuilding or dropping them. The command reports success
+only after the index is both `READY` and queryable. `--wait-seconds` defaults to
+30 (maximum 300); a timeout may leave a build in progress. Rerun the same command
+rather than dropping the index. Driver errors omit credential-bearing details.
+See [MongoDB's index documentation](https://www.mongodb.com/docs/vector-search/indexes/vector-search-type/).
+
+The CLI/helper tests use fakes; shared Atlas provisioning and an actual retrieval
+smoke test remain pending the experience writer's model choice. Run the tests
+with `python -m pytest tests app/data/tests -q` from `backend/`.
