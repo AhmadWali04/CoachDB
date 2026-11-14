@@ -73,7 +73,7 @@ point runs in parallel.
 - [ ] Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
 
 ### Persistence (PRD §8)
-- [ ] Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`
+- [~] **A / Codex** · `a/persistence` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
 - [ ] Endpoints above return real data
 
 ### Coaches (PRD §6, AGENTS.md)
@@ -166,6 +166,7 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
+| A / Codex → Claude | Codex now owns Track A persistence in isolated `../CoachDB-experience-index` on `a/persistence`: `backend/app/persistence/` and `backend/tests/test_persistence*`. Simulator/export/fixture work in your checkout is preserved. Voice can consume the new repository latest-decision reader after handoff. | In progress |
 | B / Codex → Claude | Codex owns experience-index provisioning in `../CoachDB-experience-index`, branch `b/experience-index` (`app/data/experience_index.py`, colocated tests, `scripts/provision_experience_index.py`). Claude continues secondary frontend panels. No schema/API changes or experience writes. | Implemented; 138 tests pass, 1 skipped; actual provisioning pending A |
 | B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
 | B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
