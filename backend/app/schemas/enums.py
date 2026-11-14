@@ -99,5 +99,11 @@ class AudioStatus(StrEnum):
     UNAVAILABLE = "unavailable"
 
 
+class DependencyStatus(StrEnum):
+    OK = "ok"
+    NOT_CONFIGURED = "not_configured"
+    UNREACHABLE = "unreachable"
+
+
 class CrashPoint(StrEnum):
     AFTER_SUBMIT_BEFORE_VERIFY = "after_submit_before_verify"

@@ -54,9 +54,12 @@ point runs in parallel.
   - `GET /matches/{id}/briefings/{team_id}` (transcript + audio URL or `unavailable`)
   - `POST /demo/inject-crash` · `POST /matches/{id}/reset`
 - [x] Generate TS types from the OpenAPI schema (`npm run gen:api` → `frontend/src/api/schema.d.ts`; typed client in `src/api/client.ts`)
-- [ ] **Both devs:** review the contract and ack the Handoff log entry below
-- [ ] Atlas free cluster created, `MONGODB_URI` in each dev's local `backend/.env`
-- [ ] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI)
+- [~] **Both devs:** review the contract and ack the Handoff log entries below (Justin ✓, teammate pending)
+- [x] MongoDB client, `/health` reports `mongodb` status, `scripts/check_mongo.py`, optional local Atlas via `docker compose up -d`
+- [ ] Atlas free (M0) cluster created in the Atlas UI (needs an account login)
+- [ ] Database user for each dev + IP access list entry
+- [ ] `MONGODB_URI` in each dev's local `backend/.env`; `scripts/check_mongo.py` prints `mongodb: ok`
+- [x] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI, guardrails)
 
 ---
 
@@ -135,6 +138,20 @@ point runs in parallel.
 - [ ] Remove fixture badge path from the demo build
 - [ ] Walk through PRD §16 Definition of Done
 - [ ] Rehearse the demo twice
+
+---
+
+## Stretch — Atlas Agent Engine memory (only after the demo runs end to end)
+
+For the Agents in Context Toronto hackathon. Agent Engine is in public
+preview, so it must stay swappable and must not block the demo.
+
+- [ ] Check the hackathon rules or resource guide for MongoDB prize criteria
+- [ ] Spike: Agent Memory stores coach experiences in place of `coach_experiences` Vector Search, behind the same `search_experiences(team_id, ...)` interface
+- [ ] Give each coach its own identity, with `private` visibility on its records (memory is scoped per project and user identity, not per agent)
+- [ ] **Isolation test:** Blue can't read Red's memory. If it can, use one project per coach or drop the spike.
+- [ ] Config flag `MEMORY_BACKEND=vector_search|agent_engine`, defaulting to `vector_search`
+- [ ] Mention it in the demo script and show a memory record being recalled at halftime
 
 ---
 
