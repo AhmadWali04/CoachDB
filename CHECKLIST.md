@@ -128,7 +128,8 @@ point runs in parallel.
 - [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)
-- [~] **B** · `b/track-b-experience` — Event feed (`EventFeed.tsx`, wired to live `getEvents`); coach comparison, action timeline, and evaluation view are typed empty-state panels pending Track A endpoints (see Requests)
+- [~] **B** · `b/track-b-experience` — Event feed (`EventFeed.tsx`, wired to live `getEvents`)
+- [~] **B** · `b/track-b-experience` — Coach comparison (`CoachComparison.tsx`), action timeline (`ActionTimeline.tsx`), and evaluation (`EvaluationView.tsx`) are built to fully render real data (strengths/weaknesses, scouting + prediction, plan + risks/fallback; status-colored action ledger with verified state-version transitions; per-coach metrics table, never ranked by wins) against `frontend/src/types/{coachAnalysis,action,evaluation}.ts` -- hand-written mirrors of the backend schemas/PRD §12 metrics, since no endpoint returns this data yet. Wired into `App.tsx` with empty data (`{}`/`[]`/`null`) today, so each shows its own empty state; swap in real data once Track A ships the endpoints in the Requests below. (`npx vitest run` → 31 passed)
 - [~] **B** · `b/track-b-experience` — Demo controls: start, inject crash, reset wired to the real API; "run batch" disabled pending Track A's evaluation batch endpoint
 
 ---
@@ -169,7 +170,7 @@ moves it into their track section when they accept it.
 | B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
 | B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
 | B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
-| B → A | `backend/app/data/vector_search.py`'s `search_styles`/`search_experiences` are ready to call from the scout/coach, but run on in-memory stores today -- once Atlas is set up, swap in Mongo-backed stores with the same two methods (`all()` / `by_namespace()`) rather than changing the search functions | Open |
+| B → A | `backend/app/data/retrieval.search_styles`/`search_experiences` are ready to call from the scout/coach -- Atlas, the `style_profiles` index, and 36 loaded profiles are live; see `backend/app/data/README.md`'s integration snippet | Open |
 
 ## Handoff log (contract changes, newest first)
 
