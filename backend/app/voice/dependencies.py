@@ -10,19 +10,18 @@ from app.config.settings import get_settings
 from app.schemas import TeamId
 
 from .cache import AudioCache
-from .decisions import CoachDecisionReader, InMemoryCoachDecisionReader
+from .decisions import CoachDecisionReader
 from .service import BriefingService
 from .tts import ElevenLabsClient, TextToSpeechClient
 
 AUDIO_CACHE_DIR = Path(__file__).resolve().parent.parent.parent / ".cache" / "audio"
 
-# Process-wide placeholder until Track A hands off a persistence-backed
-# reader for `coach_decisions` (see CHECKLIST.md Requests).
-_shared_decision_reader = InMemoryCoachDecisionReader()
-
 
 def get_shared_decision_reader() -> CoachDecisionReader:
-    return _shared_decision_reader
+    """The match repository: `MongoMatchRepository` or its in-memory twin."""
+    from app.orchestration.dependencies import get_repository
+
+    return get_repository()
 
 
 @lru_cache

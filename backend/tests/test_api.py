@@ -18,11 +18,6 @@ def test_health():
 @pytest.mark.parametrize(
     ("method", "path", "body"),
     [
-        ("post", "/matches", {}),
-        ("get", "/matches/m1", None),
-        ("get", "/matches/m1/frames", None),
-        ("get", "/matches/m1/events", None),
-        ("post", "/matches/m1/reset", None),
         ("post", "/demo/inject-crash", {"match_id": "m1"}),
     ],
 )
