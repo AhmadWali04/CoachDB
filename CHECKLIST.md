@@ -141,6 +141,20 @@ point runs in parallel.
 
 ---
 
+## Stretch — Atlas Agent Engine memory (only after the demo runs end to end)
+
+For the Agents in Context Toronto hackathon. Agent Engine is in public
+preview, so it must stay swappable and must not block the demo.
+
+- [ ] Check the hackathon rules or resource guide for MongoDB prize criteria
+- [ ] Spike: Agent Memory stores coach experiences in place of `coach_experiences` Vector Search, behind the same `search_experiences(team_id, ...)` interface
+- [ ] Give each coach its own identity, with `private` visibility on its records (memory is scoped per project and user identity, not per agent)
+- [ ] **Isolation test:** Blue can't read Red's memory. If it can, use one project per coach or drop the spike.
+- [ ] Config flag `MEMORY_BACKEND=vector_search|agent_engine`, defaulting to `vector_search`
+- [ ] Mention it in the demo script and show a memory record being recalled at halftime
+
+---
+
 ## Requests (cross-track asks)
 
 Add a line when you need something from the other track. The owner
