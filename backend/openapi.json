@@ -141,6 +141,15 @@
         "title": "CreateMatchRequest",
         "type": "object"
       },
+      "DependencyStatus": {
+        "enum": [
+          "ok",
+          "not_configured",
+          "unreachable"
+        ],
+        "title": "DependencyStatus",
+        "type": "string"
+      },
       "ErrorResponse": {
         "additionalProperties": false,
         "properties": {
@@ -313,6 +322,9 @@
       "HealthResponse": {
         "additionalProperties": false,
         "properties": {
+          "mongodb": {
+            "$ref": "#/components/schemas/DependencyStatus"
+          },
           "status": {
             "title": "Status",
             "type": "string"
@@ -324,7 +336,8 @@
         },
         "required": [
           "status",
-          "version"
+          "version",
+          "mongodb"
         ],
         "title": "HealthResponse",
         "type": "object"

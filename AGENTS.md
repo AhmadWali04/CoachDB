@@ -15,8 +15,8 @@ Each team has its own independent coaching workflow:
 ``` text
 Public Match State + Own Private Coach Memory
                     |
-               Match Analyst
-                    |
+          Match Analyst   Opposition Scout
+                    \       /
               Tactical Coach
                     |
            Execution / Verification
@@ -32,8 +32,10 @@ state store. - Recovery controller and worker lease manager. - MongoDB
 repository and Vector Search adapter. - Evaluation harness. - ElevenLabs
 speech adapter.
 
-Do not create an agent for every small task. Three agent roles per coach
-are sufficient for the MVP.
+Do not create an agent for every small task. Four agent roles per coach
+(Analyst, Scout, Tactical Coach, Executor) are sufficient for the MVP.
+Output contracts below are examples; `backend/app/schemas/coach.py` is
+authoritative and rejects unknown fields.
 
 ## 2. Global rules for every agent
 
@@ -76,24 +78,22 @@ are sufficient for the MVP.
 ### Mission
 
 Turn first-half structured match data into a concise, evidence-grounded
-tactical assessment.
+assessment of its **own** team. The Opposition Scout covers the rival.
 
 ### Inputs
 
 -   Match ID, half, score, and current state version.
--   Own team's structured events and metrics.
--   Opponent's public structured events and metrics.
--   Player/team stamina and availability.
+-   The coach's `CoachView`: own team in full (including stamina and
+    availability), public first-half events, and both teams' stats.
 -   Allowed tactical options.
 
 ### Responsibilities
 
 1.  Summarize what happened.
 2.  Identify up to three strengths and three weaknesses for its team.
-3.  Identify up to three opponent patterns or vulnerabilities.
-4.  Highlight relevant fatigue/availability concerns.
-5.  Cite event IDs or metrics for every factual observation.
-6.  Separate evidence from interpretation.
+3.  Highlight relevant fatigue/availability concerns.
+4.  Cite event IDs or metrics for every factual observation.
+5.  Separate evidence from interpretation.
 
 ### Must not
 
@@ -117,9 +117,64 @@ tactical assessment.
     }
   ],
   "own_weaknesses": [],
-  "opponent_patterns": [],
   "fatigue_concerns": [],
   "uncertainties": []
+}
+```
+
+## 3a. Opposition Scout
+
+**One instance per coach.**
+
+### Mission
+
+Build an evidence-cited profile of the rival from public information
+only, and list the rival's likely halftime adjustments.
+
+### Inputs
+
+-   The coach's `CoachView`: the rival's public identity, roster, and
+    kickoff formation, plus public first-half events and stats.
+-   Shared `style_profiles` (StatsBomb/Metrica-derived) via Vector
+    Search.
+-   This coach's own past experiences against the rival
+    (`require_own_namespace()`).
+
+### Responsibilities
+
+1.  Infer the rival's mentality, pressing, defensive line, attack
+    focus, and tempo from the kickoff formation and events. Leave a
+    field empty when evidence is too thin.
+2.  Identify up to three rival patterns or vulnerabilities.
+3.  Match the rival to the closest style profiles.
+4.  List likely adjustments with confidence and evidence. The Tactical
+    Coach makes the final prediction.
+
+### Must not
+
+-   Read the rival's tactics, stamina, decision, plan, prediction,
+    briefing, prompts, or memory.
+-   Present an inferred tactic as an observed fact.
+
+### Output contract
+
+``` json
+{
+  "match_id": "match_001",
+  "team_id": "blue",
+  "rival_team_id": "red",
+  "state_version": 12,
+  "observed_tactics": {"formation": "4-4-2", "pressing": "high"},
+  "patterns": [
+    {"observation": "Presses high after goal kicks.",
+     "evidence": ["event_021", "metric:pressing_successes"]}
+  ],
+  "closest_style_profile_ids": ["profile:sb_1234_home"],
+  "likely_adjustments": [
+    {"change": "drop the defensive line", "confidence": 0.6,
+     "evidence": ["event_030"]}
+  ],
+  "uncertainties": ["Small sample of right-side attacks."]
 }
 ```
 
@@ -134,16 +189,15 @@ anticipating the rival coach.
 
 ### Inputs
 
--   Match Analyst output.
--   Current authoritative match state and allowed tactical capabilities.
+-   Match Analyst output and Opposition Scout report.
+-   The coach's `CoachView` and allowed tactical capabilities.
 -   Retrieved experiences from this coach's private Vector Search
     namespace.
--   Public opponent performance evidence.
 -   Match constraints and remaining time.
 
 ### Responsibilities
 
-1.  Review the analyst's evidence.
+1.  Review the analyst's and scout's evidence.
 2.  Retrieve relevant past experiences when available.
 3.  Identify the most important tactical problem/opportunity.
 4.  Predict the rival coach's likely adjustment, with confidence and
@@ -380,8 +434,9 @@ recommendation as a successful tactic.
 ## 11. Build order
 
 1.  Implement simulator and typed contracts.
-2.  Implement analyst using structured match summaries.
-3.  Implement tactical coach with strict JSON schema.
+2.  Implement analyst and scout from the `CoachView`.
+3.  Implement tactical coach with strict JSON schema and sealed
+    submission.
 4.  Implement execution and verification as deterministic code.
 5.  Duplicate the coach workflow with isolated memory for the rival.
 6.  Add MongoDB persistence and recovery controller.

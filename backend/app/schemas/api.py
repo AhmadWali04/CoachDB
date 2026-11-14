@@ -5,7 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from .base import Contract
-from .enums import AudioStatus, CrashPoint, TeamId
+from .enums import AudioStatus, CrashPoint, DependencyStatus, TeamId
 
 
 class CreateMatchRequest(Contract):
@@ -40,6 +40,7 @@ class InjectCrashResponse(Contract):
 class HealthResponse(Contract):
     status: str
     version: str
+    mongodb: DependencyStatus
 
 
 class ErrorResponse(Contract):
