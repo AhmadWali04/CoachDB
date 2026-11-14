@@ -74,6 +74,7 @@ point runs in parallel.
 
 ### Persistence (PRD §8)
 - [~] **A / Codex** · `a/persistence` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
+- [x] **A / Codex** · `34f7f97` — Durable match/event/frame/decision repositories, unique/query indexes, version-checked updates and voice-compatible `get_latest_decision`; 43 focused tests pass (181 backend tests pass, 2 opt-in integration tests skipped). Action/task state machines remain pending.
 - [ ] Endpoints above return real data
 
 ### Coaches (PRD §6, AGENTS.md)
@@ -166,10 +167,10 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
-| A / Codex → Claude | Codex now owns Track A persistence in isolated `../CoachDB-experience-index` on `a/persistence`: `backend/app/persistence/` and `backend/tests/test_persistence*`. Simulator/export/fixture work in your checkout is preserved. Voice can consume the new repository latest-decision reader after handoff. | In progress |
+| A / Codex → Claude | Codex now owns Track A persistence in isolated `../CoachDB-experience-index` on `a/persistence`: `backend/app/persistence/` and `backend/tests/test_persistence*`. Simulator/export/fixture work in your checkout is preserved. Voice can consume the new repository latest-decision reader after handoff. | Ready: `34f7f97`; `app/persistence/README.md`; API and voice composition still pending |
 | B / Codex → Claude | Codex owns experience-index provisioning in `../CoachDB-experience-index`, branch `b/experience-index` (`app/data/experience_index.py`, colocated tests, `scripts/provision_experience_index.py`). Claude continues secondary frontend panels. No schema/API changes or experience writes. | Implemented; 138 tests pass, 1 skipped; actual provisioning pending A |
 | B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
-| B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
+| B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Reader implemented on `a/persistence` (`34f7f97`); ready for voice wiring |
 | B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
 | B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
 | B → A | `backend/app/data/retrieval.search_styles`/`search_experiences` are ready to call from the scout/coach -- Atlas, the `style_profiles` index, and 36 loaded profiles are live; see `backend/app/data/README.md`'s integration snippet | Open |
@@ -181,6 +182,7 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | A / Codex | `MongoMatchRepository` in `app/persistence` persists authoritative matches, immutable events/frames/decisions and exposes `get_latest_decision(match_id, team_id)` for B's `CoachDecisionReader`. Explicit `ensure_indexes()`, CAS state updates, bounded event/frame queries. No schema/API change; see README for composition and remaining lifecycle work. 181 tests pass, 2 opt-in integration tests skipped. | B: pending wiring |
 | 2026-11-14 | B (Justin) | Style profiles use embedding model `tactical-style-v1` (9 dims, cosine). The scout builds its query with `style_query_vector(observed_tactics)` and passes `EMBEDDING_MODEL`/`DIMENSIONS` from `app/data/tactical_style.py` to `search_styles`. Profiles are ranked within each dataset. No `schemas/` or `api/` change. | Justin ✓ · A: |
 | 2026-11-14 | B (Claude) | Implemented `GET /matches/{id}/briefings/{team_id}` (`backend/app/voice/`, wired in `api/matches.py`): reads the latest `CoachDecision` via `CoachDecisionReader` (in-memory until A hands off persistence — see Requests), resolves audio through an ElevenLabs adapter with a filesystem `AudioCache` keyed by `briefing_id`, falls back to text-only on any TTS failure or missing voice ID. Route signature/response model unchanged; now 404s instead of 501 when no decision exists yet for that match/team, and `/audio/*` is mounted for cached clips. | A: · B: Claude ✓ |
 | 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: Claude ✓ |
