@@ -1,3 +1,6 @@
+import type { Action } from "../types/action";
+import type { CoachDecision } from "../types/coachAnalysis";
+import type { EvaluationBatch } from "../types/evaluation";
 import type {
   Briefing,
   CreateMatchRequest,
@@ -43,6 +46,16 @@ export const api = {
     request<Briefing>(`/matches/${matchId}/briefings/${teamId}`),
   resetMatch: (matchId: string) =>
     request<MatchState>(`/matches/${matchId}/reset`, { method: "POST" }),
+  // Presentation reads for the coach comparison and action timeline panels.
+  getDecisions: (matchId: string) =>
+    request<Partial<Record<TeamId, CoachDecision>>>(`/matches/${matchId}/decisions`),
+  getActions: (matchId: string) => request<Action[]>(`/matches/${matchId}/actions`),
+  runEvaluation: (seeds: number[], stepsPerHalf = 10) =>
+    request<EvaluationBatch>("/evaluations", {
+      method: "POST",
+      body: JSON.stringify({ seeds, steps_per_half: stepsPerHalf }),
+    }),
+  getEvaluation: (batchId: string) => request<EvaluationBatch>(`/evaluations/${batchId}`),
   injectCrash: (body: InjectCrashRequest) =>
     request<InjectCrashResponse>("/demo/inject-crash", {
       method: "POST",

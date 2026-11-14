@@ -14,13 +14,26 @@ import { listFixtureNames, loadFixture } from "./match/fixtures";
 import { prefersReducedMotion, useFramePlayback } from "./match/useFramePlayback";
 import { useLiveEvents } from "./match/useLiveEvents";
 import { useLiveFrames } from "./match/useLiveFrames";
+import { usePolling } from "./match/usePolling";
+import { api } from "./api/client";
+import type { EvaluationBatch } from "./types/evaluation";
+
+const isFinished = (m: MatchState) => m.phase === "full_time";
+const batchDone = (b: EvaluationBatch) => b.status !== undefined && b.status !== "running";
 
 function App() {
   const [match, setMatch] = useState<MatchState | null>(null);
   const [selectedTeam, setSelectedTeam] = useState<TeamId | null>(null);
   const [fixtureFrames, setFixtureFrames] = useState<Frame[] | null>(null);
 
+  const [batchId, setBatchId] = useState<string | null>(null);
   const isLive = match !== null;
+  const matchId = match?.match_id ?? null;
+  // Live score, clock, phase and tactics; falls back to the last action's response.
+  const liveMatch = usePolling(matchId, api.getMatch, 1000, isFinished) ?? match;
+  const decisions = usePolling(matchId, api.getDecisions, 2000) ?? {};
+  const actions = usePolling(matchId, api.getActions, 1500) ?? [];
+  const batch = usePolling(batchId, api.getEvaluation, 2000, batchDone);
   const liveFrames = useLiveFrames(match?.match_id ?? null, isLive);
   const events = useLiveEvents(match?.match_id ?? null, isLive);
 
@@ -47,7 +60,7 @@ function App() {
       <main className="dashboard__grid">
         <div className="dashboard__pitch">
           <TacticalPitch
-            match={match}
+            match={liveMatch}
             players={playback.players}
             ball={playback.ball}
             arrows={arrows}
@@ -61,14 +74,18 @@ function App() {
 
         <aside className="dashboard__side">
           <CoachPanel matchId={match?.match_id ?? null} selectedTeam={selectedTeam} />
-          <DemoControls matchId={match?.match_id ?? null} onMatchChange={setMatch} />
+          <DemoControls
+            matchId={match?.match_id ?? null}
+            onMatchChange={setMatch}
+            onBatchStarted={setBatchId}
+          />
           <EventFeed events={events} />
           {/* No coach_decisions/action-ledger/evaluation endpoint exists yet
               (Track A -- see CHECKLIST.md Requests), so these render their
               own empty state until real data is wired in. */}
-          <CoachComparison decisions={{}} />
-          <ActionTimeline actions={[]} />
-          <EvaluationView batch={null} />
+          <CoachComparison decisions={decisions} />
+          <ActionTimeline actions={actions} />
+          <EvaluationView batch={batch} />
           <DatasetAttribution />
         </aside>
       </main>

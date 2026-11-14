@@ -66,36 +66,36 @@ point runs in parallel.
 ## Track A — Engine
 
 ### Simulator (PRD §5)
-- [~] **A (Justin)** · `a/engine` — Seeded match loop: two halves, 20 steps each, halftime and full time
-- [~] **A (Justin)** · `a/engine` — Tactical settings change event probabilities
-- [~] **A (Justin)** · `a/engine` — Emits player and ball positions per step (frame contract)
-- [~] **A (Justin)** · `a/engine` — Test: same seed gives identical output
-- [~] **A (Justin)** · `a/engine` — Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
+- [x] **A (Justin)** · `a/engine` — Seeded match loop: two halves, 20 steps each, halftime and full time (`app/simulator/`)
+- [x] **A (Justin)** · `a/engine` — Tactical settings change event probabilities (measured over 40 seeds: aggressive Red second half doubles Red shots, raises Blue turnovers)
+- [x] **A (Justin)** · `a/engine` — Emits player and ball positions per step (frame contract): 3 frames per step
+- [x] **A (Justin)** · `a/engine` — Test: same seed gives identical output (`tests/test_simulator.py`)
+- [x] **A (Justin)** · `a/engine` — Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B** (`scripts/export_fixture.py`)
 
 ### Persistence (PRD §8)
-- [~] **A (Justin)** · `a/engine` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
+- [x] **A (Justin)** · `a/engine` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
 - [x] **A / Codex** · `34f7f97` — Durable match/event/frame/decision repositories, unique/query indexes, version-checked updates and voice-compatible `get_latest_decision`; 43 focused tests pass (181 backend tests pass, 2 opt-in integration tests skipped). Action/task state machines remain pending.
-- [~] **A (Justin)** · `a/engine` — Endpoints above return real data
+- [x] **A (Justin)** · `a/engine` — Endpoints above return real data; also `/decisions`, `/actions`, `/evaluations`; verified live against Atlas
 
 ### Coaches (PRD §6, AGENTS.md)
-- [~] **A (Justin)** · `a/engine` — Match Analyst (own team)
-- [~] **A (Justin)** · `a/engine` — Opposition Scout (rival, public data only)
-- [~] **A (Justin)** · `a/engine` — Tactical Coach + rival prediction + `voice_script`
-- [~] **A (Justin)** · `a/engine` — Plan validation, one bounded correction, then balanced fallback
-- [~] **A (Justin)** · `a/engine` — Coach agents take only `CoachView` (`build_coach_view`) as match input
-- [~] **A (Justin)** · `a/engine` — Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
-- [~] **A (Justin)** · `a/engine` — LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
+- [x] **A (Justin)** · `a/engine` — Match Analyst (own team) — Claude `claude-opus-5-5`, structured outputs (`app/coaches/`)
+- [x] **A (Justin)** · `a/engine` — Opposition Scout (rival, public data only) — queries Atlas style profiles
+- [x] **A (Justin)** · `a/engine` — Tactical Coach + rival prediction + `voice_script`
+- [x] **A (Justin)** · `a/engine` — Plan validation (schema + evidence IDs), one bounded correction, then balanced fallback
+- [x] **A (Justin)** · `a/engine` — Coach agents take only `CoachView` (`build_coach_view`) as match input
+- [x] **A (Justin)** · `a/engine` — Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
+- [!] **A (Justin)** · `a/engine` — LangGraph orchestration with the MongoDB checkpointer: **not done.** Built instead as a custom durable workflow (MongoDB `tasks` checkpoints, leases, sealed plans; separate `Coach` objects, no shared state). Decide whether to add LangGraph
 
 ### Execution and recovery (PRD §9)
-- [~] **A (Justin)** · `a/engine` — Action ledger `proposed → submitted → applied → verified`, unique `action_id`
-- [~] **A (Justin)** · `a/engine` — Simulator dedupes repeated action IDs
-- [~] **A (Justin)** · `a/engine` — Leases, heartbeat, fencing token
-- [~] **A (Justin)** · `a/engine` — Crash injection after submit, before verify, then reconcile
-- [~] **A (Justin)** · `a/engine` — Tests: no duplicate effect; stale token can't commit
+- [x] **A (Justin)** · `a/engine` — Action ledger `proposed → submitted → applied → verified`, unique `action_id` (`app/execution/`)
+- [x] **A (Justin)** · `a/engine` — Simulator dedupes repeated action IDs
+- [x] **A (Justin)** · `a/engine` — Leases, heartbeat, fencing token; watchdog takes over expired leases
+- [x] **A (Justin)** · `a/engine` — Crash injection after submit, before verify, then reconcile (verified on real MongoDB: token 2, 0 resubmissions, 0 duplicate effects)
+- [x] **A (Justin)** · `a/engine` — Tests: no duplicate effect; stale token can't commit (`tests/test_recovery.py`)
 
 ### Evaluation (PRD §12)
-- [~] **A (Justin)** · `a/engine` — Deterministic evaluator with seeded, side-swapped batches
-- [~] **A (Justin)** · `a/engine` — `GET /evaluations/{batch_id}`
+- [x] **A (Justin)** · `a/engine` — Deterministic evaluator with seeded, side-swapped batches (`app/evaluation/`)
+- [x] **A (Justin)** · `a/engine` — `GET /evaluations/{batch_id}` and `POST /evaluations`
 
 ---
 
@@ -169,10 +169,10 @@ moves it into their track section when they accept it.
 |-----------|-----|--------|
 | A / Codex → Claude | Codex now owns Track A persistence in isolated `../CoachDB-experience-index` on `a/persistence`: `backend/app/persistence/` and `backend/tests/test_persistence*`. Simulator/export/fixture work in your checkout is preserved. Voice can consume the new repository latest-decision reader after handoff. | Ready: `34f7f97`; `app/persistence/README.md`; API and voice composition still pending |
 | B / Codex → Claude | Codex owns experience-index provisioning in `../CoachDB-experience-index`, branch `b/experience-index` (`app/data/experience_index.py`, colocated tests, `scripts/provision_experience_index.py`). Claude continues secondary frontend panels. No schema/API changes or experience writes. | Implemented; 138 tests pass, 1 skipped; actual provisioning pending A |
-| B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
-| B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Reader implemented on `a/persistence` (`34f7f97`); ready for voice wiring |
-| B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
-| B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
+| B → A ✓ done (`a/engine`) | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
+| B → A ✓ done (`a/engine`: voice reads the match repository) | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Reader implemented on `a/persistence` (`34f7f97`); ready for voice wiring |
+| B → A ✓ done (`GET /matches/{id}/decisions`) | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
+| B → A ✓ done (`/actions`, `/evaluations`) | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
 | B → A | `backend/app/data/retrieval.search_styles`/`search_experiences` are ready to call from the scout/coach -- Atlas, the `style_profiles` index, and 36 loaded profiles are live; see `backend/app/data/README.md`'s integration snippet | Open |
 
 ## Handoff log (contract changes, newest first)
@@ -182,6 +182,7 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | Justin (`a/engine`) | New endpoints: `GET /matches/{id}/decisions` (UI only; agents never call the API), `GET /matches/{id}/actions`, `POST /evaluations`, `GET /evaluations/{id}`; `POST /demo/inject-crash` now live. New contract `schemas/evaluation.py` (matches `frontend/src/types/evaluation.ts`, plus `status`). `new_match_state(swap_sides=)`: the team on top kicks off. Settings: `MATCH_STEP_SECONDS`, `COACHES_ENABLED`, `COACH_MODEL`. | Justin ✓ · Ahmad: |
 | 2026-11-14 | Justin | Track A handoff: Ahmad/Codex handed the remaining Track A work (simulator, endpoints, coaches, orchestration, execution/recovery, evaluation) to Justin on `a/engine`. | Justin ✓ · Ahmad: |
 | 2026-11-14 | A / Codex | `MongoMatchRepository` in `app/persistence` persists authoritative matches, immutable events/frames/decisions and exposes `get_latest_decision(match_id, team_id)` for B's `CoachDecisionReader`. Explicit `ensure_indexes()`, CAS state updates, bounded event/frame queries. No schema/API change; see README for composition and remaining lifecycle work. 181 tests pass, 2 opt-in integration tests skipped. | B: pending wiring |
 | 2026-11-14 | B (Justin) | Style profiles use embedding model `tactical-style-v1` (9 dims, cosine). The scout builds its query with `style_query_vector(observed_tactics)` and passes `EMBEDDING_MODEL`/`DIMENSIONS` from `app/data/tactical_style.py` to `search_styles`. Profiles are ranked within each dataset. No `schemas/` or `api/` change. | Justin ✓ · A: |

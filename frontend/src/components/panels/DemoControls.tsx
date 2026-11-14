@@ -6,9 +6,10 @@ import "./panels.css";
 export interface DemoControlsProps {
   matchId: string | null;
   onMatchChange: (match: MatchState) => void;
+  onBatchStarted?: (batchId: string) => void;
 }
 
-export function DemoControls({ matchId, onMatchChange }: DemoControlsProps) {
+export function DemoControls({ matchId, onMatchChange, onBatchStarted }: DemoControlsProps) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,8 +57,24 @@ export function DemoControls({ matchId, onMatchChange }: DemoControlsProps) {
         >
           {busy === "crash" ? "Injecting…" : "Inject crash"}
         </button>
-        <button type="button" disabled title="Needs Track A's evaluation batch endpoint">
-          Run batch
+        <button
+          type="button"
+          disabled={busy !== null || !onBatchStarted}
+          title="Runs 2 seeds x 2 side-swapped matches; each halftime calls the AI coaches"
+          onClick={async () => {
+            setBusy("batch");
+            setError(null);
+            try {
+              const batch = await api.runEvaluation([1, 2]);
+              onBatchStarted?.(batch.batch_id);
+            } catch (err) {
+              setError(err instanceof ApiError ? err.message : "Request failed.");
+            } finally {
+              setBusy(null);
+            }
+          }}
+        >
+          {busy === "batch" ? "Starting…" : "Run batch"}
         </button>
       </div>
       {error && <p className="panel__error">{error}</p>}
