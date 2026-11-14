@@ -25,6 +25,44 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/evaluations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Run Evaluation
+         * @description Start a seeded, side-swapped batch (2 matches per seed). Poll GET for progress.
+         *     With AI coaches enabled, every halftime calls the model.
+         */
+        post: operations["runEvaluation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/evaluations/{batch_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Evaluation */
+        get: operations["getEvaluation"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/health": {
         parameters: {
             query?: never;
@@ -335,6 +373,29 @@ export interface components {
              */
             used_fallback: boolean;
         };
+        /** CoachMetrics */
+        CoachMetrics: {
+            /** Avg Decision Latency Ms */
+            avg_decision_latency_ms: number;
+            /** Decision Validity */
+            decision_validity: number;
+            /** Draws */
+            draws: number;
+            /** Evidence Grounding */
+            evidence_grounding: number;
+            /** Execution Reliability */
+            execution_reliability: number;
+            /** Goal Difference */
+            goal_difference: number;
+            /** Losses */
+            losses: number;
+            /** Prediction Accuracy */
+            prediction_accuracy: number;
+            /** Recovery Correctness */
+            recovery_correctness: number;
+            /** Wins */
+            wins: number;
+        };
         /**
          * CrashPoint
          * @enum {string}
@@ -362,6 +423,31 @@ export interface components {
         ErrorResponse: {
             /** Detail */
             detail: string;
+        };
+        /** EvaluationBatch */
+        EvaluationBatch: {
+            /** Batch Id */
+            batch_id: string;
+            /** Metrics */
+            metrics: {
+                [key: string]: components["schemas"]["CoachMetrics"];
+            };
+            /**
+             * Notes
+             * @default []
+             */
+            notes: string[];
+            /** Results */
+            results: components["schemas"]["MatchResult"][];
+            /** Seeds */
+            seeds: number[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "running" | "done" | "failed";
+            /** Steps Per Half */
+            steps_per_half: number;
         };
         /**
          * EventType
@@ -423,6 +509,18 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /**
+         * HalfDelta
+         * @description Second half minus first half, for one team.
+         */
+        HalfDelta: {
+            /** Pressing Successes */
+            pressing_successes: number;
+            /** Shots */
+            shots: number;
+            /** Turnovers */
+            turnovers: number;
         };
         /** HealthResponse */
         HealthResponse: {
@@ -507,6 +605,23 @@ export interface components {
          * @enum {string}
          */
         MatchPhase: "not_started" | "first_half" | "halftime" | "second_half" | "full_time";
+        /** MatchResult */
+        MatchResult: {
+            /** Match Id */
+            match_id: string;
+            /** Score */
+            score: {
+                [key: string]: number;
+            };
+            /** Seed */
+            seed: number;
+            /** Sides Swapped */
+            sides_swapped: boolean;
+            /** Tactical Impact */
+            tactical_impact: {
+                [key: string]: components["schemas"]["HalfDelta"];
+            };
+        };
         /**
          * MatchState
          * @description Authoritative match state. Only the simulator produces this.
@@ -651,6 +766,22 @@ export interface components {
             passing: number;
             /** Shooting */
             shooting: number;
+        };
+        /** RunEvaluationRequest */
+        RunEvaluationRequest: {
+            /**
+             * Seeds
+             * @default [
+             *       1,
+             *       2
+             *     ]
+             */
+            seeds: number[];
+            /**
+             * Steps Per Half
+             * @default 10
+             */
+            steps_per_half: number;
         };
         /** Score */
         Score: {
@@ -830,6 +961,88 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["InjectCrashResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    runEvaluation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RunEvaluationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvaluationBatch"];
+                };
+            };
+            /** @description Unknown batch */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getEvaluation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                batch_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvaluationBatch"];
+                };
+            };
+            /** @description Unknown batch */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
                 };
             };
             /** @description Validation Error */

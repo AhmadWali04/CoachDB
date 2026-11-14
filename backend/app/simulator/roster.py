@@ -116,5 +116,9 @@ def build_team(team_id: TeamId, side: PitchSide) -> Team:
     )
 
 
-def default_teams() -> list[Team]:
-    return [build_team(TeamId.BLUE, PitchSide.TOP), build_team(TeamId.RED, PitchSide.BOTTOM)]
+def default_teams(swap_sides: bool = False) -> list[Team]:
+    """Blue on top by default; `swap_sides` puts Red on top (and Red kicks off)."""
+    blue, red = (
+        (PitchSide.BOTTOM, PitchSide.TOP) if swap_sides else (PitchSide.TOP, PitchSide.BOTTOM)
+    )
+    return [build_team(TeamId.BLUE, blue), build_team(TeamId.RED, red)]

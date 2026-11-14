@@ -95,7 +95,9 @@ def rival(team_id: TeamId) -> TeamId:
     return TeamId.RED if team_id == TeamId.BLUE else TeamId.BLUE
 
 
-def new_match_state(match_id: str, seed: int, steps_per_half: int = 20) -> MatchState:
+def new_match_state(
+    match_id: str, seed: int, steps_per_half: int = 20, *, swap_sides: bool = False
+) -> MatchState:
     now = datetime.now(UTC)
     return MatchState(
         match_id=match_id,
@@ -104,7 +106,7 @@ def new_match_state(match_id: str, seed: int, steps_per_half: int = 20) -> Match
         steps_per_half=steps_per_half,
         score=Score(),
         stats={TeamId.BLUE: TeamStats(), TeamId.RED: TeamStats()},
-        teams=default_teams(),
+        teams=default_teams(swap_sides),
         state_version=0,
         created_at=now,
         updated_at=now,
@@ -116,7 +118,9 @@ class MatchSimulator:
 
     def __init__(self, state: MatchState) -> None:
         self._state = state.model_copy(deep=True)
-        self._rt = _Runtime()
+        # The team on top kicks off the first half; the other team the second.
+        self._kickoff = next(t.team_id for t in self._state.teams if t.side.value == "top")
+        self._rt = _Runtime(possession=self._kickoff)
         self._applied: dict[str, ApplyResult] = {}
         self._pending_events: list[MatchEvent] = []
         self._effects: dict[str, int] = {}
@@ -174,7 +178,8 @@ class MatchSimulator:
         if s.phase is not MatchPhase.HALFTIME:
             raise SimulatorError("second half starts only from halftime")
         s.phase, s.half, s.step = MatchPhase.SECOND_HALF, 2, 0
-        self._rt.possession, self._rt.ball_depth, self._rt.ball_lateral = TeamId.RED, 35.0, 50.0
+        self._rt.possession = rival(self._kickoff)
+        self._rt.ball_depth, self._rt.ball_lateral = 35.0, 50.0
         s.state_version += 1
         s.updated_at = datetime.now(UTC)
         return self.state

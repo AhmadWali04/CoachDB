@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import logging
+import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import Protocol
 
@@ -46,6 +47,7 @@ class CoachingHalftime:
         self.coaches = coaches
         self.executor = executor or DirectExecutor()
         self.last_results: dict[str, dict[TeamId, CoachResult]] = {}
+        self.latency_ms: dict[str, dict[TeamId, float]] = {}
 
     def __call__(self, run: MatchRun) -> None:
         self.executor.apply(run, self.decide(run))
@@ -67,10 +69,17 @@ class CoachingHalftime:
         if missing:
             events = run.repository.get_events(run.match_id, limit=200)
             views = {team: build_coach_view(snapshot, events, team) for team in missing}
+
+            def timed(team: TeamId) -> CoachResult:
+                started = time.monotonic()
+                result = self.coaches[team].decide(views[team])
+                self.latency_ms.setdefault(run.match_id, {})[team] = round(
+                    (time.monotonic() - started) * 1000, 1
+                )
+                return result
+
             with ThreadPoolExecutor(max_workers=2, thread_name_prefix="halftime") as pool:
-                futures = {
-                    team: pool.submit(self.coaches[team].decide, views[team]) for team in missing
-                }
+                futures = {team: pool.submit(timed, team) for team in missing}
                 results = {team: future.result() for team, future in futures.items()}
             for team, result in results.items():
                 run.repository.save_decision(result.decision)

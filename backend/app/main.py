@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api import demo, matches
+from app.api import demo, evaluations, matches
 from app.config.mongo import ping
 from app.config.settings import get_settings
 from app.schemas import HealthResponse
@@ -26,6 +26,7 @@ def create_app() -> FastAPI:
 
     app.include_router(matches.router)
     app.include_router(demo.router)
+    app.include_router(evaluations.router)
 
     AUDIO_CACHE_DIR.mkdir(parents=True, exist_ok=True)
     app.mount("/audio", StaticFiles(directory=AUDIO_CACHE_DIR), name="audio")

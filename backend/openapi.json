@@ -316,6 +316,76 @@
         "title": "CoachDecision",
         "type": "object"
       },
+      "CoachMetrics": {
+        "additionalProperties": false,
+        "properties": {
+          "avg_decision_latency_ms": {
+            "minimum": 0.0,
+            "title": "Avg Decision Latency Ms",
+            "type": "number"
+          },
+          "decision_validity": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Decision Validity",
+            "type": "number"
+          },
+          "draws": {
+            "title": "Draws",
+            "type": "integer"
+          },
+          "evidence_grounding": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Evidence Grounding",
+            "type": "number"
+          },
+          "execution_reliability": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Execution Reliability",
+            "type": "number"
+          },
+          "goal_difference": {
+            "title": "Goal Difference",
+            "type": "integer"
+          },
+          "losses": {
+            "title": "Losses",
+            "type": "integer"
+          },
+          "prediction_accuracy": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Prediction Accuracy",
+            "type": "number"
+          },
+          "recovery_correctness": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Recovery Correctness",
+            "type": "number"
+          },
+          "wins": {
+            "title": "Wins",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "prediction_accuracy",
+          "decision_validity",
+          "execution_reliability",
+          "recovery_correctness",
+          "evidence_grounding",
+          "avg_decision_latency_ms",
+          "wins",
+          "draws",
+          "losses",
+          "goal_difference"
+        ],
+        "title": "CoachMetrics",
+        "type": "object"
+      },
       "CrashPoint": {
         "enum": [
           "after_submit_before_verify"
@@ -370,6 +440,70 @@
           "detail"
         ],
         "title": "ErrorResponse",
+        "type": "object"
+      },
+      "EvaluationBatch": {
+        "additionalProperties": false,
+        "properties": {
+          "batch_id": {
+            "title": "Batch Id",
+            "type": "string"
+          },
+          "metrics": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CoachMetrics"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/TeamId"
+            },
+            "title": "Metrics",
+            "type": "object"
+          },
+          "notes": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Notes",
+            "type": "array"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/MatchResult"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "seeds": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Seeds",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "running",
+              "done",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "steps_per_half": {
+            "title": "Steps Per Half",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "batch_id",
+          "status",
+          "seeds",
+          "steps_per_half",
+          "results",
+          "metrics"
+        ],
+        "title": "EvaluationBatch",
         "type": "object"
       },
       "EventType": {
@@ -525,6 +659,31 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HalfDelta": {
+        "additionalProperties": false,
+        "description": "Second half minus first half, for one team.",
+        "properties": {
+          "pressing_successes": {
+            "title": "Pressing Successes",
+            "type": "integer"
+          },
+          "shots": {
+            "title": "Shots",
+            "type": "integer"
+          },
+          "turnovers": {
+            "title": "Turnovers",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "shots",
+          "turnovers",
+          "pressing_successes"
+        ],
+        "title": "HalfDelta",
         "type": "object"
       },
       "HealthResponse": {
@@ -720,6 +879,52 @@
         ],
         "title": "MatchPhase",
         "type": "string"
+      },
+      "MatchResult": {
+        "additionalProperties": false,
+        "properties": {
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "score": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/TeamId"
+            },
+            "title": "Score",
+            "type": "object"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "sides_swapped": {
+            "title": "Sides Swapped",
+            "type": "boolean"
+          },
+          "tactical_impact": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/HalfDelta"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/TeamId"
+            },
+            "title": "Tactical Impact",
+            "type": "object"
+          }
+        },
+        "required": [
+          "match_id",
+          "seed",
+          "sides_swapped",
+          "score",
+          "tactical_impact"
+        ],
+        "title": "MatchResult",
+        "type": "object"
       },
       "MatchState": {
         "additionalProperties": false,
@@ -1096,6 +1301,33 @@
         "title": "PlayerSkills",
         "type": "object"
       },
+      "RunEvaluationRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "seeds": {
+            "default": [
+              1,
+              2
+            ],
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Seeds",
+            "type": "array"
+          },
+          "steps_per_half": {
+            "default": 10,
+            "maximum": 40.0,
+            "minimum": 2.0,
+            "title": "Steps Per Half",
+            "type": "integer"
+          }
+        },
+        "title": "RunEvaluationRequest",
+        "type": "object"
+      },
       "Score": {
         "additionalProperties": false,
         "properties": {
@@ -1465,6 +1697,110 @@
         "summary": "Inject Crash",
         "tags": [
           "demo"
+        ]
+      }
+    },
+    "/evaluations": {
+      "post": {
+        "description": "Start a seeded, side-swapped batch (2 matches per seed). Poll GET for progress.\nWith AI coaches enabled, every halftime calls the model.",
+        "operationId": "runEvaluation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunEvaluationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationBatch"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unknown batch"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Evaluation",
+        "tags": [
+          "evaluations"
+        ]
+      }
+    },
+    "/evaluations/{batch_id}": {
+      "get": {
+        "operationId": "getEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "batch_id",
+            "required": true,
+            "schema": {
+              "title": "Batch Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationBatch"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unknown batch"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Evaluation",
+        "tags": [
+          "evaluations"
         ]
       }
     },

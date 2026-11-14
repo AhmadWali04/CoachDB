@@ -94,10 +94,15 @@ class MatchService:
     # --- lifecycle --------------------------------------------------------------
 
     def create_match(
-        self, seed: int | None = None, steps_per_half: int = 20, *, start: bool = True
+        self,
+        seed: int | None = None,
+        steps_per_half: int = 20,
+        *,
+        start: bool = True,
+        swap_sides: bool = False,
     ) -> MatchState:
         seed = seed if seed is not None else int.from_bytes(uuid.uuid4().bytes[:4], "big")
-        state = new_match_state(self._new_id(), seed, steps_per_half)
+        state = new_match_state(self._new_id(), seed, steps_per_half, swap_sides=swap_sides)
         self.repository.create_match(state)
         run = MatchRun(state.match_id, MatchSimulator(state), self.repository)
         with self._lock:
