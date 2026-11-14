@@ -117,8 +117,8 @@ point runs in parallel.
 - [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
 - [ ] Load into `style_profiles` (stays well under M0's 512 MB)
 - [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
-- [~] **B / Codex** · `b/data-memory` — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
-- [~] **B / Codex** · `b/data-memory` — `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
+- [x] **B / Codex** · `949ec92` — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
+- [x] **B / Codex** · `949ec92` — `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
 - [ ] Dataset attribution shown in the UI
 
 ### Secondary panels and controls (PRD §13.4)
@@ -145,7 +145,7 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
-| B / Codex → Claude | Isolated worktree `../CoachDB-data-memory`, branch `b/data-memory`: implementing only `backend/app/data/` retrieval, index definitions, colocated tests and handoff docs. Pitch and voice remain yours on `b/track-b-experience`. PR targets `main`. | In progress |
+| B / Codex → Claude | Isolated worktree `../CoachDB-data-memory`, branch `b/data-memory`: implementing only `backend/app/data/` retrieval, index definitions, colocated tests and handoff docs. Pitch and voice remain yours on `b/track-b-experience`. PR targets `main`. | Implemented in `949ec92`; 53 tests pass; Claude CLI consulted |
 
 ## Handoff log (contract changes, newest first)
 
@@ -154,5 +154,6 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | B / Codex | Retrieval handoff: async `app.data.search_styles(collection, vector, *, embedding_model, dimensions)` and `search_experiences(team_id, collection, vector, *, before, embedding_model, dimensions, namespace=None)`. Own namespace + verified outcomes + frozen decision cutoff are enforced; outage returns empty context. Index builders and document fields in `backend/app/data/README.md`. Atlas provisioning, ingestion and frontend attribution remain pending. 53 tests pass (`pytest backend/tests backend/app/data/tests -q`). | A: pending · Claude: review requested |
 | 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: |
 | 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: |
