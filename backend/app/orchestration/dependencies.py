@@ -7,7 +7,9 @@ from functools import lru_cache
 
 from app.config.mongo import get_client, get_db
 from app.config.settings import get_settings
+from app.schemas import TeamId
 
+from .halftime import CoachingHalftime
 from .memory_repository import InMemoryMatchRepository
 from .service import MatchRepository, MatchService
 
@@ -26,6 +28,29 @@ def get_repository() -> MatchRepository:
     return repository
 
 
+def build_halftime() -> CoachingHalftime | None:
+    settings = get_settings()
+    if not settings.coaches_enabled:
+        return None
+    from app.coaches import ClaudeStructuredLLM, Coach
+    from app.coaches.memory import atlas_style_search
+
+    llm = ClaudeStructuredLLM(model=settings.coach_model)
+    style_search = None
+    if settings.mongodb_uri is not None and settings.mongodb_uri.get_secret_value().strip():
+        style_search = atlas_style_search(
+            settings.mongodb_uri.get_secret_value().strip(), settings.mongodb_database
+        )
+    # Separate Coach objects: own identity, prompts (persona) and memory binding.
+    coaches = {
+        team: Coach(team, f"coach_{team.value}", llm, style_search=style_search) for team in TeamId
+    }
+    return CoachingHalftime(coaches)
+
+
 @lru_cache
 def get_match_service() -> MatchService:
-    return MatchService(get_repository(), step_seconds=get_settings().match_step_seconds)
+    settings = get_settings()
+    return MatchService(
+        get_repository(), step_seconds=settings.match_step_seconds, halftime=build_halftime()
+    )

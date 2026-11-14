@@ -9,6 +9,7 @@ dependencies = [
   "pydantic>=2.8",
   "pydantic-settings>=2.4",
   "pymongo>=4.10",
+  "anthropic>=2.8",
 ]
 
 [project.optional-dependencies]

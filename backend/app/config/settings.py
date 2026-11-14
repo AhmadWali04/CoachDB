@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     # Seconds between simulation steps for live matches (40 steps per match).
     match_step_seconds: float = 1.0
 
+    # AI coaches at halftime (Claude). Without credentials they fall back to a
+    # safe balanced plan and the match still runs.
+    coaches_enabled: bool = True
+    coach_model: str = "claude-opus-5-5"
+
 
 @lru_cache
 def get_settings() -> Settings:
