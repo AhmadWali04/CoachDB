@@ -110,7 +110,7 @@ point runs in parallel.
 - [~] **B** · `b/track-b-experience` — Click pitch half, team label, or coach card → selected state + active speaker
 - [~] **B** · `b/track-b-experience` — Single audio controller: switching teams stops the previous audio
 - [~] **B** · `b/track-b-experience` — Transcript, plus pause, resume, and replay; loading/playing/paused/unavailable states
-- [~] **B** · `b/track-b-experience` — Backend ElevenLabs adapter: cache by briefing ID, text fallback, voice IDs from env
+- [x] **B** · `b/track-b-experience` — Backend ElevenLabs adapter: cache by briefing ID, text fallback, voice IDs from env (`backend/app/voice/`; `pytest` → 36 passed)
 - [~] **B** · `b/track-b-experience` — Tests: selection triggers no API writes; never two audios playing
 
 ### Data and memory (PRD §8.2, §14.2)
@@ -155,5 +155,6 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | B (Claude) | Implemented `GET /matches/{id}/briefings/{team_id}` (`backend/app/voice/`, wired in `api/matches.py`): reads the latest `CoachDecision` via `CoachDecisionReader` (in-memory until A hands off persistence — see Requests), resolves audio through an ElevenLabs adapter with a filesystem `AudioCache` keyed by `briefing_id`, falls back to text-only on any TTS failure or missing voice ID. Route signature/response model unchanged; now 404s instead of 501 when no decision exists yet for that match/team, and `/audio/*` is mounted for cached clips. | A: · B: Claude ✓ |
 | 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: Claude ✓ |
 | 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: Claude ✓ |

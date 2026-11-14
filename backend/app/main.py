@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.api import demo, matches
 from app.config.settings import get_settings
 from app.schemas import HealthResponse
+from app.voice import AUDIO_CACHE_DIR
 
 VERSION = "0.1.0"
 
@@ -23,6 +25,9 @@ def create_app() -> FastAPI:
 
     app.include_router(matches.router)
     app.include_router(demo.router)
+
+    AUDIO_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    app.mount("/audio", StaticFiles(directory=AUDIO_CACHE_DIR), name="audio")
     return app
 
 

@@ -1,8 +1,9 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 
 from app.schemas import Briefing, CreateMatchRequest, FramesPage, MatchEvent, MatchState, TeamId
+from app.voice import BriefingNotFoundError, BriefingService, get_briefing_service
 
 from .stubs import NOT_IMPLEMENTED, not_implemented
 
@@ -37,9 +38,16 @@ def get_events(
 
 
 @router.get("/{match_id}/briefings/{team_id}", response_model=Briefing, operation_id="getBriefing")
-def get_briefing(match_id: str, team_id: TeamId) -> Briefing:
+def get_briefing(
+    match_id: str,
+    team_id: TeamId,
+    briefings: Annotated[BriefingService, Depends(get_briefing_service)],
+) -> Briefing:
     """Read-only. Returns the persisted halftime briefing; never generates tactics."""
-    raise not_implemented("B")
+    try:
+        return briefings.get_briefing(match_id, team_id)
+    except BriefingNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
 
 
 @router.post("/{match_id}/reset", response_model=MatchState, operation_id="resetMatch")
