@@ -6,7 +6,7 @@ live in `PRD.md`, `CLAUDE.md`, and `AGENTS.md`. This file only tracks
 
 | Dev | Name | Track | Owns |
 |-----|------|-------|------|
-| **A** | _(name)_ | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
+| **A** | Claude (`a/simulator`) | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
 | **B** | Claude (`b/track-b-experience`) | Experience | `frontend/`, `backend/app/voice/`, `backend/app/data/` (StatsBomb/Metrica pipeline), `scripts/` |
 | Both | — | Contracts | `backend/app/schemas/`, `backend/app/api/`, `backend/app/guardrails/`, `.env.example`, this file |
 
@@ -66,11 +66,11 @@ point runs in parallel.
 ## Track A — Engine
 
 ### Simulator (PRD §5)
-- [ ] Seeded match loop: two halves, 20 steps each, halftime and full time
-- [ ] Tactical settings change event probabilities
-- [ ] Emits player and ball positions per step (frame contract)
-- [ ] Test: same seed gives identical output
-- [ ] Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
+- [~] **A** · `a/simulator` — Seeded match loop: two halves, 20 steps each, halftime and full time
+- [~] **A** · `a/simulator` — Tactical settings change event probabilities
+- [~] **A** · `a/simulator` — Emits player and ball positions per step (frame contract)
+- [~] **A** · `a/simulator` — Test: same seed gives identical output
+- [~] **A** · `a/simulator` — Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
 
 ### Persistence (PRD §8)
 - [~] **A / Codex** · `a/persistence` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
