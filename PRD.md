@@ -147,18 +147,32 @@ Keep the number of agents small for reliability and latency.
 **Per coach:**
 
 1.  **Match Analyst**
-    -   Summarizes first-half evidence from structured events and
-        statistics.
+    -   Summarizes first-half evidence for its own team from structured
+        events and statistics.
     -   Identifies strengths, weaknesses, and trends.
     -   Must cite event IDs or metric values for factual claims.
-2.  **Tactical Coach**
-    -   Combines own-team analysis, opponent analysis, retrieved
+2.  **Opposition Scout**
+    -   Builds a profile of the opposing team from the public first-half
+        observations: formation, pressing intensity, defensive line
+        height, attack focus, tempo, and fatigue indicators.
+    -   Compares the rival's observed play against historical style
+        profiles derived from StatsBomb events and Metrica tracking
+        data (§14.2) to suggest which known pattern it most resembles.
+    -   Lists the rival's likely adjustment options, each with evidence;
+        the Tactical Coach makes the final prediction.
+    -   Uses only public match observations and the coach's own memory
+        namespace. It must not read the rival's prompts, reasoning,
+        memory, or submitted plan (§7).
+    -   Must cite event IDs, metric values, or historical profile IDs
+        for factual claims.
+3.  **Tactical Coach**
+    -   Combines own-team analysis, the scouting report, retrieved
         experiences, and an opponent prediction.
     -   Produces one valid second-half tactical plan and a short
         rationale.
     -   Predicts the rival coach's likely adjustment with a confidence
         score and evidence.
-3.  **Execution/Verification Worker**
+4.  **Execution/Verification Worker**
     -   Validates the plan against allowed options and current state.
     -   Submits it using an idempotent action ID.
     -   Reads back the applied simulation state and records verified
@@ -445,6 +459,7 @@ React + TypeScript Dashboard
        /                 \
  Your Coach            Rival Coach
  Analyst                Analyst
+ Opposition Scout       Opposition Scout
  Tactical Coach         Tactical Coach
  Executor               Executor
        \                 /
@@ -518,6 +533,26 @@ action was actually applied to the simulator.
   ElevenLabs voice                    Generated coaching reports
   -----------------------------------------------------------------------
 
+The MVP uses only free, publicly available datasets:
+
+-   **StatsBomb Open Data** (`github.com/statsbomb/open-data`) ---
+    event-level data for selected competitions and matches.
+-   **Metrica Sports Sample Data** (`github.com/metrica-sports/sample-data`)
+    --- a small set of anonymized matches with tracking and event data.
+
+Data rules:
+
+-   Follow each dataset's license and attribution requirements, and
+    credit the providers in the dashboard and demo materials.
+-   Store raw dataset files outside MongoDB match documents; persist only
+    derived summaries, team profiles, and experiences with a reference to
+    the source dataset and match ID.
+-   Metrica matches are anonymized; do not attempt to identify real
+    teams or players from them.
+-   Historical data informs coach memory and benchmarks only. The
+    simulation engine remains the source of truth for the simulated
+    match (§17, principle 1).
+
 ## 15. Recommended implementation phases
 
 ### Phase 0 --- Foundation
@@ -540,7 +575,8 @@ action was actually applied to the simulator.
 
 ### Phase 2 --- Competing coaches
 
--   Implement analyst and tactical coach for each side.
+-   Implement analyst, opposition scout, and tactical coach for each
+    side.
 -   Validate structured tactical output.
 -   Apply plans to the second half.
 -   Add rival prediction.
@@ -574,6 +610,8 @@ The MVP is complete when all of the following pass:
 -   [ ] Two independent coaches analyze the same public match data.
 -   [ ] Both coaches submit schema-valid tactical plans.
 -   [ ] The plans alter second-half simulation behaviour.
+-   [ ] Each coach's Opposition Scout produces an evidence-cited
+    profile of the rival from public observations only.
 -   [ ] Each coach predicts the rival's likely tactical adjustment.
 -   [ ] Coach memories are private and Vector Search retrieval is
     filtered correctly.
