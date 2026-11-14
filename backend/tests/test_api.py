@@ -11,6 +11,8 @@ def test_health():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    # The test suite never depends on a real cluster.
+    assert response.json()["mongodb"] in {"ok", "not_configured", "unreachable"}
 
 
 @pytest.mark.parametrize(

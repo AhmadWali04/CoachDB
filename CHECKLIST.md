@@ -54,9 +54,12 @@ point runs in parallel.
   - `GET /matches/{id}/briefings/{team_id}` (transcript + audio URL or `unavailable`)
   - `POST /demo/inject-crash` · `POST /matches/{id}/reset`
 - [x] Generate TS types from the OpenAPI schema (`npm run gen:api` → `frontend/src/api/schema.d.ts`; typed client in `src/api/client.ts`)
-- [ ] **Both devs:** review the contract and ack the Handoff log entry below
-- [ ] Atlas free cluster created, `MONGODB_URI` in each dev's local `backend/.env`
-- [ ] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI)
+- [~] **Both devs:** review the contract and ack the Handoff log entries below (Justin ✓, teammate pending)
+- [x] MongoDB client, `/health` reports `mongodb` status, `scripts/check_mongo.py`, optional local Atlas via `docker compose up -d`
+- [ ] Atlas free (M0) cluster created in the Atlas UI (needs an account login)
+- [ ] Database user for each dev + IP access list entry
+- [ ] `MONGODB_URI` in each dev's local `backend/.env`; `scripts/check_mongo.py` prints `mongodb: ok`
+- [x] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI, guardrails)
 
 ---
 
@@ -154,5 +157,6 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
-| 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: |
-| 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: |
+| 2026-11-14 | Phase 0 | `HealthResponse` gains `mongodb: ok \| not_configured \| unreachable` (new `DependencyStatus` enum). MongoDB access goes through `app.config.mongo.get_db()`. | Justin ✓ · teammate: |
+| 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | Justin ✓ · teammate: |
+| 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | Justin ✓ · teammate: |

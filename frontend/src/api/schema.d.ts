@@ -205,6 +205,11 @@ export interface components {
              */
             steps_per_half: number;
         };
+        /**
+         * DependencyStatus
+         * @enum {string}
+         */
+        DependencyStatus: "ok" | "not_configured" | "unreachable";
         /** ErrorResponse */
         ErrorResponse: {
             /** Detail */
@@ -273,6 +278,7 @@ export interface components {
         };
         /** HealthResponse */
         HealthResponse: {
+            mongodb: components["schemas"]["DependencyStatus"];
             /** Status */
             status: string;
             /** Version */

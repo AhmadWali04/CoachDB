@@ -1,0 +1,16 @@
+# Optional local MongoDB with Atlas Search and Vector Search, for offline work.
+#   docker compose up -d
+#   MONGODB_URI=mongodb://localhost:27017/?directConnection=true
+# The demo uses the shared Atlas cluster instead.
+services:
+  mongodb:
+    image: mongodb/mongodb-atlas-local:8.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+
+volumes:
+  mongodb-data:
+  mongodb-config:

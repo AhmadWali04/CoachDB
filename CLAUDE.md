@@ -5,13 +5,16 @@
 Build **Rival Coaches**, a hackathon MVP where two independent AI soccer
 coaching systems compete in a seeded, simplified soccer simulation.
 
-Each coach analyzes the first half, predicts the opposing coach's likely
-tactical adjustment, and submits a structured halftime plan. The
+Each coach analyzes its own first half, scouts the rival, predicts the
+opposing coach's likely tactical adjustment, and submits a sealed,
+structured halftime plan. The
 simulator applies those plans and generates the second half. MongoDB
 Atlas stores verified state, action history, checkpoints, and coach
 experiences. Atlas Vector Search retrieves relevant prior experiences. A
 recovery controller resumes interrupted work safely. ElevenLabs
-generates optional spoken halftime briefings.
+generates optional spoken halftime briefings. The UI is a live tactical
+board: players and the ball move on a top-down pitch from real
+simulator frames.
 
 Read `PRD.md` and `AGENTS.md` before making architectural changes. These
 documents define product scope and agent contracts.
@@ -34,7 +37,9 @@ Handoff log.
 5.  **MongoDB is durable application state.** Process memory,
     conversation history, and LLM context are not authoritative.
 6.  **Keep coaches independent.** Separate prompts, identity, and memory
-    namespaces.
+    namespaces. Use the guardrails in `backend/app/guardrails/`
+    (`build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`);
+    see AGENTS.md §2.
 7.  **The evaluator is independent and deterministic.** Do not let
     either coach grade itself.
 8.  **ElevenLabs is optional presentation.** TTS failure must never stop
@@ -68,6 +73,7 @@ React + TypeScript UI
     /                 \
 Blue Coach          Red Coach
 Analyst              Analyst
+Opposition Scout     Opposition Scout
 Tactical Coach       Tactical Coach
 Executor             Executor
     \                 /
@@ -79,7 +85,7 @@ Executor             Executor
            |
  Recovery Controller
 
-Atlas Vector Search -> coach experience retrieval
+Atlas Vector Search -> coach experience and style profile retrieval
 ElevenLabs           -> voice briefing audio
 Evaluation Harness   -> independent metrics
 ```
@@ -88,32 +94,30 @@ Do not introduce a separate graph database for this MVP. The knowledge
 required here is structured match/event/action/experience data in
 MongoDB collections plus vector retrieval.
 
-## Suggested repository layout
+## Repository layout
 
-Adapt to the repository if it already has a sensible structure. Do not
-create duplicate application roots.
+Do not create duplicate application roots. `CHECKLIST.md` says which
+developer track owns each folder.
 
 ``` text
 .
-├── CLAUDE.md
-├── PRD.md
-├── AGENTS.md
-├── .env.example
-├── backend/
+├── CLAUDE.md · PRD.md · AGENTS.md · CHECKLIST.md
+├── .env.example · docker-compose.yml (optional local Atlas)
+├── backend/                 FastAPI, Python 3.12+, venv in backend/.venv
 │   ├── app/
-│   │   ├── api/
-│   │   ├── config/
-│   │   ├── schemas/
-│   │   ├── simulator/
-│   │   ├── coaches/
-│   │   ├── orchestration/
-│   │   ├── persistence/
-│   │   ├── recovery/
-│   │   ├── evaluation/
-│   │   └── voice/
+│   │   ├── api/             HTTP routes (shared contract)
+│   │   ├── config/          settings, MongoDB client
+│   │   ├── schemas/         Pydantic contract (shared, single source of truth)
+│   │   ├── guardrails/      coach isolation (shared)
+│   │   ├── simulator/ coaches/ orchestration/ persistence/
+│   │   ├── recovery/ evaluation/
+│   │   ├── voice/           ElevenLabs adapter
+│   │   └── data/            StatsBomb/Metrica → style profiles
+│   ├── scripts/             export_openapi.py, check_mongo.py
+│   ├── openapi.json         generated; do not hand-edit
 │   └── tests/
-└── frontend/
-    └── ...
+└── frontend/                React + TypeScript (Vite)
+    └── src/api/             schema.d.ts (generated), types.ts, client.ts
 ```
 
 ## Implementation sequence
@@ -133,12 +137,17 @@ is broken.
 **Done when:** app starts, schemas validate, and a test match record can
 be persisted and read.
 
+**Status:** contracts, API stubs, generated TS types, guardrails, and the
+MongoDB client are in place. See `CHECKLIST.md` for what remains.
+
 ### Phase 1 --- Deterministic soccer simulator
 
 -   Implement seeded simulation.
 -   Support two teams and a compact player/team model.
 -   Implement match clock, first half, halftime, second half, full time.
 -   Generate structured events and basic statistics.
+-   Emit a `Frame` per step with player and ball positions (the pitch
+    renders only these; see `schemas/frame.py`).
 -   Ensure tactical settings affect event probabilities/outcomes.
 -   Keep the simulation explainable and testable; do not claim
     professional realism.
@@ -148,14 +157,18 @@ complete match can run without an LLM.
 
 ### Phase 2 --- Two independent coaches
 
--   Implement Match Analyst and Tactical Coach interfaces.
+-   Implement Match Analyst, Opposition Scout, and Tactical Coach.
+-   Each coach's only match input is a `CoachView` from
+    `build_coach_view()`, built from the frozen halftime snapshot.
 -   Use structured match summaries, not raw chat transcripts.
 -   Require strict typed JSON output.
 -   Validate enums, team IDs, state version, confidence, and evidence
     references.
 -   Add rival prediction.
--   Give each coach a separate memory namespace.
--   Apply plans only at halftime.
+-   Give each coach a separate memory namespace (`coach:blue`,
+    `coach:red`) and its own LangGraph subgraph and checkpointer thread.
+-   Submit plans into `SealedHalftimePlans`; apply both together only
+    after both are in.
 
 **Done when:** both coaches produce valid plans, can produce different
 decisions, and the simulator's second-half behaviour responds to those
@@ -178,7 +191,9 @@ duplicating a tactical effect.
 
 -   Store coach experiences with verified outcomes and embeddings.
 -   Add Atlas Vector Search retrieval filtered by coach namespace and
-    metadata.
+    metadata; every call goes through `require_own_namespace()`.
+-   Build `style_profiles` from StatsBomb Open Data and Metrica sample
+    data locally; upload only compact derived profiles.
 -   Treat retrieval as context, not ground truth.
 -   Add versioned simulator capability/schema validation.
 -   Handle unavailable player, unsupported tactical option, and changed
@@ -195,18 +210,27 @@ simulated environment change is handled safely.
 -   Add halftime voice script and ElevenLabs TTS adapter.
 -   Cache audio by stable briefing ID.
 -   Add text transcript and fallback when TTS is unavailable.
--   Build dashboard for match, coach comparison, action timeline,
-    recovery, and evaluation.
+-   Build the live tactical board (PRD §13): animated pitch from real
+    frames, click a team to hear its coach, plus compact coach
+    comparison, timeline, evaluation, and demo controls.
 
 **Done when:** a judge can run the end-to-end demo and see/hear the
 result.
 
 ## Required data contracts
 
-Use a single source of truth for enums and typed schemas. Avoid
-duplicating literal allowed values across files.
+The source of truth is `backend/app/schemas/` (enums in `enums.py`).
+Do not copy allowed values elsewhere. The frontend imports generated
+types from `frontend/src/api/`. After any contract change, run
+`scripts/export_openapi.py` and `npm run gen:api`, commit both generated
+files, and add a `CHECKLIST.md` Handoff log entry. A test fails if
+`openapi.json` is stale.
 
-### Tactical plan
+All contract models reject unknown fields. Pitch coordinates are 0–100;
+x is left→right and y is top→bottom, and the `top` team attacks toward
+y=100.
+
+### Tactical plan (example; see `schemas/coach.py`)
 
 ``` json
 {
@@ -226,6 +250,8 @@ duplicating literal allowed values across files.
     "confidence": 0.72,
     "evidence": ["event_014"]
   },
+  "primary_objective": "Create more chances down the left.",
+  "expected_effects": ["More left-side entries"],
   "rationale": "Evidence-based short explanation.",
   "risks": ["Higher stamina use"],
   "success_indicators": ["Increase in left-channel entries"],
@@ -268,12 +294,20 @@ equivalent design:
 -   `tasks`
 -   `actions`
 -   `coach_experiences`
+-   `style_profiles` (derived from StatsBomb/Metrica; shared, not
+    private to a coach)
 -   `worker_leases`
 
 Add unique indexes for stable IDs and query indexes for match,
 team/coach namespace, status, and timestamps. Keep match events
 append-only. Keep audio outside match documents; store an audio
 reference and metadata.
+
+Connect through `app.config.mongo.get_db()`; check a cluster with
+`scripts/check_mongo.py`. The demo uses an Atlas free (M0) cluster: 512
+MB storage and limited throughput, so store derived data only and use
+bulk writes for batch runs. `docker compose up -d` runs Atlas Local
+(with Vector Search) for offline work.
 
 Do not assume MongoDB and an external simulator can participate in one
 atomic transaction. Use an action ledger, idempotency, and
@@ -302,6 +336,7 @@ LLM_API_KEY=
 ELEVENLABS_API_KEY=
 ELEVENLABS_BLUE_VOICE_ID=
 ELEVENLABS_RED_VOICE_ID=
+CORS_ORIGINS=["http://localhost:5173"]
 ```
 
 Do not print secret values in logs.
@@ -324,6 +359,15 @@ Write tests as features are implemented. At minimum:
     rejection.
 11. ElevenLabs failure falls back to text.
 12. Evaluator results are reproducible for the same seeds/configuration.
+13. A `CoachView` never contains the rival's tactics (other than the
+    kickoff formation), stamina, or decisions.
+14. Halftime plans stay sealed until both are submitted.
+15. Selecting a team in the UI makes no API writes, and switching teams
+    never plays two briefings at once.
+16. The pitch renders only from simulator frames.
+
+Run checks with: `cd backend && .venv/bin/pytest && .venv/bin/ruff check
+. && .venv/bin/ruff format --check .` and `cd frontend && npm run build`.
 
 Use mocks/fakes for LLM, MongoDB, and ElevenLabs in unit tests. Keep a
 small integration test for real configured services, but never make the
@@ -331,15 +375,20 @@ entire test suite depend on external API availability.
 
 ## UI requirements
 
-MVP dashboard sections: - Match: pitch/player markers, score, clock,
-possession, shots, recent events. - Coaches: side-by-side analysis,
-rival prediction, tactical plan, voice player/transcript. - Timeline:
-decisions, action lifecycle, verification, recovery. - Evaluation:
-repeated match results and metric comparison. - Controls: start match,
-run batch, inject crash, reset.
+PRD §13 is the spec. In short:
 
-Avoid complex animation until core match, persistence, and recovery
-flows work.
+-   The pitch is the centerpiece: vertical top-down board, Blue in the
+    upper half and Red in the lower half, with chalkboard-style arrows
+    for passes, runs, and pressing.
+-   Animate only from simulator frames and events. Never invent
+    positions or events. Respect `prefers-reduced-motion`.
+-   Click a team (pitch half, label, or coach card) to play that
+    coach's halftime briefing with a transcript. Only one coach speaks
+    at a time. Selection is read-only and never triggers actions.
+-   Secondary, compact: score, clock, phase, possession, shots, event
+    feed, coach comparison, timeline, evaluation, demo controls.
+-   Until the API is live, build from a recorded real simulator run in
+    `frontend/src/fixtures/` with a visible "fixture data" badge.
 
 ## Coding standards
 
@@ -374,14 +423,16 @@ variable needed.
 ## Explicitly avoid
 
 -   Overbuilding a realistic 3D soccer game.
--   Adding live sports data feeds.
+-   Adding live sports data feeds (historical StatsBomb/Metrica open
+    data is fine, as derived profiles only).
 -   Letting LLMs generate the actual play-by-play state.
 -   One giant agent with an unstructured prompt.
 -   Letting agents write directly to MongoDB collections without
     repository/service validation.
 -   Treating heartbeat as proof of task progress.
 -   Blind retries after uncertain actions.
--   Shared private memory between rival coaches.
+-   Shared private memory between rival coaches, or passing either
+    coach anything other than its own `CoachView`.
 -   Letting ElevenLabs failure block the match.
 -   Adding Neo4j, Kafka, Kubernetes, or extra infrastructure unless a
     demonstrated MVP requirement demands it.
