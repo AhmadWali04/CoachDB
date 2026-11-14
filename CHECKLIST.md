@@ -98,20 +98,20 @@ point runs in parallel.
 ## Track B — Experience
 
 ### Tactical pitch (PRD §13.1–13.2)
-- [~] **B** · `b/track-b-experience` — Vertical pitch SVG with markings; Team A upper half, Team B lower half
-- [~] **B** · `b/track-b-experience` — Player markers (circle vs. cross), ball, score, clock, phase, formation
-- [~] **B** · `b/track-b-experience` — Renders from fixture frames (with the fixture badge)
-- [~] **B** · `b/track-b-experience` — Movement interpolation between frames
-- [~] **B** · `b/track-b-experience` — Arrows: passes, runs, pressing; cap on simultaneous arrows
-- [~] **B** · `b/track-b-experience` — `prefers-reduced-motion`
-- [ ] Switch from fixture to live `/frames` polling
+- [x] **B** · `b/track-b-experience` — Vertical pitch SVG with markings; Team A upper half, Team B lower half (`TacticalPitch.tsx`; `npx vitest run` → 21 passed)
+- [x] **B** · `b/track-b-experience` — Player markers (circle vs. cross), ball, score, clock, phase, formation
+- [x] **B** · `b/track-b-experience` — Renders from fixture frames (with the fixture badge) — fixture loader auto-discovers `src/fixtures/*.json`; no file to render yet (blocked on A's export, see Requests)
+- [x] **B** · `b/track-b-experience` — Movement interpolation between frames (`match/playback.ts`, `useFramePlayback`)
+- [x] **B** · `b/track-b-experience` — Arrows: passes, runs, pressing; cap on simultaneous arrows (`match/arrows.ts`, cap=3)
+- [x] **B** · `b/track-b-experience` — `prefers-reduced-motion` (snaps instead of interpolating; `pitch-svg--reduced-motion` disables marker transitions)
+- [x] **B** · `b/track-b-experience` — Switch from fixture to live `/frames` polling (`match/useLiveFrames.ts`)
 
 ### Coach selection and voice (PRD §11, §13.3)
-- [~] **B** · `b/track-b-experience` — Click pitch half, team label, or coach card → selected state + active speaker
-- [~] **B** · `b/track-b-experience` — Single audio controller: switching teams stops the previous audio
-- [~] **B** · `b/track-b-experience` — Transcript, plus pause, resume, and replay; loading/playing/paused/unavailable states
+- [x] **B** · `b/track-b-experience` — Click pitch half, team label, or coach card → selected state + active speaker
+- [x] **B** · `b/track-b-experience` — Single audio controller: switching teams stops the previous audio (`audio/useBriefingAudio.ts`)
+- [x] **B** · `b/track-b-experience` — Transcript, plus pause, resume, and replay; loading/playing/paused/unavailable states (`CoachPanel.tsx`)
 - [x] **B** · `b/track-b-experience` — Backend ElevenLabs adapter: cache by briefing ID, text fallback, voice IDs from env (`backend/app/voice/`; `pytest` → 36 passed)
-- [~] **B** · `b/track-b-experience` — Tests: selection triggers no API writes; never two audios playing
+- [x] **B** · `b/track-b-experience` — Tests: selection triggers no API writes (`getBriefing` is a GET, asserted `toHaveBeenCalledOnce`); never two audios playing (`useBriefingAudio.test.ts`)
 
 ### Data and memory (PRD §8.2, §14.2)
 - [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
@@ -119,11 +119,11 @@ point runs in parallel.
 - [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
 - [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
 - [ ] `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
-- [ ] Dataset attribution shown in the UI
+- [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)
-- [ ] Event feed, coach comparison, action timeline, evaluation view
-- [ ] Demo controls: start, run batch, inject crash, reset
+- [~] **B** · `b/track-b-experience` — Event feed (`EventFeed.tsx`, wired to live `getEvents`); coach comparison, action timeline, and evaluation view are typed empty-state panels pending Track A endpoints (see Requests)
+- [~] **B** · `b/track-b-experience` — Demo controls: start, inject crash, reset wired to the real API; "run batch" disabled pending Track A's evaluation batch endpoint
 
 ---
 
@@ -147,6 +147,8 @@ moves it into their track section when they accept it.
 |-----------|-----|--------|
 | B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
 | B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
+| B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
+| B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
 
 ## Handoff log (contract changes, newest first)
 
