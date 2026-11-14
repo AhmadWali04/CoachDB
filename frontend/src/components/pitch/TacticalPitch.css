@@ -1,0 +1,186 @@
+.tactical-pitch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.fixture-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  background: var(--accent-bg, rgba(170, 59, 255, 0.15));
+  color: var(--accent, #aa3bff);
+  border: 1px solid var(--accent-border, rgba(170, 59, 255, 0.5));
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pitch-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pitch-hud__team {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  position: relative;
+}
+
+.pitch-hud__team--blue {
+  border-left: 3px solid #3b82f6;
+}
+
+.pitch-hud__team--red {
+  align-items: flex-end;
+  border-right: 3px solid #ef4444;
+}
+
+.pitch-hud__team--selected {
+  background: var(--accent-bg, rgba(170, 59, 255, 0.1));
+  border-color: var(--accent-border, rgba(170, 59, 255, 0.5));
+}
+
+.pitch-hud__name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pitch-hud__formation {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.pitch-hud__speaking {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+}
+
+.pitch-hud__team--red .pitch-hud__speaking {
+  right: auto;
+  left: 0.3rem;
+}
+
+.pitch-hud__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.pitch-hud__score {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.pitch-hud__clock,
+.pitch-hud__phase {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-transform: capitalize;
+}
+
+.pitch-svg {
+  width: 100%;
+  aspect-ratio: 68 / 105;
+  border-radius: 0.75rem;
+  background: #1a7a3c;
+}
+
+.pitch-turf {
+  fill: #1a7a3c;
+}
+
+.pitch-line,
+.pitch-line-shape,
+.pitch-boundary {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.65);
+  stroke-width: 0.25;
+}
+
+.pitch-spot {
+  fill: rgba(255, 255, 255, 0.65);
+}
+
+.pitch-goal {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.pitch-half {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.pitch-half:focus-visible {
+  outline: 2px solid var(--accent, #aa3bff);
+  outline-offset: -2px;
+}
+
+.pitch-half--selected {
+  fill: rgba(255, 255, 255, 0.08);
+}
+
+.pitch-ball {
+  fill: #fef3c7;
+  stroke: #1f2028;
+  stroke-width: 0.15;
+}
+
+.player-marker {
+  transition: transform 0.15s linear;
+}
+
+.pitch-svg--reduced-motion .player-marker {
+  transition: none;
+}
+
+.pitch-arrow {
+  stroke-width: 0.4;
+  opacity: 0.85;
+}
+
+.pitch-arrow--pass_sequence {
+  stroke: #facc15;
+  stroke-dasharray: 1.2 0.8;
+}
+
+.pitch-arrow--counterattack {
+  stroke: #f97316;
+}
+
+.pitch-arrow--pressing_success {
+  stroke: #38bdf8;
+  stroke-dasharray: 0.6 0.6;
+}
+
+.pitch-arrow--turnover {
+  stroke: #e879f9;
+  stroke-dasharray: 0.3 0.6;
+}
+
+.pitch-arrow-head {
+  fill: rgba(255, 255, 255, 0.85);
+}
