@@ -114,11 +114,11 @@ point runs in parallel.
 - [x] **B** · `b/track-b-experience` — Tests: selection triggers no API writes (`getBriefing` is a GET, asserted `toHaveBeenCalledOnce`); never two audios playing (`useBriefingAudio.test.ts`)
 
 ### Data and memory (PRD §8.2, §14.2)
-- [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
-- [ ] Load into `style_profiles` (stays well under M0's 512 MB)
-- [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
-- [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
-- [ ] `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
+- [x] **B** · `b/track-b-experience` — Local script: StatsBomb Open Data + Metrica sample → compact style profiles (`scripts/build_style_profiles.py`, `backend/app/data/`; ran live against the real sources → 6 profiles, see output below)
+- [~] **B** · `b/track-b-experience` — Writes compact derived profiles to `backend/.cache/data/style_profiles.json` (a few KB, nowhere near the 512 MB budget); a real `style_profiles` Mongo collection still needs A's persistence layer to load into
+- [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter — needs Atlas (Mongo not wired up yet)
+- [x] **B** · `b/track-b-experience` — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A** (`backend/app/data/vector_search.py`, local cosine-similarity reference impl; swap the in-memory stores for Atlas `$vectorSearch` later without changing either function's signature)
+- [x] **B** · `b/track-b-experience` — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; test that Blue can't retrieve Red's experiences (`test_data_vector_search.py`)
 - [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)
@@ -149,6 +149,7 @@ moves it into their track section when they accept it.
 | B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
 | B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
 | B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
+| B → A | `backend/app/data/vector_search.py`'s `search_styles`/`search_experiences` are ready to call from the scout/coach, but run on in-memory stores today -- once Atlas is set up, swap in Mongo-backed stores with the same two methods (`all()` / `by_namespace()`) rather than changing the search functions | Open |
 
 ## Handoff log (contract changes, newest first)
 
