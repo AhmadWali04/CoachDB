@@ -27,6 +27,7 @@ export function EvaluationView({ batch }: EvaluationViewProps) {
       ) : (
         <>
           <p className="evaluation__summary">
+            {batch.status === "running" ? "Batch running… " : batch.status === "failed" ? "Batch failed. " : ""}
             {batch.results.length} seeded match{batch.results.length === 1 ? "" : "es"}, sides
             swapped across paired runs. Metrics are reported separately per coach, never ranked
             by wins alone (PRD §12).

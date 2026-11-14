@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { api, ApiError } from "../../api/client";
+import type { EvaluationBatch } from "../../types/evaluation";
 import type { MatchState } from "../../api/types";
 import "./panels.css";
 
 export interface DemoControlsProps {
   matchId: string | null;
+  onBatchChange?: (batch: EvaluationBatch) => void;
   onMatchChange: (match: MatchState) => void;
 }
 
-export function DemoControls({ matchId, onMatchChange }: DemoControlsProps) {
+export function DemoControls({ matchId, onMatchChange, onBatchChange }: DemoControlsProps) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,7 +58,12 @@ export function DemoControls({ matchId, onMatchChange }: DemoControlsProps) {
         >
           {busy === "crash" ? "Injecting…" : "Inject crash"}
         </button>
-        <button type="button" disabled title="Needs Track A's evaluation batch endpoint">
+        <button type="button" disabled={busy !== null} onClick={async () => {
+          setBusy("batch"); setError(null);
+          try { onBatchChange?.(await api.runBatch()); }
+          catch (err) { setError(err instanceof Error ? err.message : "Batch failed"); }
+          finally { setBusy(null); }
+        }}>
           Run batch
         </button>
       </div>

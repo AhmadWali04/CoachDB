@@ -48,7 +48,7 @@ def _document(model: BaseModel) -> dict:
 
 
 def _without_id(document: dict) -> dict:
-    return {key: value for key, value in document.items() if key != "_id"}
+    return {key: value for key, value in document.items() if key not in {"_id", "_engine"}}
 
 
 def _parse[Model: BaseModel](model: type[Model], document: dict | None) -> Model | None:

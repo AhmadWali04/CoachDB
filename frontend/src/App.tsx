@@ -1,3 +1,7 @@
+import { api } from "./api/client";
+import type { Action } from "./types/action";
+import type { CoachDecision } from "./types/coachAnalysis";
+import type { EvaluationBatch } from "./types/evaluation";
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import type { Frame, MatchState, TeamId } from "./api/types";
@@ -20,12 +24,55 @@ function App() {
   const [selectedTeam, setSelectedTeam] = useState<TeamId | null>(null);
   const [fixtureFrames, setFixtureFrames] = useState<Frame[] | null>(null);
 
+  const [decisions, setDecisions] = useState<Partial<Record<TeamId, CoachDecision>>>({});
+  const [actions, setActions] = useState<Action[]>([]);
+  const [batch, setBatch] = useState<EvaluationBatch | null>(null);
+  const [recoveries, setRecoveries] = useState(0);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
+  const matchId = match?.match_id ?? null;
+
+  useEffect(() => {
+    if (!matchId) return;
+    let cancelled = false;
+    let inFlight = false;
+    const poll = async () => {
+      if (inFlight) return;
+      inFlight = true;
+      try {
+        const [state, coachRows, ledger, recovery] = await Promise.all([
+          api.getMatch(matchId), api.getDecisions(matchId), api.getActions(matchId), api.getRecovery(matchId),
+        ]);
+        if (!cancelled) {
+          setMatch(state);
+          setDecisions(Object.fromEntries(coachRows.map((decision) => [decision.team_id, decision])));
+          setActions(ledger); setRecoveries(recovery.recoveries); setConnectionError(null);
+        }
+      } catch { if (!cancelled) setConnectionError("Connection interrupted; retrying…"); }
+      finally { inFlight = false; }
+    };
+    void poll();
+    const timer = setInterval(poll, 700);
+    return () => { cancelled = true; clearInterval(timer); };
+  }, [matchId]);
+
+  const batchId = batch?.batch_id ?? null;
+  useEffect(() => {
+    if (!batchId) return;
+    let cancelled = false;
+    const poll = async () => {
+      try { const updated = await api.getEvaluation(batchId); if (!cancelled) setBatch(updated); }
+      catch { /* next poll retries */ }
+    };
+    const timer = setInterval(poll, 1000);
+    return () => { cancelled = true; clearInterval(timer); };
+  }, [batchId]);
+
   const isLive = match !== null;
   const liveFrames = useLiveFrames(match?.match_id ?? null, isLive);
   const events = useLiveEvents(match?.match_id ?? null, isLive);
 
   useEffect(() => {
-    if (isLive) return;
+    if (isLive || !import.meta.env.DEV) return;
     const [first] = listFixtureNames();
     if (!first) return;
     loadFixture(first).then((page) => {
@@ -51,7 +98,7 @@ function App() {
             players={playback.players}
             ball={playback.ball}
             arrows={arrows}
-            isFixture={!isLive}
+            isFixture={!isLive && fixtureFrames !== null}
             reducedMotion={reducedMotion}
             selectedTeam={selectedTeam}
             activeSpeaker={selectedTeam}
@@ -61,14 +108,13 @@ function App() {
 
         <aside className="dashboard__side">
           <CoachPanel matchId={match?.match_id ?? null} selectedTeam={selectedTeam} />
-          <DemoControls matchId={match?.match_id ?? null} onMatchChange={setMatch} />
+          <DemoControls matchId={match?.match_id ?? null} onMatchChange={setMatch} onBatchChange={setBatch} />
+          {connectionError && <p role="status">{connectionError}</p>}
+          {recoveries > 0 && <p role="status">Recovered {recoveries} worker interruption(s); tactical effects reconciled.</p>}
           <EventFeed events={events} />
-          {/* No coach_decisions/action-ledger/evaluation endpoint exists yet
-              (Track A -- see CHECKLIST.md Requests), so these render their
-              own empty state until real data is wired in. */}
-          <CoachComparison decisions={{}} />
-          <ActionTimeline actions={[]} />
-          <EvaluationView batch={null} />
+          <CoachComparison decisions={decisions} />
+          <ActionTimeline actions={actions} />
+          <EvaluationView batch={batch} />
           <DatasetAttribution />
         </aside>
       </main>

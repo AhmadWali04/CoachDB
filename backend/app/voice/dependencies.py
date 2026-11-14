@@ -22,6 +22,11 @@ _shared_decision_reader = InMemoryCoachDecisionReader()
 
 
 def get_shared_decision_reader() -> CoachDecisionReader:
+    if get_settings().mongodb_uri:
+        from app.config.mongo import get_db
+        from app.persistence import MongoMatchRepository
+
+        return MongoMatchRepository(get_db())
     return _shared_decision_reader
 
 

@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     mongodb_uri: SecretStr | None = None
     mongodb_database: str = "rival_coaches"
 
+    llm_model: str | None = None
+    engine_step_seconds: float = 0.25
+
     llm_provider: str | None = None
     llm_api_key: SecretStr | None = None
 

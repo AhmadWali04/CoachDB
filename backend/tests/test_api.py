@@ -26,9 +26,19 @@ def test_health():
         ("post", "/demo/inject-crash", {"match_id": "m1"}),
     ],
 )
-def test_stubs_return_501(method, path, body):
-    response = client.request(method, path, json=body)
-    assert response.status_code == 501
+def test_engine_requires_database(method, path, body):
+    from fastapi import HTTPException
+
+    from app.orchestration.dependencies import get_engine
+
+    def unavailable():
+        raise HTTPException(503, "MongoDB unavailable")
+
+    app.dependency_overrides[get_engine] = unavailable
+    try:
+        assert client.request(method, path, json=body).status_code == 503
+    finally:
+        app.dependency_overrides.clear()
 
 
 def test_briefing_rejects_unknown_team():
