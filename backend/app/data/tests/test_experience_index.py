@@ -5,10 +5,11 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
+from pymongo.errors import CollectionInvalid, OperationFailure
+
 from app.data import experience_index as module
 from app.data.experience_index import IndexDefinitionMismatch, provision_experience_index
 from app.data.indexes import EXPERIENCE_INDEX, vector_index_definition
-from pymongo.errors import CollectionInvalid, OperationFailure
 
 DIMENSIONS = 8
 DEFINITION = vector_index_definition(DIMENSIONS, experiences=True)

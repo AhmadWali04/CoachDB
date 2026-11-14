@@ -20,6 +20,7 @@ export interface CoachMetrics {
 
 export interface EvaluationBatch {
   batch_id: string;
+  status?: "running" | "complete" | "failed";
   results: MatchResult[];
   metrics: Record<TeamId, CoachMetrics>;
 }

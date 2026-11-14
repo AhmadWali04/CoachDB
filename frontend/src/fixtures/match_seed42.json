@@ -1,0 +1,7004 @@
+{
+  "match_id": "match_seed42",
+  "frames": [
+    {
+      "match_id": "match_seed42",
+      "seq": 1,
+      "half": 1,
+      "step": 1,
+      "clock_minute": 2,
+      "phase": "first_half",
+      "state_version": 1,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 48.347755330517664,
+          "y": 5.784359135409691
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 11.238377755504562,
+          "y": 31.53153091811162
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 35.0428423048269,
+          "y": 26.311827848821622
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 62.59070120549319,
+          "y": 25.15921581810318
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 85.35953184482574,
+          "y": 32.89930662667714
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 30.71412547100727,
+          "y": 48.32264373224418
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 46.05199007742449,
+          "y": 49.85658274006696
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 71.58511515990581,
+          "y": 51.83491551099685
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 17.24383599849425,
+          "y": 64.04150309910796
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 48.692756360901015,
+          "y": 70.74327843324069
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 76.77373101466772,
+          "y": 62.55647506028089
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.414904125467565,
+          "y": 95.69498873269492
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.837854293550542,
+          "y": 77.84276963964628
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 38.78492611183496,
+          "y": 80.2173685487282
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 65.41632505018582,
+          "y": 79.27120626325012
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 85.94815801891397,
+          "y": 77.97642798551797
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 15.618817162054096,
+          "y": 58.170241401864665
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 34.3665950692453,
+          "y": 59.22743101728954
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.31510370881686,
+          "y": 56.36738965390928
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 82.86232709088824,
+          "y": 53.47875186154177
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 38.223788824880735,
+          "y": 37.60600857645837
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 58.91865743176067,
+          "y": 40.8141066655864
+        }
+      ],
+      "ball": {
+        "x": 38.223788824880735,
+        "y": 37.60600857645837,
+        "owner_player_id": "red_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000001",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 1,
+          "clock_minute": 2,
+          "team_id": "blue",
+          "type": "foul",
+          "player_ids": [
+            "blue_4"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:01Z"
+        },
+        {
+          "event_id": "match_seed42_e000002",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 1,
+          "clock_minute": 2,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_10"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:02Z"
+        },
+        {
+          "event_id": "match_seed42_e000003",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 1,
+          "clock_minute": 2,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:03Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 2,
+      "half": 1,
+      "step": 2,
+      "clock_minute": 4,
+      "phase": "first_half",
+      "state_version": 2,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.916507191801394,
+          "y": 4.342277296396194
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 2.035643534061183,
+          "y": 27.980414962571572
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 24.119998078832744,
+          "y": 28.937140103819573
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 54.47691400791899,
+          "y": 26.341698462647877
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.20799929236996,
+          "y": 32.05711152113886
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 14.256801951232301,
+          "y": 46.37428843178463
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.14192700780562,
+          "y": 44.892718288354494
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.54327771468044,
+          "y": 46.26589706151796
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 6.517423046387822,
+          "y": 65.25820575883601
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 37.16505520848531,
+          "y": 66.93263199176928
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 67.67081482069919,
+          "y": 65.48728553844326
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.98651003077593,
+          "y": 94.5297603329961
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 13.101932868183482,
+          "y": 78.3682088049789
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 38.18258306881982,
+          "y": 82.50751594134124
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.75456607325827,
+          "y": 81.39640303084238
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 85.07621034941171,
+          "y": 80.98522563897066
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 11.376931003397877,
+          "y": 55.54545647304276
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 39.01956833362472,
+          "y": 57.65789478210395
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 61.377279734397476,
+          "y": 61.75247618617779
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 84.05295429205229,
+          "y": 55.381166236911746
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 40.23291476079309,
+          "y": 44.97672828144058
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 62.886237617875985,
+          "y": 44.82647026568171
+        }
+      ],
+      "ball": {
+        "x": 37.16505520848531,
+        "y": 66.93263199176928,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000004",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 2,
+          "clock_minute": 4,
+          "team_id": "blue",
+          "type": "counterattack",
+          "player_ids": [
+            "blue_7"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:04Z"
+        },
+        {
+          "event_id": "match_seed42_e000005",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 2,
+          "clock_minute": 4,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_7",
+            "blue_10"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:05Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 3,
+      "half": 1,
+      "step": 3,
+      "clock_minute": 7,
+      "phase": "first_half",
+      "state_version": 3,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 36.44620869438351,
+          "y": 5.281923597159616
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 2.6297896506336507,
+          "y": 29.60859150401463
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 26.006823523025552,
+          "y": 28.722895565126482
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 53.004688904402386,
+          "y": 24.580334304506543
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 76.30102271475856,
+          "y": 28.07191128318079
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 16.387558331589062,
+          "y": 50.223111419020604
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 38.87176169150538,
+          "y": 46.83369696919603
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 60.100086400601214,
+          "y": 45.917035611297806
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 10.229011829044467,
+          "y": 63.23627418071776
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 34.004575169023546,
+          "y": 66.18212203317107
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 64.15581393908666,
+          "y": 61.944936342028036
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.514887511292734,
+          "y": 95.85819723252924
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 13.460113003221291,
+          "y": 79.98999317616708
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 38.024076793632325,
+          "y": 79.34755099896512
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 61.68522761654303,
+          "y": 84.68169667178796
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 81.55370014774707,
+          "y": 77.91594277989968
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 17.1266754344559,
+          "y": 59.56361299154339
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 37.80225902478985,
+          "y": 57.770348786998575
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.12045303152047,
+          "y": 60.298821560969664
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 84.38510352160709,
+          "y": 60.234598246511545
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 40.31436871023567,
+          "y": 40.27078923265249
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 57.609208507117565,
+          "y": 43.37958641453986
+        }
+      ],
+      "ball": {
+        "x": 34.004575169023546,
+        "y": 66.18212203317107,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000006",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 3,
+          "clock_minute": 7,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_7",
+            "blue_8"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:06Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 4,
+      "half": 1,
+      "step": 4,
+      "clock_minute": 9,
+      "phase": "first_half",
+      "state_version": 4,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 36.89878934812623,
+          "y": 4.242008391736531
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 3.7064697476578665,
+          "y": 46.02851337288473
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 20.761739075612475,
+          "y": 41.38068839557946
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 54.048823658160785,
+          "y": 40.425958516054195
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 76.24336010404902,
+          "y": 45.373650702866925
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 14.566858799109227,
+          "y": 67.15781240152248
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 39.351822226370246,
+          "y": 61.42802780621397
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 55.05849478980019,
+          "y": 63.28542084422263
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 8.568344746602275,
+          "y": 82.61308544348402
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 40.27695539432602,
+          "y": 82.83602615787076
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.52327931489502,
+          "y": 81.84498198659986
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.72420472962551,
+          "y": 94.19386162845764
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 14.7361973442934,
+          "y": 77.54147173811953
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 36.38691637834641,
+          "y": 83.3744550967591
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 61.78734296921567,
+          "y": 84.9049912681958
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.7144208431597,
+          "y": 77.41572769261361
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 12.989250671362285,
+          "y": 60.170035218116745
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 37.58890838266505,
+          "y": 58.14125345064487
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.22836115733553,
+          "y": 59.531289839006426
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 88.3861247942081,
+          "y": 56.498838687292604
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 42.89079283809465,
+          "y": 41.65878447032074
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 56.40470663619905,
+          "y": 42.301951874699085
+        }
+      ],
+      "ball": {
+        "x": 55.05849478980019,
+        "y": 63.28542084422263,
+        "owner_player_id": "blue_8"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000007",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 4,
+          "clock_minute": 9,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:07Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 5,
+      "half": 1,
+      "step": 5,
+      "clock_minute": 11,
+      "phase": "first_half",
+      "state_version": 5,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.94256450180288,
+          "y": 4.332622221207828
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 14.208322340395622,
+          "y": 30.28248379519509
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 34.031784951815325,
+          "y": 25.351812399833072
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 63.12162446537722,
+          "y": 30.911853062678354
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 84.64006693871315,
+          "y": 33.70442361169142
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 33.65854112687739,
+          "y": 49.53804491594098
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 50.44614658724495,
+          "y": 50.97253613695628
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 67.23837460219251,
+          "y": 51.31044965177796
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 23.74967491975327,
+          "y": 63.78024695296739
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.33756161099419,
+          "y": 68.47508174489754
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 76.45732218325986,
+          "y": 66.48785336227438
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.011401531678054,
+          "y": 95.16835518891794
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 12.259461823515867,
+          "y": 72.11631935228971
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 31.640891721924696,
+          "y": 76.7646734196467
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 65.76028085160021,
+          "y": 72.11494976588433
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 82.88163116000744,
+          "y": 71.05127532162454
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 18.1222985130355,
+          "y": 47.71931968368275
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 38.75615322826753,
+          "y": 50.47729208673175
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 61.35379932268698,
+          "y": 52.71628906199262
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 85.18226172425567,
+          "y": 50.50203373574735
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 37.634073595388294,
+          "y": 36.608237546418565
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 57.90948762092677,
+          "y": 35.29715080473649
+        }
+      ],
+      "ball": {
+        "x": 57.90948762092677,
+        "y": 35.29715080473649,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000008",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 5,
+          "clock_minute": 11,
+          "team_id": "red",
+          "type": "pass_sequence",
+          "player_ids": [
+            "red_9",
+            "red_11"
+          ],
+          "details": {
+            "attack_focus": "middle"
+          },
+          "created_at": "2026-01-01T00:00:08Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 6,
+      "half": 1,
+      "step": 6,
+      "clock_minute": 14,
+      "phase": "first_half",
+      "state_version": 6,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.83314209047435,
+          "y": 4.145086228986314
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 6.9687715828407555,
+          "y": 49.99072664512666
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 20.70523449813632,
+          "y": 40.4395643265978
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 56.46607502394967,
+          "y": 41.59120248850241
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 76.03416193987634,
+          "y": 49.28518504211864
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 15.261974658857856,
+          "y": 64.2171625324333
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 39.62831940069897,
+          "y": 65.00246972783884
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.89786450905203,
+          "y": 65.6700665943557
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 4.062584857217264,
+          "y": 80.9238579062644
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 36.39503001759982,
+          "y": 84.90262481069277
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 71.51144003141683,
+          "y": 80.98033228979646
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.46171468167641,
+          "y": 94.26858222878674
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.425789127078527,
+          "y": 75.6422158662565
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.838638616241795,
+          "y": 80.6340892738889
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.628778498619624,
+          "y": 83.30567312283279
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.11187121304327,
+          "y": 78.80542775331048
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 18.242691928634585,
+          "y": 57.93119111289626
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 34.73838774170187,
+          "y": 62.07662227976913
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.21344179177801,
+          "y": 59.54145463538236
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 87.16895378415701,
+          "y": 55.02127413452669
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 38.09564209947479,
+          "y": 42.82268026380828
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 60.413443369011134,
+          "y": 43.44738545008759
+        }
+      ],
+      "ball": {
+        "x": 39.62831940069897,
+        "y": 65.00246972783884,
+        "owner_player_id": "blue_7"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000009",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 6,
+          "clock_minute": 14,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_7"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:09Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 7,
+      "half": 1,
+      "step": 7,
+      "clock_minute": 16,
+      "phase": "first_half",
+      "state_version": 7,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.330038265959175,
+          "y": 5.669190039772033
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.019564154257111,
+          "y": 27.888562713404895
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 26.191851909940723,
+          "y": 24.849550099580803
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 55.88562065600722,
+          "y": 27.77673382932825
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 70.68061230671803,
+          "y": 32.39354781915885
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 14.822348973374286,
+          "y": 46.497178435337545
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 41.07307761160807,
+          "y": 47.68069745122865
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 58.9652920812057,
+          "y": 47.4382643389927
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 11.439048125549395,
+          "y": 60.927320029993226
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 41.809648263447706,
+          "y": 68.18763417731978
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 71.0513296373066,
+          "y": 64.86463031964239
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.94625788702033,
+          "y": 94.04957272379637
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 18.446527088386603,
+          "y": 76.99311280767857
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.91251222700224,
+          "y": 83.81341083362284
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 63.134445676755774,
+          "y": 83.86449589944634
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 81.86476501122365,
+          "y": 79.72424705481282
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 17.868746010702253,
+          "y": 60.23300069743654
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 40.53269284477543,
+          "y": 58.33460230527399
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.441526938708805,
+          "y": 59.76181940807365
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 82.82076389926216,
+          "y": 59.77207299491717
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 37.54503830662167,
+          "y": 39.14198660820871
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 62.91482353624229,
+          "y": 40.96957170718624
+        }
+      ],
+      "ball": {
+        "x": 41.809648263447706,
+        "y": 68.18763417731978,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000010",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 7,
+          "clock_minute": 16,
+          "team_id": "red",
+          "type": "foul",
+          "player_ids": [
+            "red_2"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:10Z"
+        },
+        {
+          "event_id": "match_seed42_e000011",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 7,
+          "clock_minute": 16,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_8",
+            "blue_9"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:11Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 8,
+      "half": 1,
+      "step": 8,
+      "clock_minute": 18,
+      "phase": "first_half",
+      "state_version": 8,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 51.75694856129886,
+          "y": 5.072431464957444
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 18.763204888177825,
+          "y": 29.692050511108565
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 38.70027452609244,
+          "y": 26.07140689703478
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 61.867220377717686,
+          "y": 26.592798175137812
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 86.82836048522164,
+          "y": 31.607382551387865
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 30.849670826449145,
+          "y": 48.88206388516995
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 49.081563466757814,
+          "y": 48.068538358016866
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 68.03778004910866,
+          "y": 50.459528260979596
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 16.013530225749037,
+          "y": 66.25271170300502
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.30761597674233,
+          "y": 70.5534509929945
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 81.93560062271581,
+          "y": 66.31657999486907
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.456885887125054,
+          "y": 95.341257008866
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.31390147929018,
+          "y": 50.41984286675786
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 33.511325160466875,
+          "y": 55.98120021625558
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 66.7580341041116,
+          "y": 59.088091677038015
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.47427729766923,
+          "y": 51.801933609267586
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 14.219203096461797,
+          "y": 32.4503574517153
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 35.018302392473224,
+          "y": 33.773931215155685
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 65.52290936584146,
+          "y": 34.52267800263745
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 88.22244436586067,
+          "y": 34.0639076716364
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 38.40759899652452,
+          "y": 17.693089495708282
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 56.0032475175783,
+          "y": 17.287623278814188
+        }
+      ],
+      "ball": {
+        "x": 65.52290936584146,
+        "y": 34.52267800263745,
+        "owner_player_id": "red_8"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000012",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 8,
+          "clock_minute": 18,
+          "team_id": "red",
+          "type": "shot",
+          "player_ids": [
+            "red_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:12Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 9,
+      "half": 1,
+      "step": 9,
+      "clock_minute": 20,
+      "phase": "first_half",
+      "state_version": 9,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.89274474363731,
+          "y": 4.4274028019782
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 5.368198081014242,
+          "y": 49.40708495496953
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 19.678364293800975,
+          "y": 41.018148377188325
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 54.063526846126365,
+          "y": 43.0927120594913
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.54738771629331,
+          "y": 46.0111295324588
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 19.382365364457335,
+          "y": 66.5068288252444
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 35.593039461812616,
+          "y": 61.34784399598373
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 55.958740352626805,
+          "y": 62.14655232636096
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 10.797901556997857,
+          "y": 79.85081806531284
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 37.315528087981754,
+          "y": 80.43696937510741
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.55548189391767,
+          "y": 80.77859228442628
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.97750867604175,
+          "y": 95.39270850098102
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.248464088894274,
+          "y": 76.46390663747063
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.00771581294778,
+          "y": 79.03326890882819
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 61.852698372508314,
+          "y": 83.62027713144415
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 82.40709345365225,
+          "y": 77.55087716365641
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 15.143662003549927,
+          "y": 60.74779625367724
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 35.99358623727977,
+          "y": 57.301310310843846
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 61.65169460376138,
+          "y": 62.09001808410996
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 86.34062186069083,
+          "y": 59.808499610333584
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 40.76361854775536,
+          "y": 44.92735471839869
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 63.1314074064835,
+          "y": 44.700237650658934
+        }
+      ],
+      "ball": {
+        "x": 10.797901556997857,
+        "y": 79.85081806531284,
+        "owner_player_id": "blue_9"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000013",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 9,
+          "clock_minute": 20,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_9"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:13Z"
+        },
+        {
+          "event_id": "match_seed42_e000014",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 9,
+          "clock_minute": 20,
+          "team_id": "red",
+          "type": "save",
+          "player_ids": [
+            "blue_9",
+            "red_1"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:14Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 10,
+      "half": 1,
+      "step": 10,
+      "clock_minute": 22,
+      "phase": "first_half",
+      "state_version": 10,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.89869774729221,
+          "y": 5.48731088431917
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 12.977917900077276,
+          "y": 30.555149290790116
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 37.12650947437732,
+          "y": 28.825968620656937
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 66.01398749585425,
+          "y": 28.127798876967894
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 81.61986683091789,
+          "y": 30.64758468150523
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 28.173720856657475,
+          "y": 48.714368905178915
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 50.32121778014765,
+          "y": 46.918257410512574
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 67.85009183782549,
+          "y": 47.83024436909693
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 21.65135313355642,
+          "y": 66.16369887379432
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 49.26079495733269,
+          "y": 65.38537310428327
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 79.32619387282524,
+          "y": 65.25566684302349
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.6805740710937,
+          "y": 94.41366877902882
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.672635313633801,
+          "y": 55.42903087004106
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.85385625843148,
+          "y": 58.173137918987806
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 64.0430482314217,
+          "y": 58.59356745670841
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.8140704213746,
+          "y": 50.03537650150396
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 17.827583604552835,
+          "y": 34.52085075035632
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 37.35217026103857,
+          "y": 37.72058203082064
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 62.36905847787071,
+          "y": 36.485094013868306
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 82.76430955459055,
+          "y": 33.619515533647444
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 39.48668780837309,
+          "y": 15.316529807728617
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 58.689036349587056,
+          "y": 14.174148919680292
+        }
+      ],
+      "ball": {
+        "x": 39.48668780837309,
+        "y": 15.316529807728617,
+        "owner_player_id": "red_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000015",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 10,
+          "clock_minute": 22,
+          "team_id": "red",
+          "type": "shot",
+          "player_ids": [
+            "red_10"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:15Z"
+        },
+        {
+          "event_id": "match_seed42_e000016",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 10,
+          "clock_minute": 22,
+          "team_id": "red",
+          "type": "goal",
+          "player_ids": [
+            "red_10"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:16Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 11,
+      "half": 1,
+      "step": 11,
+      "clock_minute": 25,
+      "phase": "first_half",
+      "state_version": 11,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 48.10786580762055,
+          "y": 5.24451392194813
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 15.515135864198193,
+          "y": 31.364121538038226
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 36.14199718407468,
+          "y": 25.162612278041873
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 64.6935875524121,
+          "y": 25.814196923383385
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 84.03283091350512,
+          "y": 29.301707800931766
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 28.61476643905047,
+          "y": 48.26996170526889
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 49.03300972451309,
+          "y": 49.56737824736416
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 72.65539428124218,
+          "y": 51.51205894132871
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 16.65524986209314,
+          "y": 63.51362919069428
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.31535238338027,
+          "y": 65.11629972230007
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 78.79968274976147,
+          "y": 67.99944697105525
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.12493219844358,
+          "y": 95.30028818649976
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 17.03386563247621,
+          "y": 76.91052793146333
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 32.594885458900265,
+          "y": 82.69767039629593
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.21905876627832,
+          "y": 77.122280103922
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 86.35567075695928,
+          "y": 73.75732584924523
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 12.743716327252029,
+          "y": 56.38381749158012
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 40.135184786849926,
+          "y": 59.196789827476906
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 62.857979951127454,
+          "y": 56.00673486020681
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 81.91626297103119,
+          "y": 57.487553911731716
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 43.717766184272705,
+          "y": 41.91580704586651
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 56.205427403979726,
+          "y": 37.64859249794564
+        }
+      ],
+      "ball": {
+        "x": 56.205427403979726,
+        "y": 37.64859249794564,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000017",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 11,
+          "clock_minute": 25,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:17Z"
+        },
+        {
+          "event_id": "match_seed42_e000018",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 11,
+          "clock_minute": 25,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:18Z"
+        },
+        {
+          "event_id": "match_seed42_e000019",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 11,
+          "clock_minute": 25,
+          "team_id": "blue",
+          "type": "pressing_success",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:19Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 12,
+      "half": 1,
+      "step": 12,
+      "clock_minute": 27,
+      "phase": "first_half",
+      "state_version": 12,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.76245766373192,
+          "y": 4.15199295568612
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.0,
+          "y": 30.763454373606265
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 25.802345912710372,
+          "y": 27.634885309707343
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.96844052053852,
+          "y": 26.602469688901063
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.26108277088815,
+          "y": 32.90306610908803
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 17.427024105877955,
+          "y": 47.08322259185069
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 38.04768631741662,
+          "y": 45.223425257308335
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 60.79660501599662,
+          "y": 47.047387049167696
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 4.8443109651519904,
+          "y": 64.93398550854035
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 39.084680848811566,
+          "y": 68.76472540328747
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 69.65846914964861,
+          "y": 64.97224386601475
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.935181216053564,
+          "y": 94.87097429001535
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 13.160659171099207,
+          "y": 80.79284238742846
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.30538325158604,
+          "y": 83.84919531284054
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 64.48459594403116,
+          "y": 81.90098502329917
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.1471643043938,
+          "y": 79.38615728583073
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 17.645848151124827,
+          "y": 60.11027896011599
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 41.053049472022174,
+          "y": 57.51997738833405
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 61.71766773282585,
+          "y": 58.46318063514573
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 84.03191443302612,
+          "y": 58.66199022538312
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 42.80762269049967,
+          "y": 39.17219998662054
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 57.696958801437916,
+          "y": 40.09103914294615
+        }
+      ],
+      "ball": {
+        "x": 39.084680848811566,
+        "y": 68.76472540328747,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000020",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 12,
+          "clock_minute": 27,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_7",
+            "blue_10"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:20Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 13,
+      "half": 1,
+      "step": 13,
+      "clock_minute": 29,
+      "phase": "first_half",
+      "state_version": 13,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 51.79225031110813,
+          "y": 4.0203022288773544
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 16.760597312833553,
+          "y": 29.513677771748128
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 37.06531722785973,
+          "y": 27.931467081092723
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 66.16722319792761,
+          "y": 29.14365603667914
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 87.34346294505853,
+          "y": 31.944928010471518
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 27.77277120378024,
+          "y": 47.55832010332803
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 48.449648241040705,
+          "y": 49.15072293177121
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 69.7860839100762,
+          "y": 50.489333511994204
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 19.404030501641717,
+          "y": 65.1855315868746
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 48.64633037756744,
+          "y": 69.47561262028165
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 78.16733141580957,
+          "y": 66.21712965311461
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.482623539009225,
+          "y": 94.50280735240189
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 11.956437930040423,
+          "y": 68.1555057607091
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.09751687587283,
+          "y": 74.2151837923025
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.731077119028846,
+          "y": 72.11089905462597
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 86.79668000874442,
+          "y": 69.90519152327626
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 15.197094952868863,
+          "y": 52.85964213729834
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 34.80420886472633,
+          "y": 50.69799221964973
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 59.81986530786044,
+          "y": 50.164705468546444
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 81.11318693804851,
+          "y": 48.07664926211242
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 38.19449061426614,
+          "y": 34.20481053560598
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 60.42687173438887,
+          "y": 36.84576958661643
+        }
+      ],
+      "ball": {
+        "x": 38.19449061426614,
+        "y": 34.20481053560598,
+        "owner_player_id": "red_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000021",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 13,
+          "clock_minute": 29,
+          "team_id": "red",
+          "type": "pass_sequence",
+          "player_ids": [
+            "red_8",
+            "red_7"
+          ],
+          "details": {
+            "attack_focus": "middle"
+          },
+          "created_at": "2026-01-01T00:00:21Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 14,
+      "half": 1,
+      "step": 14,
+      "clock_minute": 32,
+      "phase": "first_half",
+      "state_version": 14,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.87758777972204,
+          "y": 5.148128439252664
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 12.474909363120654,
+          "y": 31.642812788816062
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 38.528508774144825,
+          "y": 25.308260303101466
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 67.57692516239544,
+          "y": 27.866375123594125
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 81.59265736204512,
+          "y": 31.40424465351164
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 26.428872594340266,
+          "y": 50.77667424171199
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 50.502716776676515,
+          "y": 45.89518550684193
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 73.95134498168176,
+          "y": 48.82301307105337
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 22.115547562609553,
+          "y": 62.71070937326877
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 52.325926638747355,
+          "y": 68.63790590745778
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 80.18058028104174,
+          "y": 63.35412282239021
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.77088401607731,
+          "y": 94.90102892977751
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 18.920250083734384,
+          "y": 72.16099999495708
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.968218568577186,
+          "y": 72.83228146591617
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 66.92071444387636,
+          "y": 74.65778547347078
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 82.66230324658841,
+          "y": 72.68554120195226
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 16.283425097536295,
+          "y": 48.266151171832355
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 35.39050838661147,
+          "y": 49.94234256028526
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 58.02140578082309,
+          "y": 49.45038921340701
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 85.75048956095651,
+          "y": 49.703022227706214
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 37.85180987644821,
+          "y": 32.747555734186164
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 61.62390046474974,
+          "y": 35.2417349792742
+        }
+      ],
+      "ball": {
+        "x": 37.85180987644821,
+        "y": 32.747555734186164,
+        "owner_player_id": "red_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000022",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 14,
+          "clock_minute": 32,
+          "team_id": "red",
+          "type": "pass_sequence",
+          "player_ids": [
+            "red_7",
+            "red_11"
+          ],
+          "details": {
+            "attack_focus": "middle"
+          },
+          "created_at": "2026-01-01T00:00:22Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 15,
+      "half": 1,
+      "step": 15,
+      "clock_minute": 34,
+      "phase": "first_half",
+      "state_version": 15,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 39.734673833782054,
+          "y": 5.322366085706736
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 3.3564990296846293,
+          "y": 29.55083379662527
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 26.26729156170085,
+          "y": 26.885808340414883
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.57127869484651,
+          "y": 27.959786957900356
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 71.46089450091387,
+          "y": 27.995536735324347
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 18.55365639455274,
+          "y": 49.49374633241774
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 34.99482926539767,
+          "y": 44.73166352983505
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 59.59786947980574,
+          "y": 49.13206794727256
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 8.003777416943404,
+          "y": 65.65605744446424
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 34.64353481519441,
+          "y": 65.9627713160705
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 67.45622931328619,
+          "y": 60.23916470510168
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.001471609648014,
+          "y": 94.6446431667166
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 18.695288817542693,
+          "y": 75.54796131978591
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.601592873759444,
+          "y": 84.01575168343709
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 68.99657933501962,
+          "y": 84.70471766683812
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.15608820773643,
+          "y": 79.03368950581944
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 17.050150643300455,
+          "y": 55.2413900388677
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 39.21207591546949,
+          "y": 59.8230049395098
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 59.45191317778501,
+          "y": 62.49643672756061
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 86.0782777556327,
+          "y": 58.511977751667125
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 36.72993925035062,
+          "y": 41.95035481314608
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 58.66646714932074,
+          "y": 41.0877663377679
+        }
+      ],
+      "ball": {
+        "x": 34.64353481519441,
+        "y": 65.9627713160705,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000023",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 15,
+          "clock_minute": 34,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_8",
+            "blue_10"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:23Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 16,
+      "half": 1,
+      "step": 16,
+      "clock_minute": 36,
+      "phase": "first_half",
+      "state_version": 16,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 51.25426413895189,
+          "y": 5.8903870791264215
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 14.638607268813836,
+          "y": 32.300579653830695
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 33.58619029020796,
+          "y": 26.887102943021006
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 64.23340045600597,
+          "y": 30.82110836085146
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 88.90495371825403,
+          "y": 32.08757751397463
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 30.34074875485756,
+          "y": 50.94596231889877
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 47.50066033115622,
+          "y": 47.47948542479593
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 72.0515452324446,
+          "y": 49.170676154910055
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 22.079924288488137,
+          "y": 65.75245245287006
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.39375711268265,
+          "y": 66.22134943010164
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 79.50492876057902,
+          "y": 67.56603656506668
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.48570433345048,
+          "y": 95.39650005824434
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.87097333665572,
+          "y": 78.83888089493017
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 32.26702531044186,
+          "y": 78.4357847739659
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 65.41801127242987,
+          "y": 80.30503404201602
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 88.93805711516175,
+          "y": 73.55925520768913
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 14.691583153430267,
+          "y": 58.47757927090501
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 40.65714539015121,
+          "y": 55.704796894537346
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 63.73282660793433,
+          "y": 57.990253028243174
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 83.1873991737062,
+          "y": 56.05323209041707
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 43.841957060827006,
+          "y": 42.00834367346017
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 60.41012061504376,
+          "y": 38.46238543645083
+        }
+      ],
+      "ball": {
+        "x": 60.41012061504376,
+        "y": 38.46238543645083,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000024",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 16,
+          "clock_minute": 36,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_9"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:24Z"
+        },
+        {
+          "event_id": "match_seed42_e000025",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 16,
+          "clock_minute": 36,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:25Z"
+        },
+        {
+          "event_id": "match_seed42_e000026",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 16,
+          "clock_minute": 36,
+          "team_id": "blue",
+          "type": "pressing_success",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:26Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 17,
+      "half": 1,
+      "step": 17,
+      "clock_minute": 38,
+      "phase": "first_half",
+      "state_version": 17,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 39.16002472801245,
+          "y": 4.552494805644082
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 6.473987149460161,
+          "y": 46.48965454130807
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 25.564395785484628,
+          "y": 43.04642605485794
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 51.38844679817414,
+          "y": 41.69703389969696
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 76.99121866583471,
+          "y": 47.521626334484964
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 15.188763347062313,
+          "y": 64.9378420799342
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.76099153354406,
+          "y": 63.23148346622324
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 58.34744050366939,
+          "y": 65.31150450242487
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 6.5742188018322985,
+          "y": 79.732067701199
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 39.57998742096457,
+          "y": 81.13191424224263
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.86849956846315,
+          "y": 80.4307858519094
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.174589196389206,
+          "y": 95.55108895019852
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.64182304820002,
+          "y": 79.46823090939118
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 34.08863001992786,
+          "y": 83.86845341538927
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 67.56598041367644,
+          "y": 82.98213297690721
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 84.96262919693139,
+          "y": 80.88490883195871
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 15.018329201063727,
+          "y": 55.22211766807346
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 40.95760250689772,
+          "y": 60.5410825758574
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 61.522449678165415,
+          "y": 62.24514224432585
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 84.65542459579393,
+          "y": 58.15570652084537
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 39.27982895797091,
+          "y": 43.33466296542386
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 57.23488975017239,
+          "y": 42.9286879585664
+        }
+      ],
+      "ball": {
+        "x": 65.86849956846315,
+        "y": 80.4307858519094,
+        "owner_player_id": "blue_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000027",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 17,
+          "clock_minute": 38,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_11"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:27Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 18,
+      "half": 1,
+      "step": 18,
+      "clock_minute": 40,
+      "phase": "first_half",
+      "state_version": 18,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 39.437368736673065,
+          "y": 5.704682673131786
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 1.5332892314671973,
+          "y": 46.28005638513593
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 25.075214474674908,
+          "y": 44.312304551337895
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.28719279870149,
+          "y": 45.234298104391215
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 74.04928813483713,
+          "y": 44.41052448308931
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 21.979407383649722,
+          "y": 67.52557459268178
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 37.47177177538501,
+          "y": 64.48059820042756
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 59.06998263024633,
+          "y": 62.590658758299185
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 7.549428413293647,
+          "y": 82.23547539564254
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 41.22739249640389,
+          "y": 84.16400697675941
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 70.3691477212977,
+          "y": 77.27594581206327
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.49936435910126,
+          "y": 94.58673555193042
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.24933054519008,
+          "y": 75.8734187741964
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.34015579104763,
+          "y": 82.39556837149561
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 61.63174680527996,
+          "y": 80.01990189440859
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 85.95768294829932,
+          "y": 80.22503759186912
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 18.30263212818844,
+          "y": 56.44497875113788
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 37.68919930683998,
+          "y": 57.858706320771056
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 60.04261366527323,
+          "y": 58.52386403648126
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 87.43706461580118,
+          "y": 55.05638458872922
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 41.42088708559264,
+          "y": 44.4072565415933
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 59.533838268830515,
+          "y": 39.94785373243072
+        }
+      ],
+      "ball": {
+        "x": 7.549428413293647,
+        "y": 82.23547539564254,
+        "owner_player_id": "blue_9"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000028",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 18,
+          "clock_minute": 40,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_9"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:28Z"
+        },
+        {
+          "event_id": "match_seed42_e000029",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 18,
+          "clock_minute": 40,
+          "team_id": "blue",
+          "type": "goal",
+          "player_ids": [
+            "blue_9"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:29Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 19,
+      "half": 1,
+      "step": 19,
+      "clock_minute": 43,
+      "phase": "first_half",
+      "state_version": 19,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.53877299586938,
+          "y": 4.398433998217785
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.897645615420597,
+          "y": 46.899248366355295
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 23.598495441429158,
+          "y": 43.431536154104435
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 51.36184603106616,
+          "y": 45.95615226176139
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 74.26583852742945,
+          "y": 49.86766690746118
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 18.52743213564559,
+          "y": 63.64688228106937
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 39.9573507293226,
+          "y": 64.11479695640408
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 58.85125194461179,
+          "y": 62.294265504655996
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 11.233242327149803,
+          "y": 79.98036371914323
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 40.39088095606079,
+          "y": 81.71716490875517
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 66.81856764668254,
+          "y": 80.6423899889856
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.48356465252122,
+          "y": 95.27323575601179
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.767427013365673,
+          "y": 79.06658675174016
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.70669693570013,
+          "y": 82.95508924190052
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 68.22722963258374,
+          "y": 82.76948862212139
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.47146307162109,
+          "y": 78.87804365334314
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 15.636590442947222,
+          "y": 57.64493914097687
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 34.72106700596975,
+          "y": 61.39415860763543
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 63.97984691950697,
+          "y": 58.77066270977493
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 82.05727838197427,
+          "y": 56.05384042266584
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 43.771916649690716,
+          "y": 42.236446553906525
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 63.307895795853575,
+          "y": 42.18511424221671
+        }
+      ],
+      "ball": {
+        "x": 58.85125194461179,
+        "y": 62.294265504655996,
+        "owner_player_id": "blue_8"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000030",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 19,
+          "clock_minute": 43,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:30Z"
+        },
+        {
+          "event_id": "match_seed42_e000031",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 19,
+          "clock_minute": 43,
+          "team_id": "blue",
+          "type": "goal",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:31Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 20,
+      "half": 1,
+      "step": 20,
+      "clock_minute": 45,
+      "phase": "halftime",
+      "state_version": 20,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.35486101520755,
+          "y": 5.49311870143409
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 18.703146342951023,
+          "y": 29.691018244698554
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 38.732001675702016,
+          "y": 25.844542090035297
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 66.79373369660415,
+          "y": 30.160843581392932
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 88.73815797840025,
+          "y": 34.87965345669142
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 28.926200395244532,
+          "y": 51.82752586412337
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 46.11134924080721,
+          "y": 49.74409181153362
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 69.638288221871,
+          "y": 50.219433849614354
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 21.378726378808103,
+          "y": 66.03697029124253
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 52.57933840981419,
+          "y": 68.507360549913
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 76.86676881759385,
+          "y": 67.64175135067732
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.10009859858593,
+          "y": 94.46764380442316
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.49125905799903,
+          "y": 72.30540907128912
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 32.77093760059192,
+          "y": 76.49153545245896
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 67.59084281112358,
+          "y": 71.37930224696117
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.41752139623401,
+          "y": 72.45632583056735
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 12.118216100057769,
+          "y": 49.44977513477248
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 36.43491667484804,
+          "y": 54.677569197291675
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 58.77753598897457,
+          "y": 51.955747713869236
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 82.0853123896507,
+          "y": 52.323555851171015
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 41.36388975080137,
+          "y": 33.72186254133336
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 63.56779268623546,
+          "y": 35.45884072913903
+        }
+      ],
+      "ball": {
+        "x": 41.36388975080137,
+        "y": 33.72186254133336,
+        "owner_player_id": "red_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000032",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 20,
+          "clock_minute": 45,
+          "team_id": "red",
+          "type": "pass_sequence",
+          "player_ids": [
+            "red_7",
+            "red_11"
+          ],
+          "details": {
+            "attack_focus": "middle"
+          },
+          "created_at": "2026-01-01T00:00:32Z"
+        },
+        {
+          "event_id": "match_seed42_e000033",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 1,
+          "step": 20,
+          "clock_minute": 45,
+          "team_id": null,
+          "type": "half_time",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:33Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 21,
+      "half": 2,
+      "step": 1,
+      "clock_minute": 47,
+      "phase": "second_half",
+      "state_version": 22,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.957388151158455,
+          "y": 4.198043269421057
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 6.612172203048477,
+          "y": 23.448695314186203
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 21.964239669875482,
+          "y": 17.196297721130282
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 56.604441358811414,
+          "y": 19.66029851636421
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 69.79483699684904,
+          "y": 26.132701159835726
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 18.35572689185716,
+          "y": 43.114081592887715
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.869390729698544,
+          "y": 42.867055176712284
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 55.51846849728864,
+          "y": 41.38883785646624
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 10.78426550770945,
+          "y": 54.732958314523586
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 39.30214990449582,
+          "y": 59.7283042114231
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 68.77716767615637,
+          "y": 57.85022680339931
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.14717836181847,
+          "y": 94.04271490947274
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 12.007391082464343,
+          "y": 84.46141338298415
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 31.548881222594847,
+          "y": 90.38746785544778
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.65725896277327,
+          "y": 91.59094425533151
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 87.95756341415635,
+          "y": 84.29570811151204
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 32.18043343953155,
+          "y": 71.97135732059338
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 61.02268441184013,
+          "y": 75.40318621379055
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 17.157503842564065,
+          "y": 60.15043675828106
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 48.00523357382499,
+          "y": 57.77995278866062
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 81.28846114077854,
+          "y": 56.04698272540836
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 46.11888261784567,
+          "y": 45.15468089871719
+        }
+      ],
+      "ball": {
+        "x": 39.30214990449582,
+        "y": 59.7283042114231,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000036",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 1,
+          "clock_minute": 47,
+          "team_id": "blue",
+          "type": "turnover",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:36Z"
+        },
+        {
+          "event_id": "match_seed42_e000037",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 1,
+          "clock_minute": 47,
+          "team_id": "red",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:37Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 22,
+      "half": 2,
+      "step": 2,
+      "clock_minute": 49,
+      "phase": "second_half",
+      "state_version": 23,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 50.966872227816594,
+          "y": 4.104798035722353
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 16.965322200271967,
+          "y": 32.156513159587206
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 37.22413631451362,
+          "y": 27.857475792539503
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 61.87243208003076,
+          "y": 28.07942774565515
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 88.56332514376085,
+          "y": 32.023032138714925
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 32.26581596784304,
+          "y": 47.26019022139503
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 50.17160971770467,
+          "y": 50.20188544655903
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 73.71220946497623,
+          "y": 49.748255132586095
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 19.831855287986905,
+          "y": 62.36495244496704
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 51.48877996849786,
+          "y": 67.40970352707537
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 83.27760663292183,
+          "y": 64.94161312486536
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 60.32316190964317,
+          "y": 94.14698143153291
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 23.525457866560913,
+          "y": 76.64978454180064
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 48.064613794408125,
+          "y": 78.65009599734772
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 75.60148354654935,
+          "y": 80.29013860429016
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 97.2444546994506,
+          "y": 78.96776653516554
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 47.84341433228251,
+          "y": 62.72229250545283
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 78.61423534836852,
+          "y": 60.59507077007425
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 33.20733331905044,
+          "y": 50.11675642377345
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 63.766719333260795,
+          "y": 51.61377638062843
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 91.61243932772226,
+          "y": 46.29013839796498
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 60.711452950681405,
+          "y": 36.37096144618751
+        }
+      ],
+      "ball": {
+        "x": 60.711452950681405,
+        "y": 36.37096144618751,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000038",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 2,
+          "clock_minute": 49,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_7"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:38Z"
+        },
+        {
+          "event_id": "match_seed42_e000039",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 2,
+          "clock_minute": 49,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:39Z"
+        },
+        {
+          "event_id": "match_seed42_e000040",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 2,
+          "clock_minute": 49,
+          "team_id": "blue",
+          "type": "pressing_success",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:40Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 23,
+      "half": 2,
+      "step": 3,
+      "clock_minute": 52,
+      "phase": "second_half",
+      "state_version": 24,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.49720409374215,
+          "y": 5.330215726120618
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 6.383880285875076,
+          "y": 21.91583354861234
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 25.654175107798835,
+          "y": 17.402799848819885
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.772515460526286,
+          "y": 17.559380610222064
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.49415428221914,
+          "y": 25.432775990932292
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 18.691720661915816,
+          "y": 42.3382244136921
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.63716785132964,
+          "y": 40.36951848395243
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 56.82878463707014,
+          "y": 39.73338771212735
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 10.002274002011827,
+          "y": 57.99204312001749
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 39.768485429969196,
+          "y": 62.20855289321439
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 68.80328072979742,
+          "y": 59.81039175186885
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.311674073559416,
+          "y": 94.7032923713863
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.25389042390522,
+          "y": 84.27643283403204
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 31.865747055418133,
+          "y": 88.34546921464539
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 63.9404884049228,
+          "y": 92.07224051160807
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 85.5928000346517,
+          "y": 87.5756337916211
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 37.76124129062686,
+          "y": 74.84332822691407
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 67.54741487632536,
+          "y": 75.84727961275425
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 21.14159331063865,
+          "y": 58.68143968321279
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 53.43267432795949,
+          "y": 57.1575229887215
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 78.13958180123288,
+          "y": 59.976764739757975
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 51.621590182924834,
+          "y": 46.08249643176513
+        }
+      ],
+      "ball": {
+        "x": 39.768485429969196,
+        "y": 62.20855289321439,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000041",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 3,
+          "clock_minute": 52,
+          "team_id": "blue",
+          "type": "turnover",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:41Z"
+        },
+        {
+          "event_id": "match_seed42_e000042",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 3,
+          "clock_minute": 52,
+          "team_id": "red",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:42Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 24,
+      "half": 2,
+      "step": 4,
+      "clock_minute": 54,
+      "phase": "second_half",
+      "state_version": 25,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.60313737599806,
+          "y": 5.132642189522753
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 16.065376101244112,
+          "y": 29.85124792490761
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 36.96889409604565,
+          "y": 25.183942590285437
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 64.35865995011602,
+          "y": 26.290797280201065
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 83.96042473981603,
+          "y": 31.045375890615997
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 32.21468495973393,
+          "y": 51.32957580645604
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 46.67965631981743,
+          "y": 48.405561339686386
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 67.25927917685722,
+          "y": 47.31565295855313
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 21.391749684904905,
+          "y": 65.70702909155618
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 51.29550954246609,
+          "y": 66.63261706127732
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 79.53635349358223,
+          "y": 64.91397022934598
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 63.01977257467348,
+          "y": 94.54633368872953
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 26.439309067183125,
+          "y": 73.68290504866121
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 48.42789003808107,
+          "y": 78.6994788204827
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 78.3370604698908,
+          "y": 79.9197965201855
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 96.16210716870103,
+          "y": 73.27250417562657
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 43.06149668719907,
+          "y": 63.5959497416667
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 74.6898718337625,
+          "y": 61.80851617211062
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 30.044156032171674,
+          "y": 45.823408831543965
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 58.06183925255449,
+          "y": 48.968734135627045
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 89.40555841500674,
+          "y": 49.48208474057861
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 63.629370107061305,
+          "y": 37.281244674291415
+        }
+      ],
+      "ball": {
+        "x": 63.629370107061305,
+        "y": 37.281244674291415,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000043",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 4,
+          "clock_minute": 54,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_6"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:43Z"
+        },
+        {
+          "event_id": "match_seed42_e000044",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 4,
+          "clock_minute": 54,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:44Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 25,
+      "half": 2,
+      "step": 5,
+      "clock_minute": 56,
+      "phase": "second_half",
+      "state_version": 26,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 36.07496614634258,
+          "y": 4.0846045231255825
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 5.896880108896532,
+          "y": 32.52697460701447
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 23.587197447086744,
+          "y": 26.454554964420986
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 52.34155167874785,
+          "y": 27.256993769413604
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 69.16685247219799,
+          "y": 27.69104023598279
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 20.41057723448362,
+          "y": 46.94860907667308
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 40.656207304573655,
+          "y": 46.70875157982544
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 54.70503905038308,
+          "y": 50.518618510448306
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 5.946531798581869,
+          "y": 65.06690615888819
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 38.191700344005056,
+          "y": 66.53322772981747
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 66.48219649468689,
+          "y": 62.374600181156
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.33227448997253,
+          "y": 94.67902656229693
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.083866276337186,
+          "y": 84.00879624827412
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.079616498583775,
+          "y": 87.68415983903131
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 63.79500212377904,
+          "y": 92.4355363894803
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 87.55158881219882,
+          "y": 87.36427463404343
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 32.890150791573795,
+          "y": 74.89022203450008
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 62.578174422591864,
+          "y": 70.87866530966616
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 22.081722364375135,
+          "y": 58.614393911639
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 47.417169031577835,
+          "y": 60.933054063112436
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 79.9529362001391,
+          "y": 59.63708853548536
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 52.07901719686199,
+          "y": 49.526674951481915
+        }
+      ],
+      "ball": {
+        "x": 38.191700344005056,
+        "y": 66.53322772981747,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000045",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 5,
+          "clock_minute": 56,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_6",
+            "blue_11"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:45Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 26,
+      "half": 2,
+      "step": 6,
+      "clock_minute": 59,
+      "phase": "second_half",
+      "state_version": 27,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.50886962759909,
+          "y": 5.7284937496628325
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.0,
+          "y": 27.905744408358462
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 21.422563481112107,
+          "y": 25.653248383017708
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.44937696170462,
+          "y": 24.648042004916956
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 71.48326280485048,
+          "y": 30.044021311738668
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 14.455120406671618,
+          "y": 47.71148318220409
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 34.61384800938764,
+          "y": 47.990179789978725
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 60.84234697164872,
+          "y": 50.185500203551435
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 8.056542538671643,
+          "y": 63.69005033049344
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 38.43453097070643,
+          "y": 65.77626995356363
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 71.16701412445443,
+          "y": 64.75090678359216
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.239263670791885,
+          "y": 94.89946740730181
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 13.572214103043427,
+          "y": 86.91102472789166
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 32.206888613565106,
+          "y": 89.85377416765841
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 61.828015018163136,
+          "y": 87.3712422006066
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.74750220670614,
+          "y": 88.39476100373464
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 35.03639201200766,
+          "y": 74.28589329500477
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 62.981949788786274,
+          "y": 71.03535346861818
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 19.515374334100994,
+          "y": 57.6265496458554
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 47.26996966385233,
+          "y": 60.136488211593274
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 78.26314862891535,
+          "y": 57.23711189260796
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 48.70693717473136,
+          "y": 47.45261638348392
+        }
+      ],
+      "ball": {
+        "x": 38.43453097070643,
+        "y": 65.77626995356363,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000046",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 6,
+          "clock_minute": 59,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_7",
+            "blue_10"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:46Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 27,
+      "half": 2,
+      "step": 7,
+      "clock_minute": 61,
+      "phase": "second_half",
+      "state_version": 28,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 50.89493462000985,
+          "y": 4.568293947756228
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 18.25074157730942,
+          "y": 32.939384518462866
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 33.66689628848445,
+          "y": 30.239677972363232
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 62.131427044674545,
+          "y": 28.49643708751852
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 88.74157206154196,
+          "y": 31.098924725215063
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 29.135663874682884,
+          "y": 51.190879776871284
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 53.50401759652608,
+          "y": 48.57024736890945
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 69.0134344484504,
+          "y": 48.85749132449577
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 22.50547827051841,
+          "y": 66.74997174718126
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 52.63167178315572,
+          "y": 69.02069839996834
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 81.48331552222061,
+          "y": 66.4326480327769
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 62.58409928293395,
+          "y": 95.05278667946835
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 25.89462477077428,
+          "y": 52.54043819793262
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 44.442103383014754,
+          "y": 56.175586013892264
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 80.58134614027477,
+          "y": 55.2851559672534
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 94.8123443722711,
+          "y": 52.91762552523636
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 43.61732067440701,
+          "y": 37.82539211906248
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 73.80912610934315,
+          "y": 42.0665703321153
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 34.68095861307645,
+          "y": 26.625248322178606
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 58.30197993886049,
+          "y": 29.30209299295537
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 94.13046083557794,
+          "y": 24.02058623178569
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 61.0137589665802,
+          "y": 12.786294248577049
+        }
+      ],
+      "ball": {
+        "x": 43.61732067440701,
+        "y": 37.82539211906248,
+        "owner_player_id": "red_6"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000047",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 7,
+          "clock_minute": 61,
+          "team_id": "red",
+          "type": "shot",
+          "player_ids": [
+            "red_6"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:47Z"
+        },
+        {
+          "event_id": "match_seed42_e000048",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 7,
+          "clock_minute": 61,
+          "team_id": "blue",
+          "type": "save",
+          "player_ids": [
+            "red_6",
+            "blue_1"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:48Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 28,
+      "half": 2,
+      "step": 8,
+      "clock_minute": 63,
+      "phase": "second_half",
+      "state_version": 29,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.64343444598613,
+          "y": 4.875346810276693
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.9002416115753995,
+          "y": 31.058177533131197
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 21.279423460506862,
+          "y": 25.665192258831652
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 52.59142370426672,
+          "y": 27.49121910857262
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 71.47574317250232,
+          "y": 30.204066898189566
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 17.75212484025802,
+          "y": 49.85174322654472
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.94272766580026,
+          "y": 48.01068035635424
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.87551834825261,
+          "y": 50.682781021464734
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 6.254173861630203,
+          "y": 62.77007987064594
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 38.219678307691865,
+          "y": 65.29123460514427
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 70.53512991664992,
+          "y": 65.79760891923569
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.55359413841372,
+          "y": 95.6025184483031
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.129432289635577,
+          "y": 84.50001926953404
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.43632596339545,
+          "y": 92.24470167031342
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 67.76713821386751,
+          "y": 87.61553839049046
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 83.28050411247463,
+          "y": 88.10699628850867
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 33.182330396730855,
+          "y": 74.57870098175015
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 62.17878924793283,
+          "y": 75.43183725386945
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 23.571306104094084,
+          "y": 57.624835361169886
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 49.60902392176567,
+          "y": 58.33222804144189
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 76.21336152642351,
+          "y": 57.09751046883189
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 50.01605691754588,
+          "y": 45.31954132302645
+        }
+      ],
+      "ball": {
+        "x": 70.53512991664992,
+        "y": 65.79760891923569,
+        "owner_player_id": "blue_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000049",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 8,
+          "clock_minute": 63,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_8",
+            "blue_6"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:49Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 29,
+      "half": 2,
+      "step": 9,
+      "clock_minute": 65,
+      "phase": "second_half",
+      "state_version": 30,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.59984273717673,
+          "y": 5.678352575223212
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.1007967018069742,
+          "y": 48.74828382489306
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 25.63809266522258,
+          "y": 41.72127638387961
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 50.11034153454549,
+          "y": 44.1764319314559
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 72.58881179185798,
+          "y": 48.233217051734485
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 14.63380617016577,
+          "y": 62.031507189833704
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 40.679704794259045,
+          "y": 61.535543570622266
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 59.81787828259945,
+          "y": 65.29282547266301
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 4.889494882593908,
+          "y": 80.16662903532034
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 36.40920955668976,
+          "y": 81.72860946823538
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 67.35860435002755,
+          "y": 77.28649667971311
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.82845446654579,
+          "y": 95.58779821727887
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 18.24117508529599,
+          "y": 83.66514737174009
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 31.131482817647154,
+          "y": 90.58043425691368
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.93550507536795,
+          "y": 90.09225438125644
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 84.43391114482667,
+          "y": 83.86146104147755
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 32.92451391045235,
+          "y": 73.6888574966557
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 66.31497041393607,
+          "y": 72.49940557125124
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 23.797235927617773,
+          "y": 55.51368372992357
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 50.20847556257736,
+          "y": 57.406075937453075
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 83.90665188477173,
+          "y": 58.04396617947872
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 49.12362986048051,
+          "y": 48.32491171450917
+        }
+      ],
+      "ball": {
+        "x": 14.63380617016577,
+        "y": 62.031507189833704,
+        "owner_player_id": "blue_6"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000050",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 9,
+          "clock_minute": 65,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_6"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:50Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 30,
+      "half": 2,
+      "step": 10,
+      "clock_minute": 67,
+      "phase": "second_half",
+      "state_version": 31,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.37920997265356,
+          "y": 5.57704003255903
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 4.0260556998052515,
+          "y": 31.39764612870385
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 24.88149587849849,
+          "y": 27.629008244659154
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 49.35468550636166,
+          "y": 24.99511165023191
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.5080709244487,
+          "y": 30.27608247124615
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 20.233140747826255,
+          "y": 46.05053476231025
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 39.56311401596851,
+          "y": 45.78773739848223
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 60.491981454780856,
+          "y": 48.79041508655003
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 10.209523197627373,
+          "y": 60.37860322219335
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 36.34754056940025,
+          "y": 65.74607746468412
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.5957586697215,
+          "y": 60.26283765395474
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.733483919801586,
+          "y": 94.08381188386076
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 18.91298161836899,
+          "y": 86.09230153552699
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 33.02651012162094,
+          "y": 90.25818418592512
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.528827445871286,
+          "y": 91.51974551291319
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 87.2467325358274,
+          "y": 85.14184505621218
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 33.655397491050756,
+          "y": 75.19478966246834
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 63.944153394517386,
+          "y": 70.7468500494663
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 21.94646164415697,
+          "y": 60.336919102073686
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 49.093158146085536,
+          "y": 62.36782496973032
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 79.96962581229619,
+          "y": 60.84234150589185
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 53.39448373301571,
+          "y": 47.985140354961764
+        }
+      ],
+      "ball": {
+        "x": 36.34754056940025,
+        "y": 65.74607746468412,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000051",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 10,
+          "clock_minute": 67,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_6",
+            "blue_7"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:51Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 31,
+      "half": 2,
+      "step": 11,
+      "clock_minute": 70,
+      "phase": "second_half",
+      "state_version": 32,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.18189758937855,
+          "y": 5.644682559079773
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.0,
+          "y": 28.927268569287563
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 21.451966848726016,
+          "y": 26.965515328748822
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 52.408928583064366,
+          "y": 26.6157297663836
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 71.81237587017594,
+          "y": 31.138588850672917
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 20.96029740045114,
+          "y": 45.25413097710078
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 41.98520478218439,
+          "y": 45.115355861850894
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.84021823355424,
+          "y": 46.647332160449146
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 4.600329319905274,
+          "y": 65.68742627161852
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 36.906489045207856,
+          "y": 66.82507522729979
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 69.43528486251752,
+          "y": 64.80657585337302
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 48.5711178734502,
+          "y": 95.90557879255921
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 17.250495757947732,
+          "y": 86.64543741992513
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 31.53786690449687,
+          "y": 87.20879379479125
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 63.93062778485719,
+          "y": 91.6710922410412
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 85.53795713379296,
+          "y": 85.29712641013266
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 36.43249645530716,
+          "y": 73.63056897312872
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 63.97610702776547,
+          "y": 75.69294117559333
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 20.591374226671164,
+          "y": 59.578506830791476
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 49.1842723676196,
+          "y": 60.176759289217735
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 77.99689322474718,
+          "y": 58.89736442023619
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 51.88539887583542,
+          "y": 45.68069167551011
+        }
+      ],
+      "ball": {
+        "x": 36.906489045207856,
+        "y": 66.82507522729979,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000052",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 11,
+          "clock_minute": 70,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_6",
+            "blue_10"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:52Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 32,
+      "half": 2,
+      "step": 12,
+      "clock_minute": 72,
+      "phase": "second_half",
+      "state_version": 33,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 39.985460448619044,
+          "y": 4.892546224811232
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 6.331831276335052,
+          "y": 28.713461266188947
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 19.981099375231768,
+          "y": 25.947201171525343
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 52.616341481963175,
+          "y": 28.116957742305935
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 72.56088954193964,
+          "y": 32.39207418471738
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 19.455434082005098,
+          "y": 45.526744446628385
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.55670217679976,
+          "y": 48.0731273138482
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 54.51951262652857,
+          "y": 47.08455176843139
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 11.130653458831112,
+          "y": 63.25302816735337
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 39.6944728320577,
+          "y": 68.10817230451876
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 69.10160018051214,
+          "y": 65.56394674033906
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.03502298069721,
+          "y": 95.58739276769
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 12.607842969421487,
+          "y": 83.72817473047074
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 37.32298448646199,
+          "y": 87.8332612322302
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 65.43217149807676,
+          "y": 87.15770416084959
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 87.42929381030869,
+          "y": 85.21346699300733
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 35.89558690096417,
+          "y": 73.30988160355857
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 63.4743257402277,
+          "y": 70.5172928899116
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 21.750957279125757,
+          "y": 60.99757026360632
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 52.15331640299758,
+          "y": 60.1541739289818
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 76.59000570328992,
+          "y": 59.94003639705034
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 51.13870871509105,
+          "y": 50.8342783890826
+        }
+      ],
+      "ball": {
+        "x": 39.6944728320577,
+        "y": 68.10817230451876,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000053",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 12,
+          "clock_minute": 72,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_6",
+            "blue_8"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:53Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 33,
+      "half": 2,
+      "step": 13,
+      "clock_minute": 74,
+      "phase": "second_half",
+      "state_version": 34,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 36.72785254620855,
+          "y": 5.279587858733326
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 2.460946291855798,
+          "y": 49.79758768360464
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 19.443302800142217,
+          "y": 45.46427362568132
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 50.22412373448161,
+          "y": 40.744966723834075
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 71.58128600923645,
+          "y": 44.987942479340745
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 16.768184658734985,
+          "y": 66.25599279517547
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 41.159407334568996,
+          "y": 65.6454243295892
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 56.004842471855994,
+          "y": 67.0756022369352
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 8.406731323865117,
+          "y": 80.81034254832647
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 36.42259684887101,
+          "y": 80.75102177076141
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 68.0205851579301,
+          "y": 80.20086817861028
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.766427951474384,
+          "y": 94.33727180349541
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.269862987070034,
+          "y": 83.92516560127739
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 35.84111126289484,
+          "y": 91.32379661062363
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 65.50894427545036,
+          "y": 92.05518002468034
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 81.22698790319102,
+          "y": 87.9514176039598
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 36.13162987059488,
+          "y": 70.27277081974805
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 66.2090398198848,
+          "y": 73.46062738886428
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 19.332694269305968,
+          "y": 59.60175400549787
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 49.98430448108893,
+          "y": 60.83394715325322
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 78.31737325441284,
+          "y": 58.76298406178851
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 49.86355854540336,
+          "y": 50.73990101972643
+        }
+      ],
+      "ball": {
+        "x": 68.0205851579301,
+        "y": 80.20086817861028,
+        "owner_player_id": "blue_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000054",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 13,
+          "clock_minute": 74,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_11"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:54Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 34,
+      "half": 2,
+      "step": 14,
+      "clock_minute": 77,
+      "phase": "second_half",
+      "state_version": 35,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 49.93700452042944,
+          "y": 4.879210999840822
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 15.85328210256509,
+          "y": 30.224138081380392
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 36.7469030808995,
+          "y": 26.8754949954816
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 67.8862189260346,
+          "y": 29.40519852882728
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 82.04612921241909,
+          "y": 34.85224476748928
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 30.493209725986954,
+          "y": 49.22324118830175
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 49.73178053632509,
+          "y": 46.91469531841894
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 67.98335106020437,
+          "y": 48.60483004672509
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 18.32169603975921,
+          "y": 62.58086991536343
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.92301955331175,
+          "y": 67.30489900100963
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 82.92246001376574,
+          "y": 63.48962168228712
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 61.30974328320478,
+          "y": 94.31939932426032
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 25.501719366898186,
+          "y": 76.46612222736158
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 46.98612433647927,
+          "y": 81.57872825083177
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 76.99007766718124,
+          "y": 80.0883490353889
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 93.1854103857308,
+          "y": 74.85124289232658
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 47.04355570419017,
+          "y": 65.67139682441542
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 74.72115538020992,
+          "y": 65.80011978331486
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 28.404323237023135,
+          "y": 47.11737053313813
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 65.05871581094561,
+          "y": 49.96936522115106
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 91.76469482694557,
+          "y": 48.925560221337705
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 64.77737892314775,
+          "y": 38.220144495733564
+        }
+      ],
+      "ball": {
+        "x": 64.77737892314775,
+        "y": 38.220144495733564,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000055",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 14,
+          "clock_minute": 77,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_6"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:55Z"
+        },
+        {
+          "event_id": "match_seed42_e000056",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 14,
+          "clock_minute": 77,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:56Z"
+        },
+        {
+          "event_id": "match_seed42_e000057",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 14,
+          "clock_minute": 77,
+          "team_id": "blue",
+          "type": "pressing_success",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:00:57Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 35,
+      "half": 2,
+      "step": 15,
+      "clock_minute": 79,
+      "phase": "second_half",
+      "state_version": 36,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.28112657552412,
+          "y": 4.801163242029514
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 3.4257834129692135,
+          "y": 28.167931811326316
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 23.034044232985636,
+          "y": 23.44119049845705
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 51.237765420991856,
+          "y": 27.586424688243437
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 74.44318912095089,
+          "y": 32.934544203724336
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 21.800662523310272,
+          "y": 45.71286611834154
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 40.35917782704757,
+          "y": 45.363422276371644
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.511588535643,
+          "y": 47.03451179971539
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 5.5924630524196,
+          "y": 64.52979103375677
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 38.00062322856515,
+          "y": 66.0547350973511
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.09629098854016,
+          "y": 60.27182011480245
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 49.89497660158076,
+          "y": 94.66608141070553
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.850084179230432,
+          "y": 85.74193135569725
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 33.62372678109221,
+          "y": 90.09303439288352
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 62.300016367015516,
+          "y": 90.67840872638807
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 86.91455488458884,
+          "y": 88.94369442536684
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 33.69098761721342,
+          "y": 71.7954060551699
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 65.25871863900701,
+          "y": 74.96973631574426
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 18.39832451789931,
+          "y": 59.252438838612626
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 48.94686247892616,
+          "y": 61.89449299946295
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 83.83918424943329,
+          "y": 59.042838354838096
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 52.37403851144118,
+          "y": 48.50221285109272
+        }
+      ],
+      "ball": {
+        "x": 38.00062322856515,
+        "y": 66.0547350973511,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000058",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 15,
+          "clock_minute": 79,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_8",
+            "blue_9"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:00:58Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 36,
+      "half": 2,
+      "step": 16,
+      "clock_minute": 81,
+      "phase": "second_half",
+      "state_version": 37,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 51.10464810068829,
+          "y": 5.565807982862843
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 16.771200898370452,
+          "y": 32.465806375185096
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 32.36409649397328,
+          "y": 28.50113966228584
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 65.95788644400872,
+          "y": 28.77415144687218
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 82.18220566640265,
+          "y": 34.04700274974959
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 26.252564106736795,
+          "y": 51.08436137030407
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 46.879164170669576,
+          "y": 50.689231024705805
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 68.50953986756684,
+          "y": 47.11362420503968
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 21.524002087348205,
+          "y": 62.90858754871607
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 52.19977841445673,
+          "y": 67.46226445593624
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 82.98254167129856,
+          "y": 67.52312569938326
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 60.24912514405773,
+          "y": 95.47167454253736
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 24.658733639769956,
+          "y": 73.82849491471126
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 48.297814397714795,
+          "y": 78.95029720655633
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 75.51002078990254,
+          "y": 80.15286290840021
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 100.0,
+          "y": 74.03909454314396
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 45.8342959091585,
+          "y": 62.05396210609108
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 78.76739649061834,
+          "y": 64.63193870489245
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 33.54650648023856,
+          "y": 48.859854599996766
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 59.538113353093706,
+          "y": 50.66045948047251
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 92.46469320645923,
+          "y": 46.47911481316416
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 65.78328502072455,
+          "y": 36.3492022279569
+        }
+      ],
+      "ball": {
+        "x": 65.78328502072455,
+        "y": 36.3492022279569,
+        "owner_player_id": "red_11"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000059",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 16,
+          "clock_minute": 81,
+          "team_id": "red",
+          "type": "turnover",
+          "player_ids": [
+            "red_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:00:59Z"
+        },
+        {
+          "event_id": "match_seed42_e000060",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 16,
+          "clock_minute": 81,
+          "team_id": "blue",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:01:00Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 37,
+      "half": 2,
+      "step": 17,
+      "clock_minute": 83,
+      "phase": "second_half",
+      "state_version": 38,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 39.181621424009336,
+          "y": 5.867400749541601
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 0.0,
+          "y": 28.640745220532537
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 22.037553482995058,
+          "y": 27.059733474695275
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 55.5470196810445,
+          "y": 28.880963223928173
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.43692667165256,
+          "y": 32.72765318034877
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 16.301042732913118,
+          "y": 46.74271591195761
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.77090811276493,
+          "y": 47.28484772499037
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 56.05155180378786,
+          "y": 47.65425667118901
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 5.61654405760477,
+          "y": 62.874475578098895
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 41.464191470266464,
+          "y": 66.23146754225192
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 65.09818363840738,
+          "y": 64.17702780388093
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.34732199428326,
+          "y": 95.23135406882898
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 16.35867171914483,
+          "y": 84.45474823046172
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 36.103556587269104,
+          "y": 90.1862489383968
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 64.30641092838607,
+          "y": 87.31494664103678
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 81.80435923821878,
+          "y": 87.30414833750146
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 31.041451571257042,
+          "y": 74.62459634858968
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 68.43279744135982,
+          "y": 73.3021153946777
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 23.48025678876921,
+          "y": 57.4414447092813
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 49.81958816352717,
+          "y": 62.27039772908537
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 83.71131231112749,
+          "y": 56.19673584800561
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 51.16718334312216,
+          "y": 46.927006212715
+        }
+      ],
+      "ball": {
+        "x": 41.464191470266464,
+        "y": 66.23146754225192,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000061",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 17,
+          "clock_minute": 83,
+          "team_id": "blue",
+          "type": "counterattack",
+          "player_ids": [
+            "blue_7"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:01:01Z"
+        },
+        {
+          "event_id": "match_seed42_e000062",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 17,
+          "clock_minute": 83,
+          "team_id": "blue",
+          "type": "pass_sequence",
+          "player_ids": [
+            "blue_6",
+            "blue_8"
+          ],
+          "details": {
+            "attack_focus": "left"
+          },
+          "created_at": "2026-01-01T00:01:02Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 38,
+      "half": 2,
+      "step": 18,
+      "clock_minute": 85,
+      "phase": "second_half",
+      "state_version": 39,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 51.65291890267941,
+          "y": 5.873338759501252
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 18.057959785318666,
+          "y": 30.05038865288578
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 38.357078494807475,
+          "y": 26.054732245233176
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 64.17595659422639,
+          "y": 30.98303081853106
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 88.4928699582221,
+          "y": 31.972303383930548
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 33.408317583171545,
+          "y": 52.77278828050005
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 46.0741373478408,
+          "y": 50.26045900750754
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 66.8584055261883,
+          "y": 50.40777121198697
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 18.27649321880037,
+          "y": 67.89796333022603
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 50.3464038684558,
+          "y": 70.93459682053233
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 83.50848401392697,
+          "y": 64.96347452205092
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 61.87208307602516,
+          "y": 95.70211947715599
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 23.901174088161234,
+          "y": 51.15686838964286
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 46.67131576825889,
+          "y": 54.97496557523843
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 74.48959255302455,
+          "y": 55.543589281377116
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 99.32614131540204,
+          "y": 54.41970737295354
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 49.05826200206049,
+          "y": 40.406687334525635
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 79.84917203418766,
+          "y": 38.052969483030786
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 34.61591860221048,
+          "y": 27.382256570703852
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 58.69390215878685,
+          "y": 27.091683953758775
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 89.47824960837872,
+          "y": 26.015535120459724
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 60.58881336068066,
+          "y": 12.843671253805791
+        }
+      ],
+      "ball": {
+        "x": 58.69390215878685,
+        "y": 27.091683953758775,
+        "owner_player_id": "red_9"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000063",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 18,
+          "clock_minute": 85,
+          "team_id": "red",
+          "type": "shot",
+          "player_ids": [
+            "red_9"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:01:03Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 39,
+      "half": 2,
+      "step": 19,
+      "clock_minute": 88,
+      "phase": "second_half",
+      "state_version": 40,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 38.89153011360399,
+          "y": 4.60389167938323
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 4.22946693656159,
+          "y": 44.06861440516501
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 19.49699465440429,
+          "y": 44.15661154253643
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 51.45445073602896,
+          "y": 40.709349086823835
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 73.02016376990711,
+          "y": 46.432499677810384
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 19.62845628081805,
+          "y": 67.37071021889753
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 34.93932596675821,
+          "y": 61.865867690307965
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 56.36030080124998,
+          "y": 67.49678231510381
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 5.75302880748275,
+          "y": 80.6877526888631
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 35.225484517513436,
+          "y": 80.80141269318082
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 68.84591158471255,
+          "y": 81.48640902290514
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 50.19693803527346,
+          "y": 94.83169123086245
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 15.300141501545607,
+          "y": 85.82496846127587
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 32.74729298125861,
+          "y": 90.98456663603798
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 67.03791639779892,
+          "y": 88.48479257585147
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 81.6549624517862,
+          "y": 88.2388103509264
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 36.63012900124698,
+          "y": 72.6804878649789
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 65.5133497781878,
+          "y": 70.46861633288464
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 20.381193989687453,
+          "y": 55.37054828534011
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 50.58161339382292,
+          "y": 60.03292233655557
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 78.62494110193765,
+          "y": 55.899114288294484
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 46.929920177477314,
+          "y": 48.12204924710872
+        }
+      ],
+      "ball": {
+        "x": 35.225484517513436,
+        "y": 80.80141269318082,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000064",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 19,
+          "clock_minute": 88,
+          "team_id": "blue",
+          "type": "shot",
+          "player_ids": [
+            "blue_10"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:01:04Z"
+        }
+      ]
+    },
+    {
+      "match_id": "match_seed42",
+      "seq": 40,
+      "half": 2,
+      "step": 20,
+      "clock_minute": 90,
+      "phase": "full_time",
+      "state_version": 41,
+      "players": [
+        {
+          "player_id": "blue_1",
+          "team_id": "blue",
+          "x": 37.81372920071913,
+          "y": 5.617384166354475
+        },
+        {
+          "player_id": "blue_2",
+          "team_id": "blue",
+          "x": 2.654387805695009,
+          "y": 24.07948705920985
+        },
+        {
+          "player_id": "blue_3",
+          "team_id": "blue",
+          "x": 22.699026445911386,
+          "y": 17.34642068559515
+        },
+        {
+          "player_id": "blue_4",
+          "team_id": "blue",
+          "x": 54.78624063860002,
+          "y": 21.841492115326353
+        },
+        {
+          "player_id": "blue_5",
+          "team_id": "blue",
+          "x": 75.53162580746505,
+          "y": 23.375692259719546
+        },
+        {
+          "player_id": "blue_6",
+          "team_id": "blue",
+          "x": 18.626490120472283,
+          "y": 43.47482689699089
+        },
+        {
+          "player_id": "blue_7",
+          "team_id": "blue",
+          "x": 36.756230932497076,
+          "y": 37.27173881636697
+        },
+        {
+          "player_id": "blue_8",
+          "team_id": "blue",
+          "x": 61.952989283815356,
+          "y": 39.3825594726725
+        },
+        {
+          "player_id": "blue_9",
+          "team_id": "blue",
+          "x": 4.552153169282512,
+          "y": 59.60749679330968
+        },
+        {
+          "player_id": "blue_10",
+          "team_id": "blue",
+          "x": 34.25387896818463,
+          "y": 62.60265337550958
+        },
+        {
+          "player_id": "blue_11",
+          "team_id": "blue",
+          "x": 70.15177650066786,
+          "y": 56.45320161491549
+        },
+        {
+          "player_id": "red_1",
+          "team_id": "red",
+          "x": 51.913333139696405,
+          "y": 95.53165536584743
+        },
+        {
+          "player_id": "red_2",
+          "team_id": "red",
+          "x": 14.362895511058623,
+          "y": 86.87528490858298
+        },
+        {
+          "player_id": "red_3",
+          "team_id": "red",
+          "x": 34.059836950810976,
+          "y": 92.95713959148527
+        },
+        {
+          "player_id": "red_4",
+          "team_id": "red",
+          "x": 68.25413849219657,
+          "y": 92.21772171186424
+        },
+        {
+          "player_id": "red_5",
+          "team_id": "red",
+          "x": 86.46184283281234,
+          "y": 85.25387320281193
+        },
+        {
+          "player_id": "red_6",
+          "team_id": "red",
+          "x": 35.31440211135088,
+          "y": 73.97075522875281
+        },
+        {
+          "player_id": "red_7",
+          "team_id": "red",
+          "x": 63.7821590971132,
+          "y": 73.92120459051222
+        },
+        {
+          "player_id": "red_8",
+          "team_id": "red",
+          "x": 20.29806789118401,
+          "y": 56.07084177402467
+        },
+        {
+          "player_id": "red_9",
+          "team_id": "red",
+          "x": 51.822865127249024,
+          "y": 60.17305523726406
+        },
+        {
+          "player_id": "red_10",
+          "team_id": "red",
+          "x": 76.02778635955926,
+          "y": 56.336141295797596
+        },
+        {
+          "player_id": "red_11",
+          "team_id": "red",
+          "x": 48.386903909623854,
+          "y": 45.1364119639318
+        }
+      ],
+      "ball": {
+        "x": 34.25387896818463,
+        "y": 62.60265337550958,
+        "owner_player_id": "blue_10"
+      },
+      "events": [
+        {
+          "event_id": "match_seed42_e000065",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 20,
+          "clock_minute": 90,
+          "team_id": "blue",
+          "type": "turnover",
+          "player_ids": [
+            "blue_8"
+          ],
+          "details": {},
+          "created_at": "2026-01-01T00:01:05Z"
+        },
+        {
+          "event_id": "match_seed42_e000066",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 20,
+          "clock_minute": 90,
+          "team_id": "red",
+          "type": "possession_change",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:01:06Z"
+        },
+        {
+          "event_id": "match_seed42_e000067",
+          "match_id": "match_seed42",
+          "schema_version": 1,
+          "half": 2,
+          "step": 20,
+          "clock_minute": 90,
+          "team_id": null,
+          "type": "full_time",
+          "player_ids": [],
+          "details": {},
+          "created_at": "2026-01-01T00:01:07Z"
+        }
+      ]
+    }
+  ],
+  "next_seq": null,
+  "phase": "full_time",
+  "fixture": true
+}

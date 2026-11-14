@@ -1,6 +1,163 @@
 {
   "components": {
     "schemas": {
+      "Action": {
+        "additionalProperties": false,
+        "description": "Action ledger record (PRD \u00a79). `submitted` is not success; only `verified` is.",
+        "properties": {
+          "action_id": {
+            "title": "Action Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "expected_state_version": {
+            "title": "Expected State Version",
+            "type": "integer"
+          },
+          "fencing_token": {
+            "title": "Fencing Token",
+            "type": "integer"
+          },
+          "kind": {
+            "const": "apply_tactical_plan",
+            "default": "apply_tactical_plan",
+            "title": "Kind",
+            "type": "string"
+          },
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "observed_state_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed State Version"
+          },
+          "requested": {
+            "$ref": "#/components/schemas/TacticalSettings"
+          },
+          "simulator_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulator Ref"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ActionStatus"
+          },
+          "team_id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action_id",
+          "match_id",
+          "team_id",
+          "requested",
+          "expected_state_version",
+          "status",
+          "fencing_token",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "Action",
+        "type": "object"
+      },
+      "ActionStatus": {
+        "enum": [
+          "proposed",
+          "submitted",
+          "applied",
+          "verified",
+          "rejected",
+          "failed",
+          "unknown"
+        ],
+        "title": "ActionStatus",
+        "type": "string"
+      },
+      "AnalystReport": {
+        "additionalProperties": false,
+        "properties": {
+          "fatigue_concerns": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "title": "Fatigue Concerns",
+            "type": "array"
+          },
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "own_strengths": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "maxItems": 3,
+            "title": "Own Strengths",
+            "type": "array"
+          },
+          "own_weaknesses": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "maxItems": 3,
+            "title": "Own Weaknesses",
+            "type": "array"
+          },
+          "state_version": {
+            "title": "State Version",
+            "type": "integer"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "team_id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "uncertainties": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Uncertainties",
+            "type": "array"
+          }
+        },
+        "required": [
+          "match_id",
+          "team_id",
+          "state_version",
+          "summary"
+        ],
+        "title": "AnalystReport",
+        "type": "object"
+      },
       "AttackFocus": {
         "description": "Relative to the team's own attacking direction.",
         "enum": [
@@ -52,6 +209,33 @@
           "y"
         ],
         "title": "BallPosition",
+        "type": "object"
+      },
+      "BatchRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "seeds": {
+            "default": [
+              42,
+              43
+            ],
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Seeds",
+            "type": "array"
+          },
+          "steps_per_half": {
+            "default": 20,
+            "maximum": 90.0,
+            "minimum": 2.0,
+            "title": "Steps Per Half",
+            "type": "integer"
+          }
+        },
+        "title": "BatchRequest",
         "type": "object"
       },
       "Briefing": {
@@ -108,6 +292,104 @@
         "title": "Briefing",
         "type": "object"
       },
+      "CoachDecision": {
+        "additionalProperties": false,
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/AnalystReport"
+          },
+          "coach_id": {
+            "title": "Coach Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision_id": {
+            "title": "Decision Id",
+            "type": "string"
+          },
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/TacticalPlan"
+          },
+          "scouting": {
+            "$ref": "#/components/schemas/ScoutReport"
+          },
+          "team_id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "used_fallback": {
+            "default": false,
+            "title": "Used Fallback",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "decision_id",
+          "match_id",
+          "team_id",
+          "coach_id",
+          "analysis",
+          "scouting",
+          "plan",
+          "created_at"
+        ],
+        "title": "CoachDecision",
+        "type": "object"
+      },
+      "CoachMetrics": {
+        "additionalProperties": false,
+        "properties": {
+          "avg_decision_latency_ms": {
+            "default": 0,
+            "title": "Avg Decision Latency Ms",
+            "type": "number"
+          },
+          "decision_validity": {
+            "default": 0,
+            "title": "Decision Validity",
+            "type": "number"
+          },
+          "evidence_grounding": {
+            "default": 0,
+            "title": "Evidence Grounding",
+            "type": "number"
+          },
+          "execution_reliability": {
+            "default": 0,
+            "title": "Execution Reliability",
+            "type": "number"
+          },
+          "goal_difference": {
+            "default": 0,
+            "title": "Goal Difference",
+            "type": "number"
+          },
+          "prediction_accuracy": {
+            "default": 0,
+            "title": "Prediction Accuracy",
+            "type": "number"
+          },
+          "recovery_correctness": {
+            "default": 0,
+            "title": "Recovery Correctness",
+            "type": "number"
+          },
+          "shot_delta": {
+            "default": 0,
+            "title": "Shot Delta",
+            "type": "number"
+          }
+        },
+        "title": "CoachMetrics",
+        "type": "object"
+      },
       "CrashPoint": {
         "enum": [
           "after_submit_before_verify"
@@ -150,18 +432,47 @@
         "title": "DependencyStatus",
         "type": "string"
       },
-      "ErrorResponse": {
+      "EvaluationBatch": {
         "additionalProperties": false,
         "properties": {
-          "detail": {
-            "title": "Detail",
+          "batch_id": {
+            "title": "Batch Id",
+            "type": "string"
+          },
+          "metrics": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CoachMetrics"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/TeamId"
+            },
+            "title": "Metrics",
+            "type": "object"
+          },
+          "results": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/MatchResult"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "running",
+              "complete",
+              "failed"
+            ],
+            "title": "Status",
             "type": "string"
           }
         },
         "required": [
-          "detail"
+          "batch_id",
+          "status",
+          "metrics"
         ],
-        "title": "ErrorResponse",
+        "title": "EvaluationBatch",
         "type": "object"
       },
       "EventType": {
@@ -393,6 +704,37 @@
         "title": "Level",
         "type": "string"
       },
+      "LikelyAdjustment": {
+        "additionalProperties": false,
+        "properties": {
+          "change": {
+            "title": "Change",
+            "type": "string"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "evidence": {
+            "description": "Event IDs, `metric:<name>`, or `profile:<id>`.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          }
+        },
+        "required": [
+          "change",
+          "confidence",
+          "evidence"
+        ],
+        "title": "LikelyAdjustment",
+        "type": "object"
+      },
       "MatchEvent": {
         "additionalProperties": false,
         "description": "Append-only simulation event (PRD \u00a75.4).",
@@ -481,6 +823,34 @@
         ],
         "title": "MatchPhase",
         "type": "string"
+      },
+      "MatchResult": {
+        "additionalProperties": false,
+        "properties": {
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "sides_swapped": {
+            "title": "Sides Swapped",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "match_id",
+          "seed",
+          "sides_swapped",
+          "score"
+        ],
+        "title": "MatchResult",
+        "type": "object"
       },
       "MatchState": {
         "additionalProperties": false,
@@ -588,6 +958,129 @@
         ],
         "title": "Mentality",
         "type": "string"
+      },
+      "Observation": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence": {
+            "description": "Event IDs, `metric:<name>`, or `profile:<id>`.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "observation": {
+            "title": "Observation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "observation",
+          "evidence"
+        ],
+        "title": "Observation",
+        "type": "object"
+      },
+      "ObservedTactics": {
+        "additionalProperties": false,
+        "description": "What the scout believes the rival is doing. Every field is optional.",
+        "properties": {
+          "attack_focus": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AttackFocus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "defensive_line": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Level"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Formation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mentality": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Mentality"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pressing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Level"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tempo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Tempo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "ObservedTactics",
+        "type": "object"
+      },
+      "OpponentPrediction": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "evidence": {
+            "description": "Event IDs, `metric:<name>`, or `profile:<id>`.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "likely_change": {
+            "title": "Likely Change",
+            "type": "string"
+          }
+        },
+        "required": [
+          "likely_change",
+          "confidence",
+          "evidence"
+        ],
+        "title": "OpponentPrediction",
+        "type": "object"
       },
       "PitchSide": {
         "description": "Which half a team defends. `top` attacks toward y=100.",
@@ -751,6 +1244,141 @@
           }
         },
         "title": "Score",
+        "type": "object"
+      },
+      "ScoutReport": {
+        "additionalProperties": false,
+        "properties": {
+          "closest_style_profile_ids": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Closest Style Profile Ids",
+            "type": "array"
+          },
+          "likely_adjustments": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/LikelyAdjustment"
+            },
+            "title": "Likely Adjustments",
+            "type": "array"
+          },
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "observed_tactics": {
+            "$ref": "#/components/schemas/ObservedTactics"
+          },
+          "patterns": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Observation"
+            },
+            "title": "Patterns",
+            "type": "array"
+          },
+          "rival_team_id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "state_version": {
+            "title": "State Version",
+            "type": "integer"
+          },
+          "team_id": {
+            "$ref": "#/components/schemas/TeamId",
+            "description": "The coach this report belongs to, not the rival."
+          },
+          "uncertainties": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Uncertainties",
+            "type": "array"
+          }
+        },
+        "required": [
+          "match_id",
+          "team_id",
+          "rival_team_id",
+          "state_version",
+          "observed_tactics"
+        ],
+        "title": "ScoutReport",
+        "type": "object"
+      },
+      "TacticalPlan": {
+        "additionalProperties": false,
+        "properties": {
+          "based_on_state_version": {
+            "title": "Based On State Version",
+            "type": "integer"
+          },
+          "expected_effects": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Expected Effects",
+            "type": "array"
+          },
+          "match_id": {
+            "title": "Match Id",
+            "type": "string"
+          },
+          "opponent_prediction": {
+            "$ref": "#/components/schemas/OpponentPrediction"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/TacticalSettings"
+          },
+          "primary_objective": {
+            "title": "Primary Objective",
+            "type": "string"
+          },
+          "rationale": {
+            "title": "Rationale",
+            "type": "string"
+          },
+          "risks": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Risks",
+            "type": "array"
+          },
+          "success_indicators": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Success Indicators",
+            "type": "array"
+          },
+          "team_id": {
+            "$ref": "#/components/schemas/TeamId"
+          },
+          "voice_script": {
+            "maxLength": 900,
+            "title": "Voice Script",
+            "type": "string"
+          }
+        },
+        "required": [
+          "match_id",
+          "team_id",
+          "based_on_state_version",
+          "plan",
+          "opponent_prediction",
+          "primary_objective",
+          "rationale",
+          "voice_script"
+        ],
+        "title": "TacticalPlan",
         "type": "object"
       },
       "TacticalSettings": {
@@ -962,21 +1590,94 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Inject Crash",
         "tags": [
           "demo"
+        ]
+      }
+    },
+    "/evaluations": {
+      "post": {
+        "operationId": "runBatch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationBatch"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Batch",
+        "tags": [
+          "evaluation"
+        ]
+      }
+    },
+    "/evaluations/{batch_id}": {
+      "get": {
+        "operationId": "getEvaluation",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "batch_id",
+            "required": true,
+            "schema": {
+              "title": "Batch Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationBatch"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Evaluation",
+        "tags": [
+          "evaluation"
         ]
       }
     },
@@ -1034,16 +1735,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Create Match",
@@ -1086,16 +1777,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Get Match",
@@ -1104,9 +1785,54 @@
         ]
       }
     },
+    "/matches/{match_id}/actions": {
+      "get": {
+        "operationId": "getActions",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "match_id",
+            "required": true,
+            "schema": {
+              "title": "Match Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Action"
+                  },
+                  "title": "Response Getactions",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Actions",
+        "tags": [
+          "matches"
+        ]
+      }
+    },
     "/matches/{match_id}/briefings/{team_id}": {
       "get": {
-        "description": "Read-only. Returns the persisted halftime briefing; never generates tactics.",
         "operationId": "getBriefing",
         "parameters": [
           {
@@ -1147,19 +1873,55 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Get Briefing",
+        "tags": [
+          "matches"
+        ]
+      }
+    },
+    "/matches/{match_id}/decisions": {
+      "get": {
+        "operationId": "getDecisions",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "match_id",
+            "required": true,
+            "schema": {
+              "title": "Match Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CoachDecision"
+                  },
+                  "title": "Response Getdecisions",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Decisions",
         "tags": [
           "matches"
         ]
@@ -1219,16 +1981,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Get Events",
@@ -1251,13 +2003,11 @@
             }
           },
           {
-            "description": "First frame seq to return.",
             "in": "query",
             "name": "from_seq",
             "required": false,
             "schema": {
               "default": 0,
-              "description": "First frame seq to return.",
               "minimum": 0,
               "title": "From Seq",
               "type": "integer"
@@ -1296,19 +2046,62 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Get Frames",
+        "tags": [
+          "matches"
+        ]
+      }
+    },
+    "/matches/{match_id}/recovery": {
+      "get": {
+        "operationId": "getRecovery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "match_id",
+            "required": true,
+            "schema": {
+              "title": "Match Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "boolean"
+                      }
+                    ]
+                  },
+                  "title": "Response Getrecovery",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Recovery",
         "tags": [
           "matches"
         ]
@@ -1348,16 +2141,6 @@
               }
             },
             "description": "Validation Error"
-          },
-          "501": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Not implemented yet"
           }
         },
         "summary": "Reset Match",

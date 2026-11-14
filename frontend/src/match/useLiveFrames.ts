@@ -18,20 +18,25 @@ export function useLiveFrames(matchId: string | null, enabled: boolean): Frame[]
   useEffect(() => {
     if (!matchId || !enabled) return;
     let cancelled = false;
+    let finished = false;
+    let inFlight = false;
 
     const poll = async () => {
+      if (finished || inFlight) return;
+      inFlight = true;
       try {
         const page = await api.getFrames(matchId, nextSeqRef.current);
         if (cancelled) return;
         if (page.frames.length > 0) {
           setFrames((prev) => [...prev, ...page.frames]);
         }
+        if (page.next_seq === null) finished = true;
         if (page.next_seq !== null && page.next_seq !== undefined) {
           nextSeqRef.current = page.next_seq;
         }
       } catch {
         // Transient network/API errors skip this tick; the next poll retries.
-      }
+      } finally { inFlight = false; }
     };
 
     poll();
