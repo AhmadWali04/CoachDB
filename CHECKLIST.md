@@ -6,7 +6,7 @@ live in `PRD.md`, `CLAUDE.md`, and `AGENTS.md`. This file only tracks
 
 | Dev | Name | Track | Owns |
 |-----|------|-------|------|
-| **A** | Claude (`a/simulator`) | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
+| **A** | Codex (engine completion, `a/persistence`) | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
 | **B** | Claude (`b/track-b-experience`) | Experience | `frontend/`, `backend/app/voice/`, `backend/app/data/` (StatsBomb/Metrica pipeline), `scripts/` |
 | Both | — | Contracts | `backend/app/schemas/`, `backend/app/api/`, `backend/app/guardrails/`, `.env.example`, this file |
 
@@ -75,27 +75,27 @@ point runs in parallel.
 ### Persistence (PRD §8)
 - [~] **A / Codex** · `a/persistence` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
 - [x] **A / Codex** · `34f7f97` — Durable match/event/frame/decision repositories, unique/query indexes, version-checked updates and voice-compatible `get_latest_decision`; 43 focused tests pass (181 backend tests pass, 2 opt-in integration tests skipped). Action/task state machines remain pending.
-- [ ] Endpoints above return real data
+- [~] **A / Codex** · `a/persistence` — Endpoints above return real data
 
 ### Coaches (PRD §6, AGENTS.md)
-- [ ] Match Analyst (own team)
-- [ ] Opposition Scout (rival, public data only)
-- [ ] Tactical Coach + rival prediction + `voice_script`
-- [ ] Plan validation, one bounded correction, then balanced fallback
-- [ ] Coach agents take only `CoachView` (`build_coach_view`) as match input
-- [ ] Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
-- [ ] LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
+- [~] **A / Codex** · `a/persistence` — Match Analyst (own team)
+- [~] **A / Codex** · `a/persistence` — Opposition Scout (rival, public data only)
+- [~] **A / Codex** · `a/persistence` — Tactical Coach + rival prediction + `voice_script`
+- [~] **A / Codex** · `a/persistence` — Plan validation, one bounded correction, then balanced fallback
+- [~] **A / Codex** · `a/persistence` — Coach agents take only `CoachView` (`build_coach_view`) as match input
+- [~] **A / Codex** · `a/persistence` — Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
+- [~] **A / Codex** · `a/persistence` — LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
 
 ### Execution and recovery (PRD §9)
-- [ ] Action ledger `proposed → submitted → applied → verified`, unique `action_id`
-- [ ] Simulator dedupes repeated action IDs
-- [ ] Leases, heartbeat, fencing token
-- [ ] Crash injection after submit, before verify, then reconcile
-- [ ] Tests: no duplicate effect; stale token can't commit
+- [~] **A / Codex** · `a/persistence` — Action ledger `proposed → submitted → applied → verified`, unique `action_id`
+- [~] **A / Codex** · `a/persistence` — Simulator dedupes repeated action IDs
+- [~] **A / Codex** · `a/persistence` — Leases, heartbeat, fencing token
+- [~] **A / Codex** · `a/persistence` — Crash injection after submit, before verify, then reconcile
+- [~] **A / Codex** · `a/persistence` — Tests: no duplicate effect; stale token can't commit
 
 ### Evaluation (PRD §12)
-- [ ] Deterministic evaluator with seeded, side-swapped batches
-- [ ] `GET /evaluations/{batch_id}`
+- [~] **A / Codex** · `a/persistence` — Deterministic evaluator with seeded, side-swapped batches
+- [~] **A / Codex** · `a/persistence` — `GET /evaluations/{batch_id}`
 
 ---
 
