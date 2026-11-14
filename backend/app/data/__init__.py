@@ -1,27 +1,19 @@
-"""StatsBomb/Metrica style-profile pipeline and local vector search (PRD §14.2).
-
-Historical data informs coach memory and benchmarks only -- the simulator
-stays the source of truth for the simulated match (CLAUDE.md principle 1).
+"""StatsBomb/Metrica style-profile ingestion (Claude, `b/track-b-experience`)
+and historical retrieval (Codex, `b/data-memory`) -- see README.md.
+Historical context informs coach memory and benchmarks only; the simulator
+remains the source of truth for the simulated match (CLAUDE.md principle 1).
 """
 
 from .pipeline import build_all_profiles, write_profiles
-from .style_profile import FEATURE_NAMES, StyleProfile, cosine_similarity, derive_tags
-from .vector_search import (
-    Experience,
-    InMemoryExperienceStore,
-    InMemoryStyleProfileStore,
-    search_experiences,
-    search_styles,
-)
+from .retrieval import ExperienceHit, StyleHit, search_experiences, search_styles
+from .style_profile import FEATURE_NAMES, StyleProfile, derive_tags
 
 __all__ = [
     "FEATURE_NAMES",
-    "Experience",
-    "InMemoryExperienceStore",
-    "InMemoryStyleProfileStore",
+    "ExperienceHit",
+    "StyleHit",
     "StyleProfile",
     "build_all_profiles",
-    "cosine_similarity",
     "derive_tags",
     "search_experiences",
     "search_styles",

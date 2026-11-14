@@ -3,18 +3,32 @@
 A profile informs coach memory and benchmarks only; it never feeds the
 live simulation (CLAUDE.md principle 1). Features are plain, named
 numbers rather than a learned embedding -- there's no embedding model in
-this MVP -- but `vector` (the same values in a fixed order) is shaped so
-it can be indexed by Atlas Vector Search like any other embedding.
+this MVP -- but `embedding` (the same values in a fixed order) is shaped
+so it can be indexed by Atlas Vector Search like any other embedding.
+
+Field names (`summary`, `source_match_id`, `namespace`, `embedding_model`,
+`embedding`) match the storage contract in `backend/app/data/README.md`
+(Codex, `search_styles`/`search_experiences`, `b/data-memory`), so a
+document written by this pipeline is queryable by that retrieval code
+without translation.
 """
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Literal
 
 Source = Literal["statsbomb", "metrica"]
+
+# Must match retrieval.STYLE_NAMESPACE -- duplicated as a literal rather than
+# imported to keep the ingestion pipeline independent of the retrieval
+# module; test_style_profile.py asserts the two stay in sync.
+STYLE_NAMESPACE = "public:styles"
+
+# No embedding model is wired up in this MVP; these handcrafted stats stand
+# in for one so the documents are still queryable via $vectorSearch.
+EMBEDDING_MODEL = "handcrafted-stats-v1"
 
 FEATURE_NAMES: tuple[str, ...] = (
     "possession_pct",
@@ -32,7 +46,7 @@ FEATURE_NAMES: tuple[str, ...] = (
 class StyleProfile:
     profile_id: str
     source: Source
-    source_ref: str
+    source_match_id: str
     team_label: str
     formation: str | None
     features: dict[str, float]
@@ -40,18 +54,27 @@ class StyleProfile:
     created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
 
     @property
-    def vector(self) -> list[float]:
+    def embedding(self) -> list[float]:
         return [self.features.get(name, 0.0) for name in FEATURE_NAMES]
+
+    @property
+    def summary(self) -> str:
+        formation = self.formation or "formation unknown"
+        tag_text = ", ".join(self.tags)
+        return f"{self.team_label} ({self.source}): {formation}, {tag_text}"
 
     def to_dict(self) -> dict:
         return {
             "profile_id": self.profile_id,
             "source": self.source,
-            "source_ref": self.source_ref,
+            "source_match_id": self.source_match_id,
             "team_label": self.team_label,
             "formation": self.formation,
+            "summary": self.summary,
+            "namespace": STYLE_NAMESPACE,
+            "embedding_model": EMBEDDING_MODEL,
+            "embedding": self.embedding,
             "features": self.features,
-            "vector": self.vector,
             "tags": self.tags,
             "created_at": self.created_at,
         }
@@ -70,14 +93,3 @@ def derive_tags(features: dict[str, float]) -> list[str]:
     if not tags:
         tags.append("balanced")
     return tags
-
-
-def cosine_similarity(a: list[float], b: list[float]) -> float:
-    if len(a) != len(b) or not a:
-        return 0.0
-    dot = sum(x * y for x, y in zip(a, b, strict=True))
-    norm_a = math.sqrt(sum(x * x for x in a))
-    norm_b = math.sqrt(sum(y * y for y in b))
-    if norm_a == 0.0 or norm_b == 0.0:
-        return 0.0
-    return dot / (norm_a * norm_b)

@@ -89,7 +89,7 @@ def parse_metrica_events(csv_text: str, team: str, game: str) -> StyleProfile | 
     return StyleProfile(
         profile_id=f"metrica:{game}:{team.lower()}",
         source="metrica",
-        source_ref=game,
+        source_match_id=game,
         team_label=team,
         formation=None,
         features=features,
