@@ -11,6 +11,13 @@ import csv
 import io
 
 from ._http import fetch_cached
+from .metrica_tracking import (
+    PossessionTimeline,
+    TrackingShape,
+    fetch_tracking_csv,
+    parse_tracking,
+    team_shape,
+)
 from .style_profile import StyleProfile, derive_tags
 from .tactical_style import OnPitchEvent, tactical_features
 
@@ -112,8 +119,14 @@ def _pass_length_m(row: dict[str, str]) -> float | None:
     return (dx**2 + dy**2) ** 0.5
 
 
-def parse_metrica_events(csv_text: str, team: str, game: str) -> StyleProfile | None:
-    """`team` is "Home" or "Away", matching the CSV's `Team` column."""
+def parse_metrica_events(
+    csv_text: str, team: str, game: str, tracking: TrackingShape | None = None
+) -> StyleProfile | None:
+    """`team` is "Home" or "Away", matching the CSV's `Team` column.
+
+    With `tracking`, the profile gets block-shape features and a formation
+    inferred from average positions; without it, formation stays unknown.
+    """
     all_rows = list(csv.DictReader(io.StringIO(csv_text)))
     rows = [row for row in all_rows if row.get("Team") == team]
     if not rows:
@@ -164,19 +177,36 @@ def parse_metrica_events(csv_text: str, team: str, game: str) -> StyleProfile | 
         source="metrica",
         source_match_id=game,
         team_label=team,
-        formation=None,
+        formation=tracking.formation if tracking else None,
+        formation_source="tracking" if tracking and tracking.formation else None,
         features=features,
         tags=derive_tags(features),
         context=f"sample {game.replace('Sample_Game_', 'game ')}",
-        tactical_features=tactical_features(to_on_pitch_events(all_rows), team),
+        tactical_features={
+            **tactical_features(to_on_pitch_events(all_rows), team),
+            **(tracking.features if tracking else {}),
+        },
     )
 
 
-def build_game_profiles(game: str) -> list[StyleProfile]:
+def tracking_shapes(csv_text: str, game: str) -> dict[str, TrackingShape]:
+    rows = list(csv.DictReader(io.StringIO(csv_text)))
+    direction = attacking_right(rows)
+    possession = PossessionTimeline(rows)
+    shapes = {}
+    for team in TEAMS:
+        samples = parse_tracking(fetch_tracking_csv(game, team))
+        team_direction = {p: v for (t, p), v in direction.items() if t == team}
+        shapes[team] = team_shape(samples, team, team_direction, possession)
+    return shapes
+
+
+def build_game_profiles(game: str, with_tracking: bool = True) -> list[StyleProfile]:
     csv_text = fetch_events_csv(game)
+    shapes = tracking_shapes(csv_text, game) if with_tracking else {}
     profiles = []
-    for team in ("Home", "Away"):
-        profile = parse_metrica_events(csv_text, team, game)
+    for team in TEAMS:
+        profile = parse_metrica_events(csv_text, team, game, shapes.get(team))
         if profile is not None:
             profiles.append(profile)
     return profiles

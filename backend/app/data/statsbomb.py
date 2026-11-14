@@ -185,6 +185,7 @@ def parse_statsbomb_events(
         source_match_id=str(match_id),
         team_label=team_name,
         formation=formation,
+        formation_source="lineup" if formation else None,
         features=features,
         tags=derive_tags(features),
         context=context,

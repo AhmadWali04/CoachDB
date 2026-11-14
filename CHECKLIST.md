@@ -124,7 +124,7 @@ point runs in parallel.
 - [ ] Vector index on `coach_experiences` (needs A's experience writer; definition in `indexes.py`)
 - [x] **B** · `b/data-memory` (Codex) — Retrieval for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` (`backend/app/data/retrieval.py`) → **handed to A**, see `backend/app/data/README.md`
 - [x] **B** · `b/data-memory` (Codex) — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; Blue can't retrieve Red's experiences (`backend/app/data/tests/test_retrieval.py`)
-- [ ] Metrica tracking (positions) → formation and block shape for Metrica profiles (PRD §14.2; currently events only, so Metrica formation is unknown)
+- [x] **B** · `b/metrica-tracking` — Metrica tracking (positions) → formation and block shape for Metrica profiles (`metrica_tracking.py`): 3× 4-4-2 and 1× 3-5-2 inferred, checked against player width; block length, width, and line height out of possession (`pytest` → 94 passed, 1 skipped; Atlas integration → 1 passed)
 - [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)

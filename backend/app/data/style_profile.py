@@ -52,6 +52,8 @@ class StyleProfile:
     team_label: str
     formation: str | None
     features: dict[str, float]
+    # "lineup" (announced, StatsBomb) or "tracking" (inferred from positions).
+    formation_source: str | None = None
     tags: list[str] = field(default_factory=list)
     context: str | None = None
     tactical_features: dict[str, float | None] = field(default_factory=dict)
@@ -69,6 +71,8 @@ class StyleProfile:
         if self.context:
             where = f"{where}, {self.context}"
         formation = self.formation or "formation unknown"
+        if self.formation and self.formation_source == "tracking":
+            formation = f"{formation} (inferred from tracking)"
         if not self.tactics:
             return f"{self.team_label} ({where}): {formation}, {', '.join(self.tags)}"
 
@@ -84,6 +88,12 @@ class StyleProfile:
             share = self.tactical_features.get(f"{focus}_entry_share")
             pct = f" ({share:.0%} of final-third entries)" if share is not None else ""
             parts.append(f"attacks mainly through the {focus}{pct}")
+        length = self.tactical_features.get("block_length_m")
+        line = self.tactical_features.get("defensive_line_height_m")
+        if length is not None and line is not None:
+            parts.append(
+                f"out of possession a {length:.0f} m long block, last line at {line:.0f} m"
+            )
         described = ", ".join(p for p in parts if p) or "too little data to label"
         return f"{self.team_label} ({where}): {formation}; {described}."
 
@@ -99,6 +109,7 @@ class StyleProfile:
             "team_label": self.team_label,
             "context": self.context,
             "formation": self.formation,
+            "formation_source": self.formation_source,
             "summary": self.summary,
             "namespace": STYLE_NAMESPACE,
             "embedding_model": EMBEDDING_MODEL,

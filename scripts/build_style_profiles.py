@@ -46,6 +46,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--season", type=int, default=DEFAULT_STATSBOMB_COMPETITION[1])
     parser.add_argument("--max-matches", type=int, default=DEFAULT_STATSBOMB_MAX_MATCHES)
     parser.add_argument("--no-metrica", action="store_true")
+    parser.add_argument(
+        "--no-tracking", action="store_true", help="skip Metrica tracking (about 125 MB)"
+    )
     parser.add_argument("--load", action="store_true", help="upsert into MongoDB and index")
     parser.add_argument("--database", default=os.environ.get("MONGODB_DATABASE", "rival_coaches"))
     return parser.parse_args()
@@ -81,6 +84,7 @@ def main() -> None:
         statsbomb_competition=(args.competition, args.season),
         statsbomb_max_matches=args.max_matches,
         metrica_games=() if args.no_metrica else DEFAULT_METRICA_GAMES,
+        metrica_tracking=not args.no_tracking,
     )
     if not profiles:
         print("No profiles were built -- check network access and try again.", file=sys.stderr)

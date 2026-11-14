@@ -211,7 +211,10 @@ def rank_cohort(
         return None if left is None or right is None else right - left
 
     pressing = percentile_ranks(column("press_rate"))
-    line = percentile_ranks(column("regain_height_m"))
+    # Tracking measures the defensive line directly; use it when every profile
+    # in this set has it (Metrica with tracking), else the regain height.
+    tracked = all(f.get("defensive_line_height_m") is not None for f in features)
+    line = percentile_ranks(column("defensive_line_height_m" if tracked else "regain_height_m"))
     tempo = percentile_ranks(column("passes_per_possession_min"))
     mentality = percentile_ranks(column("final_third_share"))
     lateral_p = percentile_ranks([lateral(f) for f in features])
