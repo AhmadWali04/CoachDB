@@ -301,3 +301,32 @@ def test_claude_adapter_treats_refusal_as_unavailable():
         ClaudeStructuredLLM(client=client).complete(
             system="s", prompt="p", output=AnalystDraft, effort="low"
         )
+
+
+def test_claude_adapter_turns_any_client_failure_into_unavailable():
+    class Broken:
+        beta = SimpleNamespace(
+            messages=SimpleNamespace(create=lambda **kw: (_ for _ in ()).throw(KeyError("x")))
+        )
+
+    with pytest.raises(LLMUnavailable, match="KeyError"):
+        ClaudeStructuredLLM(client=Broken()).complete(
+            system="s", prompt="p", output=AnalystDraft, effort="low"
+        )
+
+
+def test_expired_credentials_fall_back_and_the_match_finishes():
+    class Expired:
+        def __init__(self):
+            def create(**kw):
+                raise RuntimeError("user_oauth refresh failed")
+
+            self.beta = SimpleNamespace(messages=SimpleNamespace(create=create))
+
+    llm = ClaudeStructuredLLM(client=Expired())
+    coaches = {t: Coach(t, f"coach_{t.value}", llm) for t in TeamId}
+    repo = InMemoryMatchRepository()
+    service = MatchService(repo, step_seconds=0, halftime=CoachingHalftime(coaches))
+    match_id = service.create_match(3, 4, start=False).match_id
+    assert service.run_to_completion(match_id).phase is MatchPhase.FULL_TIME
+    assert all(repo.get_latest_decision(match_id, t).used_fallback for t in TeamId)

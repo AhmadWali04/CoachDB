@@ -125,6 +125,10 @@ class ClaudeStructuredLLM:
                 raise LLMUnavailable(f"API error {exc.status_code}") from exc
             except anthropic.APIConnectionError as exc:  # includes timeouts
                 raise LLMUnavailable("could not reach the model") from exc
+            except Exception as exc:
+                # Credentials, configuration or SDK errors (e.g. an expired login).
+                # The coach falls back; a model problem must never stop the match.
+                raise LLMUnavailable(f"model call failed: {type(exc).__name__}") from exc
 
             if response.stop_reason == "refusal":
                 raise LLMUnavailable("model declined the request")
