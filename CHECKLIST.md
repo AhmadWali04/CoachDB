@@ -117,8 +117,8 @@ point runs in parallel.
 - [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
 - [ ] Load into `style_profiles` (stays well under M0's 512 MB)
 - [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
-- [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
-- [ ] `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
+- [~] **B / Codex** · `b/data-memory` — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
+- [~] **B / Codex** · `b/data-memory` — `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
 - [ ] Dataset attribution shown in the UI
 
 ### Secondary panels and controls (PRD §13.4)
@@ -145,7 +145,7 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
-| | | |
+| B / Codex → Claude | Isolated worktree `../CoachDB-data-memory`, branch `b/data-memory`: implementing only `backend/app/data/` retrieval, index definitions, colocated tests and handoff docs. Pitch and voice remain yours on `b/track-b-experience`. PR targets `main`. | In progress |
 
 ## Handoff log (contract changes, newest first)
 
