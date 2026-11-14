@@ -48,21 +48,38 @@ class CoachingHalftime:
         self.last_results: dict[str, dict[TeamId, CoachResult]] = {}
 
     def __call__(self, run: MatchRun) -> None:
+        self.executor.apply(run, self.decide(run))
+
+    def decide(
+        self, run: MatchRun, snapshot_version: int | None = None
+    ) -> dict[TeamId, TacticalPlan]:
+        """Sealed plans for this halftime. Decisions already persisted for the
+        snapshot are reused (checkpoint), so recovery never re-asks the model."""
         snapshot = run.simulator.state
-        events = run.repository.get_events(run.match_id, limit=200)
-        views = {team: build_coach_view(snapshot, events, team) for team in TeamId}
-        sealed = SealedHalftimePlans(run.match_id, snapshot.state_version)
-
-        with ThreadPoolExecutor(max_workers=2, thread_name_prefix="halftime") as pool:
-            futures = {team: pool.submit(self.coaches[team].decide, views[team]) for team in TeamId}
-            results = {team: future.result() for team, future in futures.items()}
-
-        for team, result in results.items():
-            run.repository.save_decision(result.decision)
-            sealed.submit(team, result.decision.plan)
-            logger.info(
-                "coach decided",
-                extra={"match_id": run.match_id, "team_id": team.value, **result.fallbacks},
-            )
-        self.last_results[run.match_id] = results
-        self.executor.apply(run, sealed.reveal())
+        version = snapshot.state_version if snapshot_version is None else snapshot_version
+        sealed = SealedHalftimePlans(run.match_id, version)
+        saved = {team: run.repository.get_latest_decision(run.match_id, team) for team in TeamId}
+        missing = [
+            team
+            for team, decision in saved.items()
+            if decision is None or decision.plan.based_on_state_version != version
+        ]
+        if missing:
+            events = run.repository.get_events(run.match_id, limit=200)
+            views = {team: build_coach_view(snapshot, events, team) for team in missing}
+            with ThreadPoolExecutor(max_workers=2, thread_name_prefix="halftime") as pool:
+                futures = {
+                    team: pool.submit(self.coaches[team].decide, views[team]) for team in missing
+                }
+                results = {team: future.result() for team, future in futures.items()}
+            for team, result in results.items():
+                run.repository.save_decision(result.decision)
+                saved[team] = result.decision
+                logger.info(
+                    "coach decided",
+                    extra={"match_id": run.match_id, "team_id": team.value, **result.fallbacks},
+                )
+            self.last_results.setdefault(run.match_id, {}).update(results)
+        for team in TeamId:
+            sealed.submit(team, saved[team].plan)
+        return sealed.reveal()

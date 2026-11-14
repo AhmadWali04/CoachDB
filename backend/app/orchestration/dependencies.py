@@ -7,6 +7,7 @@ from functools import lru_cache
 
 from app.config.mongo import get_client, get_db
 from app.config.settings import get_settings
+from app.execution import HalftimeWorkflow, collections_for
 from app.schemas import TeamId
 
 from .halftime import CoachingHalftime
@@ -28,7 +29,12 @@ def get_repository() -> MatchRepository:
     return repository
 
 
-def build_halftime() -> CoachingHalftime | None:
+def build_halftime(repository: MatchRepository) -> HalftimeWorkflow:
+    """Durable halftime (ledger, leases, recovery) around the AI coaches."""
+    return HalftimeWorkflow(build_coaches(), collections_for(repository))
+
+
+def build_coaches() -> CoachingHalftime | None:
     settings = get_settings()
     if not settings.coaches_enabled:
         return None
@@ -51,6 +57,7 @@ def build_halftime() -> CoachingHalftime | None:
 @lru_cache
 def get_match_service() -> MatchService:
     settings = get_settings()
+    repository = get_repository()
     return MatchService(
-        get_repository(), step_seconds=settings.match_step_seconds, halftime=build_halftime()
+        repository, step_seconds=settings.match_step_seconds, halftime=build_halftime(repository)
     )

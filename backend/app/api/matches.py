@@ -5,7 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from app.orchestration import MatchService, UnknownMatch
 from app.orchestration.dependencies import get_match_service
 from app.schemas import (
+    Action,
     Briefing,
+    CoachDecision,
     CreateMatchRequest,
     ErrorResponse,
     FramesPage,
@@ -99,3 +101,33 @@ def reset_match(match_id: str, service: Service) -> MatchState:
         return service.reset_match(match_id)
     except UnknownMatch as exc:
         raise _not_found(match_id) from exc
+
+
+@router.get(
+    "/{match_id}/decisions",
+    response_model=dict[TeamId, CoachDecision],
+    operation_id="getDecisions",
+)
+def get_decisions(match_id: str, service: Service) -> dict[TeamId, CoachDecision]:
+    """Both coaches' latest halftime decisions, for the UI's coach comparison.
+
+    Presentation only: coach agents never call the HTTP API (AGENTS.md §2), so
+    showing both decisions here cannot leak one coach's plan to the other.
+    """
+    try:
+        service.get_match(match_id)
+    except UnknownMatch as exc:
+        raise _not_found(match_id) from exc
+    decisions = {team: service.repository.get_latest_decision(match_id, team) for team in TeamId}
+    return {team: d for team, d in decisions.items() if d is not None}
+
+
+@router.get("/{match_id}/actions", response_model=list[Action], operation_id="getActions")
+def get_actions(match_id: str, service: Service) -> list[Action]:
+    """The action ledger for this match (proposed -> submitted -> applied -> verified)."""
+    try:
+        service.get_match(match_id)
+    except UnknownMatch as exc:
+        raise _not_found(match_id) from exc
+    ledger = getattr(service.halftime, "ledger", None)
+    return ledger.for_match(match_id) if ledger is not None else []

@@ -1,4 +1,3 @@
-import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -13,17 +12,6 @@ def test_health():
     assert response.json()["status"] == "ok"
     # The test suite never depends on a real cluster.
     assert response.json()["mongodb"] in {"ok", "not_configured", "unreachable"}
-
-
-@pytest.mark.parametrize(
-    ("method", "path", "body"),
-    [
-        ("post", "/demo/inject-crash", {"match_id": "m1"}),
-    ],
-)
-def test_stubs_return_501(method, path, body):
-    response = client.request(method, path, json=body)
-    assert response.status_code == 501
 
 
 def test_briefing_rejects_unknown_team():

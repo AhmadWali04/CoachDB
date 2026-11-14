@@ -80,6 +80,7 @@ class MatchService:
         step_seconds: float = 1.0,
         halftime: HalftimeHandler | None = None,
         new_id: Callable[[], str] = lambda: f"match_{uuid.uuid4().hex[:10]}",
+        recovery_interval_s: float = 0.5,
     ) -> None:
         self.repository = repository
         self.step_seconds = step_seconds
@@ -87,6 +88,8 @@ class MatchService:
         self._new_id = new_id
         self._runs: dict[str, MatchRun] = {}
         self._lock = threading.Lock()
+        self.recovery_interval_s = recovery_interval_s
+        self._watchdog: threading.Thread | None = None
 
     # --- lifecycle --------------------------------------------------------------
 
@@ -101,6 +104,7 @@ class MatchService:
             self._runs[state.match_id] = run
         if start:
             self._start(run)
+            self._ensure_watchdog()
         return state
 
     def reset_match(self, match_id: str) -> MatchState:
@@ -143,11 +147,63 @@ class MatchService:
             if phase is MatchPhase.HALFTIME:
                 if self.halftime is not None:
                     self.halftime(run)
-                run.persist(run.simulator.drain_pending_events(), [])
-                run.simulator.start_second_half()
-                return run.persist([], [])
+                return self._finish_halftime(run)
             out = run.simulator.step()
             return run.persist(out.events, out.frames)
+
+    def _finish_halftime(self, run: MatchRun) -> MatchState:
+        run.persist(run.simulator.drain_pending_events(), [])
+        run.simulator.start_second_half()
+        return run.persist([], [])
+
+    # --- crash recovery (PRD §9.3) ------------------------------------------------------
+
+    def arm_crash(self, match_id: str) -> bool:
+        self.run(match_id)
+        arm = getattr(self.halftime, "arm_crash", None)
+        if arm is None:
+            return False
+        arm(match_id)
+        return True
+
+    def check_recovery(self) -> list[str]:
+        """Resume halftimes whose worker died and whose lease expired."""
+        needs = getattr(self.halftime, "needs_recovery", None)
+        if needs is None:
+            return []
+        recovered = []
+        for run in list(self._runs.values()):
+            alive = run.thread is not None and run.thread.is_alive()
+            if alive or run.stop.is_set() or run.simulator.state.phase is not MatchPhase.HALFTIME:
+                continue
+            if not needs(run.match_id):
+                continue
+            with run.lock:
+                if not self.halftime.recover(run):
+                    continue
+                self._finish_halftime(run)
+            run.error = None
+            recovered.append(run.match_id)
+            if run.thread is not None:  # it was a live match: keep it running
+                self._start(run)
+        return recovered
+
+    def _ensure_watchdog(self) -> None:
+        if getattr(self.halftime, "needs_recovery", None) is None:
+            return
+        with self._lock:
+            if self._watchdog is not None and self._watchdog.is_alive():
+                return
+            self._watchdog = threading.Thread(target=self._watch, name="recovery", daemon=True)
+            self._watchdog.start()
+
+    def _watch(self) -> None:
+        while True:
+            time.sleep(self.recovery_interval_s)
+            try:
+                self.check_recovery()
+            except Exception:
+                logger.exception("recovery check failed")
 
     def _loop(self, run: MatchRun) -> None:
         try:

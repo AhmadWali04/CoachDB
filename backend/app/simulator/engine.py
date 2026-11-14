@@ -119,6 +119,7 @@ class MatchSimulator:
         self._rt = _Runtime()
         self._applied: dict[str, ApplyResult] = {}
         self._pending_events: list[MatchEvent] = []
+        self._effects: dict[str, int] = {}
 
     # --- read ------------------------------------------------------------------
 
@@ -132,6 +133,10 @@ class MatchSimulator:
     def action_result(self, action_id: str) -> ApplyResult | None:
         """Authoritative answer to "did this action happen?" for reconciliation."""
         return self._applied.get(action_id)
+
+    def effects_of(self, action_id: str) -> int:
+        """How many times this action actually changed tactics (should be 0 or 1)."""
+        return self._effects.get(action_id, 0)
 
     # --- transitions -----------------------------------------------------------------
 
@@ -192,6 +197,7 @@ class MatchSimulator:
             return self._record(action_id, team, False, "expected state version is in the future")
         previous = team.tactics
         team.tactics = tactics.model_copy()
+        self._effects[action_id] = self._effects.get(action_id, 0) + 1
         s.state_version += 1
         s.updated_at = datetime.now(UTC)
         self._pending_events.append(

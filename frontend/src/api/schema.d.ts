@@ -13,7 +13,11 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Inject Crash */
+        /**
+         * Inject Crash
+         * @description Arm a one-time crash in this match's halftime worker, after a plan is
+         *     applied by the simulator and before the ledger records it (PRD §9.3).
+         */
         post: operations["injectCrash"];
         delete?: never;
         options?: never;
@@ -75,6 +79,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/matches/{match_id}/actions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Actions
+         * @description The action ledger for this match (proposed -> submitted -> applied -> verified).
+         */
+        get: operations["getActions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/matches/{match_id}/briefings/{team_id}": {
         parameters: {
             query?: never;
@@ -87,6 +111,29 @@ export interface paths {
          * @description Read-only. Returns the persisted halftime briefing; never generates tactics.
          */
         get: operations["getBriefing"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/matches/{match_id}/decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Decisions
+         * @description Both coaches' latest halftime decisions, for the UI's coach comparison.
+         *
+         *     Presentation only: coach agents never call the HTTP API (AGENTS.md §2), so
+         *     showing both decisions here cannot leak one coach's plan to the other.
+         */
+        get: operations["getDecisions"];
         put?: never;
         post?: never;
         delete?: never;
@@ -154,6 +201,78 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         /**
+         * Action
+         * @description Action ledger record (PRD §9). `submitted` is not success; only `verified` is.
+         */
+        Action: {
+            /** Action Id */
+            action_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Expected State Version */
+            expected_state_version: number;
+            /** Fencing Token */
+            fencing_token: number;
+            /**
+             * Kind
+             * @default apply_tactical_plan
+             * @constant
+             */
+            kind: "apply_tactical_plan";
+            /** Match Id */
+            match_id: string;
+            /** Observed State Version */
+            observed_state_version?: number | null;
+            requested: components["schemas"]["TacticalSettings"];
+            /** Simulator Ref */
+            simulator_ref?: string | null;
+            status: components["schemas"]["ActionStatus"];
+            team_id: components["schemas"]["TeamId"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * ActionStatus
+         * @enum {string}
+         */
+        ActionStatus: "proposed" | "submitted" | "applied" | "verified" | "rejected" | "failed" | "unknown";
+        /** AnalystReport */
+        AnalystReport: {
+            /**
+             * Fatigue Concerns
+             * @default []
+             */
+            fatigue_concerns: components["schemas"]["Observation"][];
+            /** Match Id */
+            match_id: string;
+            /**
+             * Own Strengths
+             * @default []
+             */
+            own_strengths: components["schemas"]["Observation"][];
+            /**
+             * Own Weaknesses
+             * @default []
+             */
+            own_weaknesses: components["schemas"]["Observation"][];
+            /** State Version */
+            state_version: number;
+            /** Summary */
+            summary: string;
+            team_id: components["schemas"]["TeamId"];
+            /**
+             * Uncertainties
+             * @default []
+             */
+            uncertainties: string[];
+        };
+        /**
          * AttackFocus
          * @description Relative to the team's own attacking direction.
          * @enum {string}
@@ -192,6 +311,29 @@ export interface components {
             team_id: components["schemas"]["TeamId"];
             /** Transcript */
             transcript: string;
+        };
+        /** CoachDecision */
+        CoachDecision: {
+            analysis: components["schemas"]["AnalystReport"];
+            /** Coach Id */
+            coach_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Decision Id */
+            decision_id: string;
+            /** Match Id */
+            match_id: string;
+            plan: components["schemas"]["TacticalPlan"];
+            scouting: components["schemas"]["ScoutReport"];
+            team_id: components["schemas"]["TeamId"];
+            /**
+             * Used Fallback
+             * @default false
+             */
+            used_fallback: boolean;
         };
         /**
          * CrashPoint
@@ -311,6 +453,18 @@ export interface components {
          * @enum {string}
          */
         Level: "low" | "medium" | "high";
+        /** LikelyAdjustment */
+        LikelyAdjustment: {
+            /** Change */
+            change: string;
+            /** Confidence */
+            confidence: number;
+            /**
+             * Evidence
+             * @description Event IDs, `metric:<name>`, or `profile:<id>`.
+             */
+            evidence: string[];
+        };
         /**
          * MatchEvent
          * @description Append-only simulation event (PRD §5.4).
@@ -405,6 +559,40 @@ export interface components {
          * @enum {string}
          */
         Mentality: "balanced" | "attacking" | "defensive";
+        /** Observation */
+        Observation: {
+            /**
+             * Evidence
+             * @description Event IDs, `metric:<name>`, or `profile:<id>`.
+             */
+            evidence: string[];
+            /** Observation */
+            observation: string;
+        };
+        /**
+         * ObservedTactics
+         * @description What the scout believes the rival is doing. Every field is optional.
+         */
+        ObservedTactics: {
+            attack_focus?: components["schemas"]["AttackFocus"] | null;
+            defensive_line?: components["schemas"]["Level"] | null;
+            formation?: components["schemas"]["Formation"] | null;
+            mentality?: components["schemas"]["Mentality"] | null;
+            pressing?: components["schemas"]["Level"] | null;
+            tempo?: components["schemas"]["Tempo"] | null;
+        };
+        /** OpponentPrediction */
+        OpponentPrediction: {
+            /** Confidence */
+            confidence: number;
+            /**
+             * Evidence
+             * @description Event IDs, `metric:<name>`, or `profile:<id>`.
+             */
+            evidence: string[];
+            /** Likely Change */
+            likely_change: string;
+        };
         /**
          * PitchSide
          * @description Which half a team defends. `top` attacks toward y=100.
@@ -476,6 +664,68 @@ export interface components {
              * @default 0
              */
             red: number;
+        };
+        /** ScoutReport */
+        ScoutReport: {
+            /**
+             * Closest Style Profile Ids
+             * @default []
+             */
+            closest_style_profile_ids: string[];
+            /**
+             * Likely Adjustments
+             * @default []
+             */
+            likely_adjustments: components["schemas"]["LikelyAdjustment"][];
+            /** Match Id */
+            match_id: string;
+            observed_tactics: components["schemas"]["ObservedTactics"];
+            /**
+             * Patterns
+             * @default []
+             */
+            patterns: components["schemas"]["Observation"][];
+            rival_team_id: components["schemas"]["TeamId"];
+            /** State Version */
+            state_version: number;
+            /** @description The coach this report belongs to, not the rival. */
+            team_id: components["schemas"]["TeamId"];
+            /**
+             * Uncertainties
+             * @default []
+             */
+            uncertainties: string[];
+        };
+        /** TacticalPlan */
+        TacticalPlan: {
+            /** Based On State Version */
+            based_on_state_version: number;
+            /**
+             * Expected Effects
+             * @default []
+             */
+            expected_effects: string[];
+            /** Match Id */
+            match_id: string;
+            opponent_prediction: components["schemas"]["OpponentPrediction"];
+            plan: components["schemas"]["TacticalSettings"];
+            /** Primary Objective */
+            primary_objective: string;
+            /** Rationale */
+            rationale: string;
+            /**
+             * Risks
+             * @default []
+             */
+            risks: string[];
+            /**
+             * Success Indicators
+             * @default []
+             */
+            success_indicators: string[];
+            team_id: components["schemas"]["TeamId"];
+            /** Voice Script */
+            voice_script: string;
         };
         /** TacticalSettings */
         TacticalSettings: {
@@ -591,15 +841,6 @@ export interface operations {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
-            /** @description Not implemented yet */
-            501: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
         };
     };
     health: {
@@ -704,6 +945,46 @@ export interface operations {
             };
         };
     };
+    getActions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                match_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Action"][];
+                };
+            };
+            /** @description Unknown match */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     getBriefing: {
         parameters: {
             query?: never;
@@ -723,6 +1004,48 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Briefing"];
+                };
+            };
+            /** @description Unknown match */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getDecisions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                match_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: components["schemas"]["CoachDecision"];
+                    };
                 };
             };
             /** @description Unknown match */
