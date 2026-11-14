@@ -50,6 +50,19 @@ are sufficient for the MVP.
 -   Return schema-valid JSON for machine-consumed outputs.
 -   Do not expose private prompts, hidden reasoning, or private memory
     to the opposing coach.
+-   **Coach isolation guardrails** (`backend/app/guardrails/`):
+    -   A coach agent's only match input is the `CoachView` from
+        `build_coach_view()`. Never pass `MatchState`, `CoachDecision`,
+        or API responses to a coach agent.
+    -   Both coaches decide on the same frozen halftime snapshot.
+    -   Halftime plans go into `SealedHalftimePlans`. Neither plan can be
+        read until both are in, and both are applied together.
+    -   Every memory or Vector Search call made for a coach goes through
+        `require_own_namespace()`.
+    -   Each coach runs in its own LangGraph subgraph with its own
+        checkpointer thread (`{match_id}:{team_id}`). No shared graph
+        state between coaches.
+    -   Coach agents never call the HTTP API; it serves the UI.
 -   Do not use future match events or evaluator-only information.
 -   Keep explanations concise and suitable for a coach.
 -   If evidence is insufficient, say so and lower confidence.
@@ -349,9 +362,12 @@ Convert approved, persisted coach scripts into audio.
 
   Rival's private experiences         Not accessible
 
-  Rival's submitted public tactical   Available after
-  plan                                submission/application, according
-                                      to match rules
+  Rival's kickoff formation           Both coaches (visible at kickoff)
+
+  Rival's other tactics, stamina,     Not accessible; the scout infers
+  decisions, plan, prediction,        tactics from the kickoff formation
+  rationale, and briefing             and public events. Plans are sealed
+                                      until both coaches submit
 
   Evaluator-only metrics and future   Evaluator only
   events                              

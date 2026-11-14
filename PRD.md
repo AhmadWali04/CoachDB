@@ -225,6 +225,10 @@ still invalid, use a safe balanced default and record the fallback.
     against the same rival.
 -   Do not let a coach read the result of a match before it makes its
     decision for that match.
+-   **Sealed halftime decisions:** both coaches decide on the same
+    frozen halftime snapshot, see only a filtered view (own team in
+    full, rival's public identity and roster, public first-half events),
+    and neither plan is revealed or applied until both are submitted.
 
 The MVP's "learning" is retrieval and adaptation from stored
 experiences, not model-weight training.

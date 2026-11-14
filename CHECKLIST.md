@@ -8,7 +8,7 @@ live in `PRD.md`, `CLAUDE.md`, and `AGENTS.md`. This file only tracks
 |-----|------|-------|------|
 | **A** | _(name)_ | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
 | **B** | _(name)_ | Experience | `frontend/`, `backend/app/voice/`, `backend/app/data/` (StatsBomb/Metrica pipeline), `scripts/` |
-| Both | — | Contracts | `backend/app/schemas/`, `backend/app/api/`, `.env.example`, this file |
+| Both | — | Contracts | `backend/app/schemas/`, `backend/app/api/`, `backend/app/guardrails/`, `.env.example`, this file |
 
 ---
 
@@ -45,16 +45,18 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (say why)
 Nothing else starts until these are merged. Everything after this
 point runs in parallel.
 
-- [ ] Repo skeleton: `backend/` (FastAPI) and `frontend/` (React + TS, Vite)
-- [ ] `.env.example` with the variable names from CLAUDE.md
-- [ ] Pydantic schemas: team, player, match state, event, tactical plan, action, decision
-- [ ] **Frame contract** for the pitch (PRD §13.5): per step → player `(x, y)`, ball position and owner, events with the players involved
-- [ ] API shape agreed and stubbed (returning `501`):
-  - `POST /matches` · `GET /matches/{id}` · `GET /matches/{id}/frames?from=` · `GET /matches/{id}/events`
+- [x] Repo skeleton: `backend/` (FastAPI) and `frontend/` (React + TS, Vite)
+- [x] `.env.example` with the variable names from CLAUDE.md
+- [x] Pydantic schemas: team, player, match state, event, tactical plan, action, decision, analyst and scout reports (`backend/app/schemas/`)
+- [x] **Frame contract** for the pitch (PRD §13.5): per step → player `(x, y)`, ball position and owner, events with the players involved (`schemas/frame.py`)
+- [x] API shape agreed and stubbed (returning `501`):
+  - `POST /matches` · `GET /matches/{id}` · `GET /matches/{id}/frames?from_seq=&limit=` · `GET /matches/{id}/events`
   - `GET /matches/{id}/briefings/{team_id}` (transcript + audio URL or `unavailable`)
   - `POST /demo/inject-crash` · `POST /matches/{id}/reset`
-- [ ] Generate TS types from the OpenAPI schema (shared source of truth for enums)
-- [ ] Atlas free cluster created, `MONGODB_URI` in each dev's local `.env`
+- [x] Generate TS types from the OpenAPI schema (`npm run gen:api` → `frontend/src/api/schema.d.ts`; typed client in `src/api/client.ts`)
+- [ ] **Both devs:** review the contract and ack the Handoff log entry below
+- [ ] Atlas free cluster created, `MONGODB_URI` in each dev's local `backend/.env`
+- [ ] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI)
 
 ---
 
@@ -76,8 +78,9 @@ point runs in parallel.
 - [ ] Opposition Scout (rival, public data only)
 - [ ] Tactical Coach + rival prediction + `voice_script`
 - [ ] Plan validation, one bounded correction, then balanced fallback
-- [ ] Separate namespaces for the Blue and Red coaches; test that neither can read the other's
-- [ ] LangGraph orchestration with the MongoDB checkpointer
+- [ ] Coach agents take only `CoachView` (`build_coach_view`) as match input
+- [ ] Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
+- [ ] LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
 
 ### Execution and recovery (PRD §9)
 - [ ] Action ledger `proposed → submitted → applied → verified`, unique `action_id`
@@ -114,7 +117,8 @@ point runs in parallel.
 - [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
 - [ ] Load into `style_profiles` (stays well under M0's 512 MB)
 - [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
-- [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(namespace, ...)` → **hand to A**
+- [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
+- [ ] `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
 - [ ] Dataset attribution shown in the UI
 
 ### Secondary panels and controls (PRD §13.4)
@@ -150,4 +154,5 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
-| | | | |
+| 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: |
+| 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: |
