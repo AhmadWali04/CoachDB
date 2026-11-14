@@ -66,36 +66,36 @@ point runs in parallel.
 ## Track A — Engine
 
 ### Simulator (PRD §5)
-- [~] **A** · `a/simulator` — Seeded match loop: two halves, 20 steps each, halftime and full time
-- [~] **A** · `a/simulator` — Tactical settings change event probabilities
-- [~] **A** · `a/simulator` — Emits player and ball positions per step (frame contract)
-- [~] **A** · `a/simulator` — Test: same seed gives identical output
-- [~] **A** · `a/simulator` — Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
+- [~] **A (Justin)** · `a/engine` — Seeded match loop: two halves, 20 steps each, halftime and full time
+- [~] **A (Justin)** · `a/engine` — Tactical settings change event probabilities
+- [~] **A (Justin)** · `a/engine` — Emits player and ball positions per step (frame contract)
+- [~] **A (Justin)** · `a/engine` — Test: same seed gives identical output
+- [~] **A (Justin)** · `a/engine` — Export one real run to `frontend/src/fixtures/match_seed42.json` → **unblocks B**
 
 ### Persistence (PRD §8)
-- [~] **A / Codex** · `a/persistence` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
+- [~] **A (Justin)** · `a/engine` — Repository layer + indexes for `matches`, `match_events`, `actions`, `tasks`, `coach_decisions`; first slice: durable match/event/frame/decision storage and latest-decision reader (Claude keeps simulator work)
 - [x] **A / Codex** · `34f7f97` — Durable match/event/frame/decision repositories, unique/query indexes, version-checked updates and voice-compatible `get_latest_decision`; 43 focused tests pass (181 backend tests pass, 2 opt-in integration tests skipped). Action/task state machines remain pending.
-- [~] **A / Codex** · `a/persistence` — Endpoints above return real data
+- [~] **A (Justin)** · `a/engine` — Endpoints above return real data
 
 ### Coaches (PRD §6, AGENTS.md)
-- [~] **A / Codex** · `a/persistence` — Match Analyst (own team)
-- [~] **A / Codex** · `a/persistence` — Opposition Scout (rival, public data only)
-- [~] **A / Codex** · `a/persistence` — Tactical Coach + rival prediction + `voice_script`
-- [~] **A / Codex** · `a/persistence` — Plan validation, one bounded correction, then balanced fallback
-- [~] **A / Codex** · `a/persistence` — Coach agents take only `CoachView` (`build_coach_view`) as match input
-- [~] **A / Codex** · `a/persistence` — Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
-- [~] **A / Codex** · `a/persistence` — LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
+- [~] **A (Justin)** · `a/engine` — Match Analyst (own team)
+- [~] **A (Justin)** · `a/engine` — Opposition Scout (rival, public data only)
+- [~] **A (Justin)** · `a/engine` — Tactical Coach + rival prediction + `voice_script`
+- [~] **A (Justin)** · `a/engine` — Plan validation, one bounded correction, then balanced fallback
+- [~] **A (Justin)** · `a/engine` — Coach agents take only `CoachView` (`build_coach_view`) as match input
+- [~] **A (Justin)** · `a/engine` — Halftime flow uses `SealedHalftimePlans`: both submit, then reveal, then apply both together
+- [~] **A (Justin)** · `a/engine` — LangGraph orchestration with the MongoDB checkpointer: one subgraph and thread per coach, no shared state
 
 ### Execution and recovery (PRD §9)
-- [~] **A / Codex** · `a/persistence` — Action ledger `proposed → submitted → applied → verified`, unique `action_id`
-- [~] **A / Codex** · `a/persistence` — Simulator dedupes repeated action IDs
-- [~] **A / Codex** · `a/persistence` — Leases, heartbeat, fencing token
-- [~] **A / Codex** · `a/persistence` — Crash injection after submit, before verify, then reconcile
-- [~] **A / Codex** · `a/persistence` — Tests: no duplicate effect; stale token can't commit
+- [~] **A (Justin)** · `a/engine` — Action ledger `proposed → submitted → applied → verified`, unique `action_id`
+- [~] **A (Justin)** · `a/engine` — Simulator dedupes repeated action IDs
+- [~] **A (Justin)** · `a/engine` — Leases, heartbeat, fencing token
+- [~] **A (Justin)** · `a/engine` — Crash injection after submit, before verify, then reconcile
+- [~] **A (Justin)** · `a/engine` — Tests: no duplicate effect; stale token can't commit
 
 ### Evaluation (PRD §12)
-- [~] **A / Codex** · `a/persistence` — Deterministic evaluator with seeded, side-swapped batches
-- [~] **A / Codex** · `a/persistence` — `GET /evaluations/{batch_id}`
+- [~] **A (Justin)** · `a/engine` — Deterministic evaluator with seeded, side-swapped batches
+- [~] **A (Justin)** · `a/engine` — `GET /evaluations/{batch_id}`
 
 ---
 
@@ -182,6 +182,7 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | Justin | Track A handoff: Ahmad/Codex handed the remaining Track A work (simulator, endpoints, coaches, orchestration, execution/recovery, evaluation) to Justin on `a/engine`. | Justin ✓ · Ahmad: |
 | 2026-11-14 | A / Codex | `MongoMatchRepository` in `app/persistence` persists authoritative matches, immutable events/frames/decisions and exposes `get_latest_decision(match_id, team_id)` for B's `CoachDecisionReader`. Explicit `ensure_indexes()`, CAS state updates, bounded event/frame queries. No schema/API change; see README for composition and remaining lifecycle work. 181 tests pass, 2 opt-in integration tests skipped. | B: pending wiring |
 | 2026-11-14 | B (Justin) | Style profiles use embedding model `tactical-style-v1` (9 dims, cosine). The scout builds its query with `style_query_vector(observed_tactics)` and passes `EMBEDDING_MODEL`/`DIMENSIONS` from `app/data/tactical_style.py` to `search_styles`. Profiles are ranked within each dataset. No `schemas/` or `api/` change. | Justin ✓ · A: |
 | 2026-11-14 | B (Claude) | Implemented `GET /matches/{id}/briefings/{team_id}` (`backend/app/voice/`, wired in `api/matches.py`): reads the latest `CoachDecision` via `CoachDecisionReader` (in-memory until A hands off persistence — see Requests), resolves audio through an ElevenLabs adapter with a filesystem `AudioCache` keyed by `briefing_id`, falls back to text-only on any TTS failure or missing voice ID. Route signature/response model unchanged; now 404s instead of 501 when no decision exists yet for that match/team, and `/audio/*` is mounted for cached clips. | A: · B: Claude ✓ |
