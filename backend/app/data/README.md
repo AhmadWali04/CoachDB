@@ -3,17 +3,42 @@
 Codex owns this slice on `b/data-memory`. Claude continues pitch and voice on
 `b/track-b-experience`; no frontend, API, schema, engine or voice files change here.
 
+## Style profiles (StatsBomb + Metrica)
+
+Build and load (raw files cached in `backend/.cache/data/raw/`, gitignored):
+
+```bash
+docker compose up -d   # or use the Atlas cluster's URI
+MONGODB_URI='mongodb://localhost:27017/?directConnection=true' \
+  backend/.venv/bin/python scripts/build_style_profiles.py --load
+```
+
+Default set: the first 16 FIFA World Cup 2022 matches plus Metrica sample
+games 1 and 2, which gives 36 profiles (about 56 KB). `--max-matches` widens it.
+
+Each profile carries tactics labels in the scout's vocabulary (pressing,
+defensive line, tempo, mentality, attack focus, formation) and a 9-dimension
+`tactical-style-v1` embedding (`tactical_style.py`). Labels are percentiles
+**within each dataset**, so "high press" means high relative to the other
+teams in that dataset. Always rebuild and reload the whole set.
+
 ## Track A integration
+
+The scout queries styles with its inferred rival tactics:
 
 ```python
 from app.data import search_experiences, search_styles
+from app.data.tactical_style import DIMENSIONS, EMBEDDING_MODEL, style_query_vector
 
-styles = await search_styles(
+vector = style_query_vector(scout_report.observed_tactics)  # None if nothing inferred
+styles = [] if vector is None else await search_styles(
     db.style_profiles,
-    query_vector,
-    embedding_model="your-embedding-model-and-version",
-    dimensions=384,
+    vector,
+    embedding_model=EMBEDDING_MODEL,
+    dimensions=DIMENSIONS,
+    limit=3,
 )
+# Cite hits as `profile:<profile_id>` in ScoutReport.closest_style_profile_ids.
 experiences = await search_experiences(
     coach_view.team_id,
     db.coach_experiences,

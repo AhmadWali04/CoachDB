@@ -81,10 +81,37 @@ def test_returns_none_for_a_team_with_no_events():
     assert parse_statsbomb_events(events, match_id=99, team_id=1) is None
 
 
-def test_profile_embedding_matches_feature_order():
+def test_descriptive_features_follow_the_declared_order():
     from app.data.style_profile import FEATURE_NAMES
 
-    events = [event()]
-    profile = parse_statsbomb_events(events, match_id=99, team_id=1)
+    profile = parse_statsbomb_events([event()], match_id=99, team_id=1)
     assert profile is not None
-    assert profile.embedding == [profile.features[name] for name in FEATURE_NAMES]
+    assert tuple(profile.features) == FEATURE_NAMES
+
+
+def test_locations_are_converted_from_yards_to_metres():
+    from app.data.statsbomb import to_on_pitch_events
+
+    events = [
+        event({"location": [60.0, 40.0], "pass": {"end_location": [120.0, 0.0]}, "minute": 1})
+    ]
+    [converted] = to_on_pitch_events(events)
+    assert (converted.x, converted.y) == (52.5, 34.0)
+    assert (converted.end_x, converted.end_y) == (105.0, 0.0)
+    assert converted.t == 60.0
+
+
+def test_failed_ball_recoveries_are_not_regains():
+    from app.data.statsbomb import to_on_pitch_events
+
+    events = [
+        event({"type": {"name": "Ball Recovery"}, "location": [80, 40]}),
+        event(
+            {
+                "type": {"name": "Ball Recovery"},
+                "location": [80, 40],
+                "ball_recovery": {"recovery_failure": True},
+            }
+        ),
+    ]
+    assert [e.kind for e in to_on_pitch_events(events)] == ["regain"]

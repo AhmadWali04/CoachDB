@@ -117,11 +117,14 @@ point runs in parallel.
 - [x] **B** · `b/track-b-experience` — Tests: selection triggers no API writes (`getBriefing` is a GET, asserted `toHaveBeenCalledOnce`); never two audios playing (`useBriefingAudio.test.ts`)
 
 ### Data and memory (PRD §8.2, §14.2)
-- [x] **B** · `b/track-b-experience` — Local script: StatsBomb Open Data + Metrica sample → compact style profiles (`scripts/build_style_profiles.py`, `backend/app/data/`; ran live against the real sources → 6 profiles, see output below)
-- [~] **B** · `b/track-b-experience` — Writes compact derived profiles to `backend/.cache/data/style_profiles.json` (a few KB, nowhere near the 512 MB budget); a real `style_profiles` Mongo collection still needs A's persistence layer to load into
-- [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter — needs Atlas (Mongo not wired up yet)
-- [x] **B** · `b/track-b-experience` — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A** (`backend/app/data/vector_search.py`, local cosine-similarity reference impl; swap the in-memory stores for Atlas `$vectorSearch` later without changing either function's signature)
-- [x] **B** · `b/track-b-experience` — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; test that Blue can't retrieve Red's experiences (`test_data_vector_search.py`)
+- [x] **B** · `b/style-profiles` — Local script: StatsBomb Open Data + Metrica sample → compact style profiles (`scripts/build_style_profiles.py`, `backend/app/data/`): 16 World Cup 2022 matches + Metrica games 1–2 → 36 profiles, raw files cached in `backend/.cache/data/raw/` (47 MB, gitignored)
+- [x] **B** · `b/style-profiles` — Profiles carry tactics labels in the scout's vocabulary and a 9-dim `tactical-style-v1` embedding; `style_query_vector(ObservedTactics)` builds the scout's query (`tactical_style.py`)
+- [x] **B** · `b/style-profiles` — Load into `style_profiles` (56 KB): `--load` upserts and provisions `style_profiles_vector`; verified on local Atlas, smoke query returns 4-3-3 high-press teams (`pytest` → 71 passed; `TEST_MONGODB_URI=… pytest tests/test_data_atlas_integration.py` → 1 passed)
+- [ ] Load into the shared Atlas cluster once it exists (same command with its URI)
+- [ ] Vector index on `coach_experiences` (needs A's experience writer; definition in `indexes.py`)
+- [x] **B** · `b/data-memory` (Codex) — Retrieval for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` (`backend/app/data/retrieval.py`) → **handed to A**, see `backend/app/data/README.md`
+- [x] **B** · `b/data-memory` (Codex) — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; Blue can't retrieve Red's experiences (`backend/app/data/tests/test_retrieval.py`)
+- [ ] Metrica tracking (positions) → formation and block shape for Metrica profiles (PRD §14.2; currently events only, so Metrica formation is unknown)
 - [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)
@@ -175,6 +178,7 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
+| 2026-11-14 | B (Justin) | Style profiles use embedding model `tactical-style-v1` (9 dims, cosine). The scout builds its query with `style_query_vector(observed_tactics)` and passes `EMBEDDING_MODEL`/`DIMENSIONS` from `app/data/tactical_style.py` to `search_styles`. Profiles are ranked within each dataset. No `schemas/` or `api/` change. | Justin ✓ · A: |
 | 2026-11-14 | B (Claude) | Implemented `GET /matches/{id}/briefings/{team_id}` (`backend/app/voice/`, wired in `api/matches.py`): reads the latest `CoachDecision` via `CoachDecisionReader` (in-memory until A hands off persistence — see Requests), resolves audio through an ElevenLabs adapter with a filesystem `AudioCache` keyed by `briefing_id`, falls back to text-only on any TTS failure or missing voice ID. Route signature/response model unchanged; now 404s instead of 501 when no decision exists yet for that match/team, and `/audio/*` is mounted for cached clips. | A: · B: Claude ✓ |
 | 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: Claude ✓ |
 | 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: Claude ✓ |
