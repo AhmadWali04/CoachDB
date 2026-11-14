@@ -121,7 +121,7 @@ point runs in parallel.
 - [x] **B** · `b/style-profiles` — Profiles carry tactics labels in the scout's vocabulary and a 9-dim `tactical-style-v1` embedding; `style_query_vector(ObservedTactics)` builds the scout's query (`tactical_style.py`)
 - [x] **B** · `b/style-profiles` — Load into `style_profiles` (56 KB): `--load` upserts and provisions `style_profiles_vector`; verified on local Atlas, smoke query returns 4-3-3 high-press teams (`pytest` → 71 passed; `TEST_MONGODB_URI=… pytest tests/test_data_atlas_integration.py` → 1 passed)
 - [x] **B** · `b/atlas-setup` — Loaded into the shared Atlas cluster: 36 profiles in `rival_coaches.style_profiles`, `style_profiles_vector` READY, smoke query through `search_styles` returns 4-3-3 high-press teams
-- [ ] Vector index on `coach_experiences` (needs A's experience writer; definition in `indexes.py`)
+- [~] **B / Codex** · `b/experience-index` — Coach-experience vector index provisioning CLI, readiness checks and tests; actual Atlas provisioning waits for A's embedding dimensions/model (definition in `indexes.py`)
 - [x] **B** · `b/data-memory` (Codex) — Retrieval for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` (`backend/app/data/retrieval.py`) → **handed to A**, see `backend/app/data/README.md`
 - [x] **B** · `b/data-memory` (Codex) — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; Blue can't retrieve Red's experiences (`backend/app/data/tests/test_retrieval.py`)
 - [x] **B** · `b/metrica-tracking` — Metrica tracking (positions) → formation and block shape for Metrica profiles (`metrica_tracking.py`): 3× 4-4-2 and 1× 3-5-2 inferred, checked against player width; block length, width, and line height out of possession (`pytest` → 94 passed, 1 skipped; Atlas integration → 1 passed)
@@ -165,6 +165,7 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
+| B / Codex → Claude | Codex owns experience-index provisioning in `../CoachDB-experience-index`, branch `b/experience-index` (`app/data/experience_index.py`, colocated tests, `scripts/provision_experience_index.py`). Claude continues secondary frontend panels. No schema/API changes or experience writes. | In progress |
 | B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
 | B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
 | B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
