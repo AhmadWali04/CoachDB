@@ -124,7 +124,7 @@ def parse_statsbomb_events(
     return StyleProfile(
         profile_id=f"statsbomb:{match_id}:{team_id}",
         source="statsbomb",
-        source_ref=str(match_id),
+        source_match_id=str(match_id),
         team_label=team_name,
         formation=formation,
         features=features,

@@ -81,10 +81,10 @@ def test_returns_none_for_a_team_with_no_events():
     assert parse_statsbomb_events(events, match_id=99, team_id=1) is None
 
 
-def test_profile_vector_matches_feature_order():
+def test_profile_embedding_matches_feature_order():
     from app.data.style_profile import FEATURE_NAMES
 
     events = [event()]
     profile = parse_statsbomb_events(events, match_id=99, team_id=1)
     assert profile is not None
-    assert profile.vector == [profile.features[name] for name in FEATURE_NAMES]
+    assert profile.embedding == [profile.features[name] for name in FEATURE_NAMES]
