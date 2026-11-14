@@ -26,6 +26,7 @@ DEFAULT_OUTPUT_PATH = (
 # few KB of derived profile per team is ever stored.
 DEFAULT_STATSBOMB_COMPETITION: tuple[int, int] = (43, 106)
 DEFAULT_STATSBOMB_MAX_MATCHES = 16
+# Metrica tracking adds about 30 MB of raw download per team and game (cached).
 # Sample_Game_3 ships in a different (JSON/EPTS) format and isn't supported.
 DEFAULT_METRICA_GAMES: tuple[str, ...] = ("Sample_Game_1", "Sample_Game_2")
 
@@ -42,6 +43,7 @@ def build_all_profiles(
     statsbomb_competition: tuple[int, int] | None = DEFAULT_STATSBOMB_COMPETITION,
     statsbomb_max_matches: int = DEFAULT_STATSBOMB_MAX_MATCHES,
     metrica_games: tuple[str, ...] = DEFAULT_METRICA_GAMES,
+    metrica_tracking: bool = True,
 ) -> list[StyleProfile]:
     profiles: list[StyleProfile] = []
 
@@ -60,7 +62,7 @@ def build_all_profiles(
 
     for game in metrica_games:
         try:
-            profiles.extend(metrica.build_game_profiles(game))
+            profiles.extend(metrica.build_game_profiles(game, with_tracking=metrica_tracking))
         except Exception:
             logger.warning(
                 "skipping Metrica game %s after a fetch/parse error", game, exc_info=True

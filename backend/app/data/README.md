@@ -16,6 +16,17 @@ MONGODB_URI='mongodb://localhost:27017/?directConnection=true' \
 Default set: the first 16 FIFA World Cup 2022 matches plus Metrica sample
 games 1 and 2, which gives 36 profiles (about 56 KB). `--max-matches` widens it.
 
+Metrica profiles also use the tracking files (about 125 MB raw, cached;
+`--no-tracking` skips them), via `metrica_tracking.py`:
+- formation inferred from the starting outfield players' average positions
+  out of possession in the first half (`formation_source="tracking"`), so it is
+  the defensive shape, which may differ from the attacking lineup;
+- `defensive_line_height_m`, `block_length_m`, `block_width_m` while the
+  opponent has the ball, with possession taken from the synchronized events.
+  For Metrica, the defensive line label uses the tracked line height.
+
+StatsBomb formations come from the announced lineup (`formation_source="lineup"`).
+
 Each profile carries tactics labels in the scout's vocabulary (pressing,
 defensive line, tempo, mentality, attack focus, formation) and a 9-dimension
 `tactical-style-v1` embedding (`tactical_style.py`). Labels are percentiles
@@ -31,12 +42,16 @@ from app.data import search_experiences, search_styles
 from app.data.tactical_style import DIMENSIONS, EMBEDDING_MODEL, style_query_vector
 
 vector = style_query_vector(scout_report.observed_tactics)  # None if nothing inferred
-styles = [] if vector is None else await search_styles(
-    db.style_profiles,
-    vector,
-    embedding_model=EMBEDDING_MODEL,
-    dimensions=DIMENSIONS,
-    limit=3,
+styles = (
+    []
+    if vector is None
+    else await search_styles(
+        db.style_profiles,
+        vector,
+        embedding_model=EMBEDDING_MODEL,
+        dimensions=DIMENSIONS,
+        limit=3,
+    )
 )
 # Cite hits as `profile:<profile_id>` in ScoutReport.closest_style_profile_ids.
 experiences = await search_experiences(
