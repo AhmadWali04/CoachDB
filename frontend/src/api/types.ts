@@ -14,6 +14,7 @@ export type MatchState = S["MatchState"];
 export type Team = S["Team"];
 export type Player = S["Player"];
 export type TacticalSettings = S["TacticalSettings"];
+export type TeamStats = S["TeamStats"];
 export type MatchEvent = S["MatchEvent"];
 
 export type Frame = S["Frame"];

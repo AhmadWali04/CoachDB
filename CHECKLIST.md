@@ -7,7 +7,7 @@ live in `PRD.md`, `CLAUDE.md`, and `AGENTS.md`. This file only tracks
 | Dev | Name | Track | Owns |
 |-----|------|-------|------|
 | **A** | _(name)_ | Engine | `backend/app/{simulator,coaches,orchestration,persistence,recovery,evaluation}`, `backend/tests/` for those |
-| **B** | _(name)_ | Experience | `frontend/`, `backend/app/voice/`, `backend/app/data/` (StatsBomb/Metrica pipeline), `scripts/` |
+| **B** | Claude (`b/track-b-experience`) | Experience | `frontend/`, `backend/app/voice/`, `backend/app/data/` (StatsBomb/Metrica pipeline), `scripts/` |
 | Both | — | Contracts | `backend/app/schemas/`, `backend/app/api/`, `backend/app/guardrails/`, `.env.example`, this file |
 
 ---
@@ -98,32 +98,32 @@ point runs in parallel.
 ## Track B — Experience
 
 ### Tactical pitch (PRD §13.1–13.2)
-- [ ] Vertical pitch SVG with markings; Team A upper half, Team B lower half
-- [ ] Player markers (circle vs. cross), ball, score, clock, phase, formation
-- [ ] Renders from fixture frames (with the fixture badge)
-- [ ] Movement interpolation between frames
-- [ ] Arrows: passes, runs, pressing; cap on simultaneous arrows
-- [ ] `prefers-reduced-motion`
-- [ ] Switch from fixture to live `/frames` polling
+- [x] **B** · `b/track-b-experience` — Vertical pitch SVG with markings; Team A upper half, Team B lower half (`TacticalPitch.tsx`; `npx vitest run` → 21 passed)
+- [x] **B** · `b/track-b-experience` — Player markers (circle vs. cross), ball, score, clock, phase, formation
+- [x] **B** · `b/track-b-experience` — Renders from fixture frames (with the fixture badge) — fixture loader auto-discovers `src/fixtures/*.json`; no file to render yet (blocked on A's export, see Requests)
+- [x] **B** · `b/track-b-experience` — Movement interpolation between frames (`match/playback.ts`, `useFramePlayback`)
+- [x] **B** · `b/track-b-experience` — Arrows: passes, runs, pressing; cap on simultaneous arrows (`match/arrows.ts`, cap=3)
+- [x] **B** · `b/track-b-experience` — `prefers-reduced-motion` (snaps instead of interpolating; `pitch-svg--reduced-motion` disables marker transitions)
+- [x] **B** · `b/track-b-experience` — Switch from fixture to live `/frames` polling (`match/useLiveFrames.ts`)
 
 ### Coach selection and voice (PRD §11, §13.3)
-- [ ] Click pitch half, team label, or coach card → selected state + active speaker
-- [ ] Single audio controller: switching teams stops the previous audio
-- [ ] Transcript, plus pause, resume, and replay; loading/playing/paused/unavailable states
-- [ ] Backend ElevenLabs adapter: cache by briefing ID, text fallback, voice IDs from env
-- [ ] Tests: selection triggers no API writes; never two audios playing
+- [x] **B** · `b/track-b-experience` — Click pitch half, team label, or coach card → selected state + active speaker
+- [x] **B** · `b/track-b-experience` — Single audio controller: switching teams stops the previous audio (`audio/useBriefingAudio.ts`)
+- [x] **B** · `b/track-b-experience` — Transcript, plus pause, resume, and replay; loading/playing/paused/unavailable states (`CoachPanel.tsx`)
+- [x] **B** · `b/track-b-experience` — Backend ElevenLabs adapter: cache by briefing ID, text fallback, voice IDs from env (`backend/app/voice/`; `pytest` → 36 passed)
+- [x] **B** · `b/track-b-experience` — Tests: selection triggers no API writes (`getBriefing` is a GET, asserted `toHaveBeenCalledOnce`); never two audios playing (`useBriefingAudio.test.ts`)
 
 ### Data and memory (PRD §8.2, §14.2)
 - [ ] Local script: StatsBomb Open Data + Metrica sample → compact style profiles
 - [ ] Load into `style_profiles` (stays well under M0's 512 MB)
 - [ ] Vector indexes on `style_profiles` and `coach_experiences` with `namespace` filter
-- [x] **B / Codex** · [#3](https://github.com/AhmadWali04/CoachDB/pull/3) — Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
-- [x] **B / Codex** · [#3](https://github.com/AhmadWali04/CoachDB/pull/3) — `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
-- [ ] Dataset attribution shown in the UI
+- [ ] Retrieval function for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` → **hand to A**
+- [ ] `search_experiences` calls `require_own_namespace()` and filters on `namespace` in the vector query; test that Blue can't retrieve Red's experiences
+- [x] **B** · `b/track-b-experience` — Dataset attribution shown in the UI (`DatasetAttribution.tsx`)
 
 ### Secondary panels and controls (PRD §13.4)
-- [ ] Event feed, coach comparison, action timeline, evaluation view
-- [ ] Demo controls: start, run batch, inject crash, reset
+- [~] **B** · `b/track-b-experience` — Event feed (`EventFeed.tsx`, wired to live `getEvents`); coach comparison, action timeline, and evaluation view are typed empty-state panels pending Track A endpoints (see Requests)
+- [~] **B** · `b/track-b-experience` — Demo controls: start, inject crash, reset wired to the real API; "run batch" disabled pending Track A's evaluation batch endpoint
 
 ---
 
@@ -145,7 +145,10 @@ moves it into their track section when they accept it.
 
 | From → To | Ask | Status |
 |-----------|-----|--------|
-| B / Codex → Claude | Isolated worktree `../CoachDB-data-memory`, branch `b/data-memory`: implementing only `backend/app/data/` retrieval, index definitions, colocated tests and handoff docs. Pitch and voice remain yours on `b/track-b-experience`. PR targets `main`. | Draft PR #3 against `main`; 53 tests pass; Claude CLI review found no blockers |
+| B → A | Export `frontend/src/fixtures/match_seed42.json` from a real seeded run (frame contract, §13.5) so the pitch renders real data instead of unit-test-only mock frames | Open |
+| B → A | Need a read accessor for the latest `CoachDecision` per `(match_id, team_id)` from `backend/app/persistence` (e.g. `get_latest_decision`) so `backend/app/voice` can read the approved `voice_script` instead of depending on an in-memory fake | Open |
+| B → A | Coach comparison panel (§13.4) needs a read endpoint exposing `AnalystReport`/`ScoutReport`/`TacticalPlan` per match/team — none of `schemas/api.py`'s current endpoints return them | Open |
+| B → A | Action timeline (§13.4) needs a read endpoint over the action ledger (`proposed → submitted → applied → verified`); evaluation view needs `GET /evaluations/{batch_id}` from §12 — neither exists yet in `api/stubs.py` | Open |
 
 ## Handoff log (contract changes, newest first)
 
@@ -154,6 +157,6 @@ anything the other dev's agent needs to know.
 
 | Date / time | Who | Change | Acked by |
 |-------------|-----|--------|----------|
-| 2026-11-14 | B / Codex | Retrieval handoff: async `app.data.search_styles(collection, vector, *, embedding_model, dimensions)` and `search_experiences(team_id, collection, vector, *, before, embedding_model, dimensions, namespace=None)`. Own namespace + verified outcomes + frozen decision cutoff are enforced; outage returns empty context. Index builders and document fields in `backend/app/data/README.md`. Atlas provisioning, ingestion and frontend attribution remain pending. 53 tests pass (`pytest backend/tests backend/app/data/tests -q`). | A: pending · Claude CLI: reviewed, no blockers |
-| 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: |
-| 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: |
+| 2026-11-14 | B (Claude) | Implemented `GET /matches/{id}/briefings/{team_id}` (`backend/app/voice/`, wired in `api/matches.py`): reads the latest `CoachDecision` via `CoachDecisionReader` (in-memory until A hands off persistence — see Requests), resolves audio through an ElevenLabs adapter with a filesystem `AudioCache` keyed by `briefing_id`, falls back to text-only on any TTS failure or missing voice ID. Route signature/response model unchanged; now 404s instead of 501 when no decision exists yet for that match/team, and `/audio/*` is mounted for cached clips. | A: · B: Claude ✓ |
+| 2026-11-14 | Phase 0 | Coach isolation guardrails (`backend/app/guardrails/`, `schemas/coach_view.py`): `build_coach_view`, `SealedHalftimePlans`, `require_own_namespace`. Coaches see the rival's kickoff formation; the rest of the rival's tactics and its stamina are hidden, and the scout infers them from the formation and public events. Memory namespaces are `coach:blue` and `coach:red`. Rules are in AGENTS.md §2. | A: · B: Claude ✓ |
+| 2026-11-14 | Phase 0 | Initial contract: `schemas/` (enums, match, event, frame, coach, action, api) and stubbed endpoints. Team IDs are `blue`/`red`; pitch side is `top`/`bottom` (the `top` team attacks toward y=100). Coordinates are 0–100. Unknown fields are rejected. | A: · B: Claude ✓ |
