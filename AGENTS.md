@@ -3,6 +3,11 @@
 **Purpose:** Define the responsibilities, boundaries, inputs, outputs,
 and safety rules for the MVP's agents.
 
+> **Coding agents:** two developers work on this repo in parallel. Read
+> `CHECKLIST.md` at the start of every task, claim the task there before
+> editing, stay within your track's files, and record any contract
+> change in its Handoff log.
+
 ## 1. Agent topology
 
 Each team has its own independent coaching workflow:

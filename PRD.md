@@ -435,18 +435,82 @@ repeated seeded matches with sides swapped to reduce starting-side bias.
 
 ## 13. User interface requirements
 
-One dashboard is sufficient.
+The primary experience is a **live tactical board**: two AI coaches
+managing a match on a top-down pitch, explained by ElevenLabs voice. It
+should feel like a sports analytics product, not an admin dashboard.
 
-Required panels: 1. **Match view:** pitch representation, score, clock,
-possession, shots, recent events. 2. **Coach comparison:** side-by-side
-halftime analysis, predictions, tactics, and voice playback. 3.
-**Timeline:** event stream, decisions, action lifecycle, verification,
-recovery events. 4. **Evaluation:** coach metric comparison and match
-results. 5. **Demo controls:** start match, run batch, inject crash,
-reset match.
+### 13.1 Tactical pitch (centerpiece)
 
-Use simple player markers and tactical labels. Fancy animation is
-optional and must not block core functionality.
+-   Large, responsive, vertical top-down pitch with standard markings
+    (goals, penalty areas, halfway line, center circle).
+-   Team A in the upper half, Team B in the lower half, with distinct
+    colors, marker styles (e.g. circles vs. crosses), and an obvious
+    attacking direction.
+-   Show player positions, the ball, each team's name, score, coach
+    identity, and current formation.
+-   Chalkboard-inspired visual language: clean markings, curved
+    directional arrows, dashed movement paths, passing lanes, and
+    highlighted target zones.
+
+### 13.2 Live movement
+
+-   Animate players and the ball from actual simulation state and
+    events: passing sequences, attacking runs, defensive shape,
+    pressing, shots, goals, and second-half tactical changes.
+-   Use arrows to show where players and the ball are going. Limit
+    simultaneous arrows so the pitch stays readable.
+-   **Never** animate randomly or invent events or positions. The
+    simulation is the source of truth; the frontend only visualizes it
+    and does not duplicate simulation logic.
+-   Respect `prefers-reduced-motion`.
+
+### 13.3 Coach selection and voice
+
+-   Each team is selectable via its pitch half, team label, or coach
+    card. The selected team gets a clear highlight and active-speaker
+    indicator.
+-   Selecting a team plays that coach's approved halftime ElevenLabs
+    briefing (§11) with transcript/captions and pause, resume, and
+    replay controls.
+-   **Only one coach speaks at a time:** switching teams stops the
+    previous audio immediately.
+-   Show loading, playing, paused, and unavailable states. If audio
+    fails, the transcript remains available and the match continues.
+-   Selection is presentation-only: it must not change the match,
+    modify plans, or submit actions. Audio is never regenerated per
+    render or tick, and it never blocks the simulation.
+-   The UI never shows one coach's private reasoning or memory in a
+    way that feeds the other coach.
+
+### 13.4 Match information and secondary panels
+
+Keep compact and secondary to the pitch: score, clock, match phase
+(first half / halftime / second half / full time), possession, shots,
+and a live event feed.
+
+Also provide, without crowding the pitch: - **Coach comparison:**
+halftime analysis, scouting report, prediction, and tactics. -
+**Timeline:** decisions, action lifecycle, verification, and recovery
+events. - **Evaluation:** coach metric comparison and match results. -
+**Demo controls:** start match, run batch, inject crash, reset match.
+
+### 13.5 Required data contract
+
+The pitch needs, per simulation step: player IDs with `(x, y)`
+positions, ball position and owner, and the events in that step with
+the players involved. If the simulator does not yet expose positions,
+add the smallest compatible contract to the simulation output (§5).
+Never fabricate positions in the frontend.
+
+### 13.6 Build order and tests
+
+Build in phases: (A) static pitch, markers, and match info; (B) live
+movement and arrows; (C) team selection; (D) voice and transcripts; (E)
+responsive polish and loading/error/empty states. Desktop first, usable
+on small screens. Components are modular and typed in TypeScript.
+
+Tests cover team selection, audio switching (no overlapping playback),
+and pitch rendering from simulation state.
 
 ## 14. Suggested architecture
 
@@ -630,6 +694,10 @@ The MVP is complete when all of the following pass:
     side-swapped matches.
 -   [ ] The UI shows match state, decisions, voice, recovery, and
     evaluation.
+-   [ ] Players and the ball move on the tactical pitch from real
+    simulation output, with arrows for passes, runs, and pressing.
+-   [ ] Clicking either team plays only that coach's briefing with a
+    transcript; switching teams never overlaps audio.
 
 ## 17. Engineering principles
 

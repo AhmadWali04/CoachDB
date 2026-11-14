@@ -16,6 +16,11 @@ generates optional spoken halftime briefings.
 Read `PRD.md` and `AGENTS.md` before making architectural changes. These
 documents define product scope and agent contracts.
 
+**Two developers work on this repo in parallel.** Read `CHECKLIST.md`
+at the start of every task, claim the task there before editing, stay
+within your track's files, and record any contract change in its
+Handoff log.
+
 ## Highest-priority engineering rules
 
 1.  **The simulator is the source of match truth.** LLMs analyze and
