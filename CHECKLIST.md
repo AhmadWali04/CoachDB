@@ -56,9 +56,9 @@ point runs in parallel.
 - [x] Generate TS types from the OpenAPI schema (`npm run gen:api` → `frontend/src/api/schema.d.ts`; typed client in `src/api/client.ts`)
 - [~] **Both devs:** review the contract and ack the Handoff log entries below (Justin ✓, teammate pending)
 - [x] MongoDB client, `/health` reports `mongodb` status, `scripts/check_mongo.py`, optional local Atlas via `docker compose up -d`
-- [ ] Atlas free (M0) cluster created in the Atlas UI (needs an account login)
-- [ ] Database user for each dev + IP access list entry
-- [ ] `MONGODB_URI` in each dev's local `backend/.env`; `scripts/check_mongo.py` prints `mongodb: ok`
+- [x] Atlas free (M0) cluster created in the Atlas UI (`cluster0`, MongoDB 9.0.7)
+- [~] Database user for each dev + IP access list entry (Justin ✓, teammate pending)
+- [~] `MONGODB_URI` in each dev's local `backend/.env`; `scripts/check_mongo.py` prints `mongodb: ok` (Justin ✓, teammate pending)
 - [x] Sync CLAUDE.md and AGENTS.md with the PRD (Opposition Scout, live tactical board UI, guardrails)
 
 ---
@@ -120,7 +120,7 @@ point runs in parallel.
 - [x] **B** · `b/style-profiles` — Local script: StatsBomb Open Data + Metrica sample → compact style profiles (`scripts/build_style_profiles.py`, `backend/app/data/`): 16 World Cup 2022 matches + Metrica games 1–2 → 36 profiles, raw files cached in `backend/.cache/data/raw/` (47 MB, gitignored)
 - [x] **B** · `b/style-profiles` — Profiles carry tactics labels in the scout's vocabulary and a 9-dim `tactical-style-v1` embedding; `style_query_vector(ObservedTactics)` builds the scout's query (`tactical_style.py`)
 - [x] **B** · `b/style-profiles` — Load into `style_profiles` (56 KB): `--load` upserts and provisions `style_profiles_vector`; verified on local Atlas, smoke query returns 4-3-3 high-press teams (`pytest` → 71 passed; `TEST_MONGODB_URI=… pytest tests/test_data_atlas_integration.py` → 1 passed)
-- [ ] Load into the shared Atlas cluster once it exists (same command with its URI)
+- [x] **B** · `b/atlas-setup` — Loaded into the shared Atlas cluster: 36 profiles in `rival_coaches.style_profiles`, `style_profiles_vector` READY, smoke query through `search_styles` returns 4-3-3 high-press teams
 - [ ] Vector index on `coach_experiences` (needs A's experience writer; definition in `indexes.py`)
 - [x] **B** · `b/data-memory` (Codex) — Retrieval for A's scout and coach: `search_styles()`, `search_experiences(team_id, ...)` (`backend/app/data/retrieval.py`) → **handed to A**, see `backend/app/data/README.md`
 - [x] **B** · `b/data-memory` (Codex) — `search_experiences` calls `require_own_namespace()` and filters on `namespace`; Blue can't retrieve Red's experiences (`backend/app/data/tests/test_retrieval.py`)
